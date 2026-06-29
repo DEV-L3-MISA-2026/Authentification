@@ -7,7 +7,6 @@ default_target: all
 
 # Allow only one "make -f Makefile2" at a time, but pass parallelism.
 .NOTPARALLEL:
-
 #=============================================================================
 # Special targets provided by cmake.
 
