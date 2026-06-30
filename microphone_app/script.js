@@ -56,11 +56,13 @@ sendBtn.onclick = async () => {
     form.append("audio", recordedBlob, "voice.webm");
 
     status.textContent = "Sending...";
-
-    await fetch("http://localhost:8080/upload", {
-        method: "POST",
-        body: form
-    });
+    console.log(recordedBlob);
+    console.log(recordedBlob.size);
+    console.log(recordedBlob.type);
+await fetch("http://localhost:5000/api/voc/test", {
+    method: "POST",
+    body: recordedBlob
+});
 
     status.textContent = "Sent";
 

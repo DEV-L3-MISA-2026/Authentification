@@ -7,6 +7,7 @@
 #include <AuthData.h>
 #include <utility.h>
 #include <crow.h>
+#include <fstream>
 
 int main() {
     AuthRepository::init("dbname=auth user=postgres password=mamanlah host=localhost port=5432");
@@ -27,6 +28,21 @@ int main() {
     CROW_ROUTE(app, "/")
     ([] () {
         return "Hello world !";
+    });
+
+    CROW_ROUTE(app, "/api/voc/test").methods(crow::HTTPMethod::POST)
+    ([] (const crow::request& req) {
+        std::cout << "receiving " << req.body.size() << "bytes!" << std::endl;
+        for(int i = 0; i < 20; i++) 
+        {
+            std::cout << req.body[i] << " ";
+        }
+        std:: cout << "\n";
+        std::ofstream file("voice.ogg", std::ios::binary);
+
+
+        file.write(req.body.data(), req.body.size());
+        return crow::response("Ok");
     });
     app.port(5000).multithreaded().run();
     return 0;
