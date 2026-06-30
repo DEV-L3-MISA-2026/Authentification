@@ -1121,6 +1121,7 @@ CMakeFiles/app.dir/main.cpp.o: /home/kukuna/korontana/projet/etude/S5/dev/authen
   /usr/local/include/opencv5/opencv2/videoio.hpp
 
 CMakeFiles/app.dir/src/AudioProcessor.cpp.o: /home/kukuna/korontana/projet/etude/S5/dev/authentification/src/AudioProcessor.cpp \
+  /home/kukuna/korontana/projet/etude/S5/dev/authentification/include/MemoryAudioFIle.h \
   /home/kukuna/korontana/projet/etude/S5/dev/authentification/include/AudioProcessor.h \
   /usr/include/alloca.h \
   /usr/include/asm-generic/errno-base.h \
@@ -3878,6 +3879,8 @@ CMakeFiles/app.dir/src/utility.cpp.o: /home/kukuna/korontana/projet/etude/S5/dev
 /usr/include/samplerate.h:
 
 /home/kukuna/korontana/projet/etude/S5/dev/authentification/include/AudioProcessor.h:
+
+/home/kukuna/korontana/projet/etude/S5/dev/authentification/include/MemoryAudioFIle.h:
 
 /usr/local/include/opencv5/opencv2/videoio.hpp:
 

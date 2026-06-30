@@ -33,6 +33,7 @@ add_executable(app
     src/AudioProcessor.cpp
     src/SpeechProcessor.cpp
     src/Repository/AuthRepository.cpp
+    src/MemoryAudioFile.cpp
 )
 
 target_include_directories(app PRIVATE

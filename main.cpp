@@ -31,17 +31,14 @@ int main() {
     });
 
     CROW_ROUTE(app, "/api/voc/test").methods(crow::HTTPMethod::POST)
-    ([] (const crow::request& req) {
+    ([&sp] (const crow::request& req) {
         std::cout << "receiving " << req.body.size() << "bytes!" << std::endl;
-        for(int i = 0; i < 20; i++) 
-        {
-            std::cout << req.body[i] << " ";
-        }
-        std:: cout << "\n";
-        std::ofstream file("voice.ogg", std::ios::binary);
+        auto embending = sp->getEmbendingFromData(req.body.data(), req.body.size());
 
-
-        file.write(req.body.data(), req.body.size());
+        std::cout << "embending: " << "\n";
+        for(const auto& i : embending)
+            std::cout << i << " ";
+        std::cout << "\n";
         return crow::response("Ok");
     });
     app.port(5000).multithreaded().run();

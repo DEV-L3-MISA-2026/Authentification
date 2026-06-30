@@ -2,6 +2,7 @@
 #include <sndfile.h>
 #include <samplerate.h>
 #include <iostream>
+#include <MemoryAudioFile.h>
 
 std::shared_ptr<AudioProcessor> AudioProcessor::instance = nullptr;
 AudioProcessor::AudioProcessor() {
@@ -69,6 +70,53 @@ std::vector<float> AudioProcessor::loadAudio(const std::string& path) {
         16000
     );
     sf_close(file);
+    return mono;
+}
+
+
+std::vector<float>
+AudioProcessor::loadAudio(
+    const void* data,
+    size_t size)
+{
+    SF_INFO info{};
+
+    MemoryAudioFile file(data, size);
+
+    SNDFILE* snd =
+        file.open(info);
+
+    std::vector<float> interleaved(
+        info.frames * info.channels);
+
+    sf_read_float(
+        snd,
+        interleaved.data(),
+        interleaved.size());
+
+    sf_close(snd);
+
+    std::vector<float> mono;
+
+    if (info.channels == 1)
+    {
+        mono = std::move(interleaved);
+    }
+    else if (info.channels == 2)
+    {
+        mono = stereoToMono(interleaved);
+    }
+    else
+    {
+        throw std::runtime_error(
+            "Unsupported number of channels.");
+    }
+
+    mono = resample(
+        mono,
+        info.samplerate,
+        16000);
+
     return mono;
 }
 

@@ -249,6 +249,30 @@ src/FacesModel.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/FacesModel.cpp.s
 .PHONY : src/FacesModel.cpp.s
 
+src/MemoryAudioFile.o: src/MemoryAudioFile.cpp.o
+.PHONY : src/MemoryAudioFile.o
+
+# target to build an object file
+src/MemoryAudioFile.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/MemoryAudioFile.cpp.o
+.PHONY : src/MemoryAudioFile.cpp.o
+
+src/MemoryAudioFile.i: src/MemoryAudioFile.cpp.i
+.PHONY : src/MemoryAudioFile.i
+
+# target to preprocess a source file
+src/MemoryAudioFile.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/MemoryAudioFile.cpp.i
+.PHONY : src/MemoryAudioFile.cpp.i
+
+src/MemoryAudioFile.s: src/MemoryAudioFile.cpp.s
+.PHONY : src/MemoryAudioFile.s
+
+# target to generate assembly for a file
+src/MemoryAudioFile.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/MemoryAudioFile.cpp.s
+.PHONY : src/MemoryAudioFile.cpp.s
+
 src/Repository/AuthRepository.o: src/Repository/AuthRepository.cpp.o
 .PHONY : src/Repository/AuthRepository.o
 
@@ -345,6 +369,9 @@ help:
 	@echo "... src/FacesModel.o"
 	@echo "... src/FacesModel.i"
 	@echo "... src/FacesModel.s"
+	@echo "... src/MemoryAudioFile.o"
+	@echo "... src/MemoryAudioFile.i"
+	@echo "... src/MemoryAudioFile.s"
 	@echo "... src/Repository/AuthRepository.o"
 	@echo "... src/Repository/AuthRepository.i"
 	@echo "... src/Repository/AuthRepository.s"

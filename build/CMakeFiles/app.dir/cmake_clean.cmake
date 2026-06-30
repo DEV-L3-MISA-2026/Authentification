@@ -9,6 +9,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/app.dir/src/FaceRecognizer.cpp.o.d"
   "CMakeFiles/app.dir/src/FacesModel.cpp.o"
   "CMakeFiles/app.dir/src/FacesModel.cpp.o.d"
+  "CMakeFiles/app.dir/src/MemoryAudioFile.cpp.o"
+  "CMakeFiles/app.dir/src/MemoryAudioFile.cpp.o.d"
   "CMakeFiles/app.dir/src/Repository/AuthRepository.cpp.o"
   "CMakeFiles/app.dir/src/Repository/AuthRepository.cpp.o.d"
   "CMakeFiles/app.dir/src/SpeechProcessor.cpp.o"

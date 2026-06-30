@@ -10,6 +10,7 @@ class SpeechProcessor
         static void init(const std::string& modelPath);
         static std::shared_ptr<SpeechProcessor> getInstance();
         std::vector<float> getEmbending(const std::string& path);
+        std::vector<float> getEmbendingFromData(const void* data, size_t size);
     private:
         SpeechProcessor(const std::string& modelPath);
         static std::shared_ptr<SpeechProcessor> instance;
