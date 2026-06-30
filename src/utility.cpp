@@ -59,3 +59,16 @@ double euclideanDistance(
 
     return std::sqrt(sum);
 }
+
+
+std::vector<float> FacesModel::formatEmbending(cv::Mat matEmbending)
+{
+    std::vector<float> embending(128);
+    if(matEmbending.size().width != 128 || matEmbending.size().height != 1)
+        throw LocalException("bad cv::mat embending shape !");
+
+    float *row_ptr = matEmbending.ptr<float>(0); // pointor at the first row
+    for(int i = 0; i < 128; i++)
+        embending[i] = row_ptr[i];
+    return embending;
+}

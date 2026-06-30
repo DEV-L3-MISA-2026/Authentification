@@ -8,10 +8,6 @@
 
 using namespace std;
 
-
-
-
-
 // class SpeakerEncoder
 // {
 // public:
