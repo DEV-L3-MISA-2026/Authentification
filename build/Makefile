@@ -7,6 +7,7 @@ default_target: all
 
 # Allow only one "make -f Makefile2" at a time, but pass parallelism.
 .NOTPARALLEL:
+
 #=============================================================================
 # Special targets provided by cmake.
 
@@ -176,30 +177,6 @@ src/AudioProcessor.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/AudioProcessor.cpp.s
 .PHONY : src/AudioProcessor.cpp.s
 
-src/AuthRepository.o: src/AuthRepository.cpp.o
-.PHONY : src/AuthRepository.o
-
-# target to build an object file
-src/AuthRepository.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/AuthRepository.cpp.o
-.PHONY : src/AuthRepository.cpp.o
-
-src/AuthRepository.i: src/AuthRepository.cpp.i
-.PHONY : src/AuthRepository.i
-
-# target to preprocess a source file
-src/AuthRepository.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/AuthRepository.cpp.i
-.PHONY : src/AuthRepository.cpp.i
-
-src/AuthRepository.s: src/AuthRepository.cpp.s
-.PHONY : src/AuthRepository.s
-
-# target to generate assembly for a file
-src/AuthRepository.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/AuthRepository.cpp.s
-.PHONY : src/AuthRepository.cpp.s
-
 src/FaceDetector.o: src/FaceDetector.cpp.o
 .PHONY : src/FaceDetector.o
 
@@ -272,6 +249,30 @@ src/FacesModel.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/FacesModel.cpp.s
 .PHONY : src/FacesModel.cpp.s
 
+src/Repository/AuthRepository.o: src/Repository/AuthRepository.cpp.o
+.PHONY : src/Repository/AuthRepository.o
+
+# target to build an object file
+src/Repository/AuthRepository.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/Repository/AuthRepository.cpp.o
+.PHONY : src/Repository/AuthRepository.cpp.o
+
+src/Repository/AuthRepository.i: src/Repository/AuthRepository.cpp.i
+.PHONY : src/Repository/AuthRepository.i
+
+# target to preprocess a source file
+src/Repository/AuthRepository.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/Repository/AuthRepository.cpp.i
+.PHONY : src/Repository/AuthRepository.cpp.i
+
+src/Repository/AuthRepository.s: src/Repository/AuthRepository.cpp.s
+.PHONY : src/Repository/AuthRepository.s
+
+# target to generate assembly for a file
+src/Repository/AuthRepository.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/Repository/AuthRepository.cpp.s
+.PHONY : src/Repository/AuthRepository.cpp.s
+
 src/SpeechProcessor.o: src/SpeechProcessor.cpp.o
 .PHONY : src/SpeechProcessor.o
 
@@ -335,9 +336,6 @@ help:
 	@echo "... src/AudioProcessor.o"
 	@echo "... src/AudioProcessor.i"
 	@echo "... src/AudioProcessor.s"
-	@echo "... src/AuthRepository.o"
-	@echo "... src/AuthRepository.i"
-	@echo "... src/AuthRepository.s"
 	@echo "... src/FaceDetector.o"
 	@echo "... src/FaceDetector.i"
 	@echo "... src/FaceDetector.s"
@@ -347,6 +345,9 @@ help:
 	@echo "... src/FacesModel.o"
 	@echo "... src/FacesModel.i"
 	@echo "... src/FacesModel.s"
+	@echo "... src/Repository/AuthRepository.o"
+	@echo "... src/Repository/AuthRepository.i"
+	@echo "... src/Repository/AuthRepository.s"
 	@echo "... src/SpeechProcessor.o"
 	@echo "... src/SpeechProcessor.i"
 	@echo "... src/SpeechProcessor.s"

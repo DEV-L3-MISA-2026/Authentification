@@ -222,6 +222,9 @@ PKG_CONFIG_ARGN:STRING=
 //pkg-config executable
 PKG_CONFIG_EXECUTABLE:FILEPATH=/usr/bin/pkg-config
 
+//The directory containing a CMake configuration file for asio.
+asio_DIR:PATH=asio_DIR-NOTFOUND
+
 //Path to a library.
 pkgcfg_lib_PQXX_pqxx:FILEPATH=/usr/lib/x86_64-linux-gnu/libpqxx.so
 
