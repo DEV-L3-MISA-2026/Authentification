@@ -118,12 +118,76 @@ CMakeFiles/app.dir/src/utility.cpp.o: \
  /usr/include/asm-generic/errno.h /usr/include/asm-generic/errno-base.h \
  /usr/include/x86_64-linux-gnu/bits/types/error_t.h \
  /usr/include/c++/13/bits/charconv.h \
- /usr/include/c++/13/bits/basic_string.tcc /usr/include/c++/13/sstream \
- /usr/include/c++/13/istream /usr/include/c++/13/ios \
- /usr/include/c++/13/exception /usr/include/c++/13/bits/exception_ptr.h \
- /usr/include/c++/13/bits/cxxabi_init_exception.h \
- /usr/include/c++/13/typeinfo /usr/include/c++/13/bits/nested_exception.h \
- /usr/include/c++/13/bits/ios_base.h /usr/include/c++/13/ext/atomicity.h \
+ /usr/include/c++/13/bits/basic_string.tcc \
+ /usr/local/include/opencv5/opencv2/opencv.hpp \
+ /usr/local/include/opencv5/opencv2/opencv_modules.hpp \
+ /usr/local/include/opencv5/opencv2/core.hpp \
+ /usr/local/include/opencv5/opencv2/core/cvdef.h \
+ /usr/local/include/opencv5/opencv2/core/version.hpp \
+ /usr/include/c++/13/limits \
+ /usr/local/include/opencv5/opencv2/core/hal/interface.h \
+ /usr/include/c++/13/cstdint \
+ /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h /usr/include/stdint.h \
+ /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
+ /usr/include/x86_64-linux-gnu/bits/stdint-least.h \
+ /usr/local/include/opencv5/opencv2/core/cv_cpu_dispatch.h \
+ /usr/lib/gcc/x86_64-linux-gnu/13/include/emmintrin.h \
+ /usr/lib/gcc/x86_64-linux-gnu/13/include/xmmintrin.h \
+ /usr/lib/gcc/x86_64-linux-gnu/13/include/mmintrin.h \
+ /usr/lib/gcc/x86_64-linux-gnu/13/include/mm_malloc.h \
+ /usr/include/c++/13/stdlib.h \
+ /usr/local/include/opencv5/opencv2/core/base.hpp \
+ /usr/include/c++/13/climits \
+ /usr/lib/gcc/x86_64-linux-gnu/13/include/limits.h \
+ /usr/lib/gcc/x86_64-linux-gnu/13/include/syslimits.h \
+ /usr/include/limits.h /usr/include/x86_64-linux-gnu/bits/posix1_lim.h \
+ /usr/include/x86_64-linux-gnu/bits/local_lim.h \
+ /usr/include/linux/limits.h \
+ /usr/include/x86_64-linux-gnu/bits/pthread_stack_min-dynamic.h \
+ /usr/include/x86_64-linux-gnu/bits/posix2_lim.h \
+ /usr/include/x86_64-linux-gnu/bits/xopen_lim.h \
+ /usr/include/x86_64-linux-gnu/bits/uio_lim.h \
+ /usr/include/c++/13/algorithm /usr/include/c++/13/bits/stl_algo.h \
+ /usr/include/c++/13/bits/algorithmfwd.h \
+ /usr/include/c++/13/bits/stl_heap.h \
+ /usr/include/c++/13/bits/uniform_int_dist.h \
+ /usr/include/c++/13/bits/stl_tempbuf.h \
+ /usr/include/c++/13/pstl/glue_algorithm_defs.h \
+ /usr/include/c++/13/pstl/execution_defs.h \
+ /usr/local/include/opencv5/opencv2/core/cvstd.hpp \
+ /usr/include/c++/13/cstring /usr/include/string.h /usr/include/strings.h \
+ /usr/include/c++/13/utility /usr/include/c++/13/bits/stl_relops.h \
+ /usr/include/c++/13/cmath /usr/include/math.h \
+ /usr/include/x86_64-linux-gnu/bits/math-vector.h \
+ /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
+ /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
+ /usr/include/x86_64-linux-gnu/bits/fp-logb.h \
+ /usr/include/x86_64-linux-gnu/bits/fp-fast.h \
+ /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h \
+ /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
+ /usr/include/x86_64-linux-gnu/bits/mathcalls-narrow.h \
+ /usr/include/x86_64-linux-gnu/bits/iscanonical.h \
+ /usr/include/c++/13/bits/specfun.h /usr/include/c++/13/tr1/gamma.tcc \
+ /usr/include/c++/13/tr1/special_function_util.h \
+ /usr/include/c++/13/tr1/bessel_function.tcc \
+ /usr/include/c++/13/tr1/beta_function.tcc \
+ /usr/include/c++/13/tr1/ell_integral.tcc \
+ /usr/include/c++/13/tr1/exp_integral.tcc \
+ /usr/include/c++/13/tr1/hypergeometric.tcc \
+ /usr/include/c++/13/tr1/legendre_function.tcc \
+ /usr/include/c++/13/tr1/modified_bessel_func.tcc \
+ /usr/include/c++/13/tr1/poly_hermite.tcc \
+ /usr/include/c++/13/tr1/poly_laguerre.tcc \
+ /usr/include/c++/13/tr1/riemann_zeta.tcc \
+ /usr/local/include/opencv5/opencv2/core/cvstd_wrapper.hpp \
+ /usr/include/c++/13/memory \
+ /usr/include/c++/13/bits/stl_raw_storage_iter.h \
+ /usr/include/c++/13/bits/align.h /usr/include/c++/13/bits/unique_ptr.h \
+ /usr/include/c++/13/bits/shared_ptr.h \
+ /usr/include/c++/13/bits/shared_ptr_base.h /usr/include/c++/13/typeinfo \
+ /usr/include/c++/13/bits/allocated_ptr.h \
+ /usr/include/c++/13/ext/aligned_buffer.h \
+ /usr/include/c++/13/ext/atomicity.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h \
  /usr/include/pthread.h /usr/include/sched.h \
@@ -136,9 +200,39 @@ CMakeFiles/app.dir/src/utility.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h \
  /usr/include/x86_64-linux-gnu/bits/setjmp.h \
  /usr/include/x86_64-linux-gnu/bits/types/struct___jmp_buf_tag.h \
- /usr/include/x86_64-linux-gnu/bits/pthread_stack_min-dynamic.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h \
  /usr/include/x86_64-linux-gnu/sys/single_threaded.h \
+ /usr/include/c++/13/ext/concurrence.h /usr/include/c++/13/exception \
+ /usr/include/c++/13/bits/exception_ptr.h \
+ /usr/include/c++/13/bits/cxxabi_init_exception.h \
+ /usr/include/c++/13/bits/nested_exception.h \
+ /usr/include/c++/13/bits/shared_ptr_atomic.h \
+ /usr/include/c++/13/bits/atomic_base.h \
+ /usr/include/c++/13/bits/atomic_lockfree_defines.h \
+ /usr/include/c++/13/backward/auto_ptr.h \
+ /usr/include/c++/13/pstl/glue_memory_defs.h \
+ /usr/local/include/opencv5/opencv2/core/fwddecl.hpp \
+ /usr/local/include/opencv5/opencv2/core/neon_utils.hpp \
+ /usr/local/include/opencv5/opencv2/core/vsx_utils.hpp \
+ /usr/include/assert.h \
+ /usr/local/include/opencv5/opencv2/core/exception.hpp \
+ /usr/local/include/opencv5/opencv2/core/check.hpp \
+ /usr/local/include/opencv5/opencv2/core/traits.hpp \
+ /usr/local/include/opencv5/opencv2/core/matx.hpp \
+ /usr/local/include/opencv5/opencv2/core/saturate.hpp \
+ /usr/local/include/opencv5/opencv2/core/fast_math.hpp \
+ /usr/local/include/opencv5/opencv2/core/matx.inl.hpp \
+ /usr/local/include/opencv5/opencv2/core/types.hpp \
+ /usr/include/c++/13/cfloat \
+ /usr/lib/gcc/x86_64-linux-gnu/13/include/float.h \
+ /usr/local/include/opencv5/opencv2/core/mat.hpp \
+ /usr/local/include/opencv5/opencv2/core/bufferpool.hpp \
+ /usr/include/c++/13/array /usr/include/c++/13/compare \
+ /usr/local/include/opencv5/opencv2/core/mat.inl.hpp \
+ /usr/local/include/opencv5/opencv2/core/persistence.hpp \
+ /usr/local/include/opencv5/opencv2/core/operations.hpp \
+ /usr/include/c++/13/ostream /usr/include/c++/13/ios \
+ /usr/include/c++/13/bits/ios_base.h \
  /usr/include/c++/13/bits/locale_classes.h \
  /usr/include/c++/13/bits/locale_classes.tcc \
  /usr/include/c++/13/system_error \
@@ -152,29 +246,126 @@ CMakeFiles/app.dir/src/utility.cpp.o: \
  /usr/include/c++/13/bits/streambuf_iterator.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_inline.h \
  /usr/include/c++/13/bits/locale_facets.tcc \
- /usr/include/c++/13/bits/basic_ios.tcc /usr/include/c++/13/ostream \
+ /usr/include/c++/13/bits/basic_ios.tcc \
  /usr/include/c++/13/bits/ostream.tcc \
- /usr/include/c++/13/bits/istream.tcc \
- /usr/include/c++/13/bits/sstream.tcc /usr/include/c++/13/cmath \
- /usr/include/math.h /usr/include/x86_64-linux-gnu/bits/math-vector.h \
- /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
- /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
- /usr/include/x86_64-linux-gnu/bits/fp-logb.h \
- /usr/include/x86_64-linux-gnu/bits/fp-fast.h \
- /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h \
- /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
- /usr/include/x86_64-linux-gnu/bits/mathcalls-narrow.h \
- /usr/include/x86_64-linux-gnu/bits/iscanonical.h \
- /usr/include/c++/13/bits/specfun.h /usr/include/c++/13/limits \
- /usr/include/c++/13/tr1/gamma.tcc \
- /usr/include/c++/13/tr1/special_function_util.h \
- /usr/include/c++/13/tr1/bessel_function.tcc \
- /usr/include/c++/13/tr1/beta_function.tcc \
- /usr/include/c++/13/tr1/ell_integral.tcc \
- /usr/include/c++/13/tr1/exp_integral.tcc \
- /usr/include/c++/13/tr1/hypergeometric.tcc \
- /usr/include/c++/13/tr1/legendre_function.tcc \
- /usr/include/c++/13/tr1/modified_bessel_func.tcc \
- /usr/include/c++/13/tr1/poly_hermite.tcc \
- /usr/include/c++/13/tr1/poly_laguerre.tcc \
- /usr/include/c++/13/tr1/riemann_zeta.tcc
+ /usr/local/include/opencv5/opencv2/core/cvstd.inl.hpp \
+ /usr/include/c++/13/complex /usr/include/c++/13/sstream \
+ /usr/include/c++/13/istream /usr/include/c++/13/bits/istream.tcc \
+ /usr/include/c++/13/bits/sstream.tcc \
+ /usr/local/include/opencv5/opencv2/core/utility.hpp \
+ /usr/include/c++/13/functional /usr/include/c++/13/bits/std_function.h \
+ /usr/include/c++/13/unordered_map \
+ /usr/include/c++/13/bits/unordered_map.h \
+ /usr/include/c++/13/bits/hashtable.h \
+ /usr/include/c++/13/bits/hashtable_policy.h \
+ /usr/include/c++/13/bits/enable_special_members.h \
+ /usr/include/c++/13/bits/node_handle.h \
+ /usr/include/c++/13/bits/erase_if.h /usr/include/c++/13/mutex \
+ /usr/include/c++/13/bits/chrono.h /usr/include/c++/13/ratio \
+ /usr/include/c++/13/ctime /usr/include/c++/13/bits/parse_numbers.h \
+ /usr/include/c++/13/bits/std_mutex.h \
+ /usr/include/c++/13/bits/unique_lock.h \
+ /usr/local/include/opencv5/opencv2/core/optim.hpp \
+ /usr/local/include/opencv5/opencv2/calib.hpp \
+ /usr/local/include/opencv5/opencv2/core/affine.hpp \
+ /usr/local/include/opencv5/opencv2/features.hpp \
+ /usr/local/include/opencv5/opencv2/flann/miniflann.hpp \
+ /usr/local/include/opencv5/opencv2/flann/defines.h \
+ /usr/local/include/opencv5/opencv2/flann/config.h \
+ /usr/local/include/opencv5/opencv2/dnn.hpp \
+ /usr/local/include/opencv5/opencv2/dnn/dnn.hpp \
+ /usr/local/include/opencv5/opencv2/core/async.hpp \
+ /usr/include/c++/13/chrono \
+ /usr/local/include/opencv5/opencv2/dnn/version.hpp \
+ /usr/local/include/opencv5/opencv2/dnn/dict.hpp /usr/include/c++/13/map \
+ /usr/include/c++/13/bits/stl_tree.h /usr/include/c++/13/bits/stl_map.h \
+ /usr/include/c++/13/bits/stl_multimap.h \
+ /usr/local/include/opencv5/opencv2/dnn/layer.hpp \
+ /usr/local/include/opencv5/opencv2/dnn/dnn.inl.hpp \
+ /usr/local/include/opencv5/opencv2/dnn/utils/inference_engine.hpp \
+ /usr/local/include/opencv5/opencv2/dnn/dnn.hpp \
+ /usr/local/include/opencv5/opencv2/flann.hpp \
+ /usr/local/include/opencv5/opencv2/flann/flann_base.hpp \
+ /usr/local/include/opencv5/opencv2/flann/general.h \
+ /usr/local/include/opencv5/opencv2/flann/matrix.h \
+ /usr/local/include/opencv5/opencv2/flann/params.h \
+ /usr/local/include/opencv5/opencv2/flann/any.h \
+ /usr/local/include/opencv5/opencv2/flann/defines.h \
+ /usr/include/c++/13/iostream \
+ /usr/local/include/opencv5/opencv2/flann/saving.h \
+ /usr/local/include/opencv5/opencv2/flann/nn_index.h \
+ /usr/local/include/opencv5/opencv2/flann/result_set.h \
+ /usr/include/c++/13/set /usr/include/c++/13/bits/stl_set.h \
+ /usr/include/c++/13/bits/stl_multiset.h \
+ /usr/local/include/opencv5/opencv2/flann/all_indices.h \
+ /usr/local/include/opencv5/opencv2/flann/kdtree_index.h \
+ /usr/local/include/opencv5/opencv2/flann/dynamic_bitset.h \
+ /usr/local/include/opencv5/opencv2/flann/dist.h \
+ /usr/local/include/opencv5/opencv2/flann/heap.h \
+ /usr/local/include/opencv5/opencv2/flann/allocator.h \
+ /usr/local/include/opencv5/opencv2/flann/random.h \
+ /usr/local/include/opencv5/opencv2/flann/kdtree_single_index.h \
+ /usr/local/include/opencv5/opencv2/flann/kmeans_index.h \
+ /usr/local/include/opencv5/opencv2/flann/logger.h \
+ /usr/local/include/opencv5/opencv2/flann/composite_index.h \
+ /usr/local/include/opencv5/opencv2/flann/linear_index.h \
+ /usr/local/include/opencv5/opencv2/flann/hierarchical_clustering_index.h \
+ /usr/local/include/opencv5/opencv2/flann/lsh_index.h \
+ /usr/local/include/opencv5/opencv2/flann/lsh_table.h \
+ /usr/include/c++/13/iomanip /usr/include/c++/13/locale \
+ /usr/include/c++/13/bits/locale_facets_nonio.h \
+ /usr/include/x86_64-linux-gnu/c++/13/bits/time_members.h \
+ /usr/include/x86_64-linux-gnu/c++/13/bits/messages_members.h \
+ /usr/include/libintl.h /usr/include/c++/13/bits/codecvt.h \
+ /usr/include/c++/13/bits/locale_facets_nonio.tcc \
+ /usr/include/c++/13/bits/locale_conv.h \
+ /usr/include/c++/13/bits/quoted_string.h /usr/include/c++/13/math.h \
+ /usr/local/include/opencv5/opencv2/flann/autotuned_index.h \
+ /usr/local/include/opencv5/opencv2/flann/ground_truth.h \
+ /usr/local/include/opencv5/opencv2/flann/index_testing.h \
+ /usr/local/include/opencv5/opencv2/flann/timer.h \
+ /usr/local/include/opencv5/opencv2/flann/sampling.h \
+ /usr/local/include/opencv5/opencv2/highgui.hpp \
+ /usr/local/include/opencv5/opencv2/imgcodecs.hpp \
+ /usr/local/include/opencv5/opencv2/videoio.hpp \
+ /usr/local/include/opencv5/opencv2/imgproc.hpp \
+ /usr/local/include/opencv5/opencv2/objdetect.hpp \
+ /usr/local/include/opencv5/opencv2/objdetect/aruco_detector.hpp \
+ /usr/local/include/opencv5/opencv2/objdetect/aruco_dictionary.hpp \
+ /usr/local/include/opencv5/opencv2/objdetect/aruco_board.hpp \
+ /usr/local/include/opencv5/opencv2/objdetect/graphical_code_detector.hpp \
+ /usr/local/include/opencv5/opencv2/objdetect/mcc_checker_detector.hpp \
+ /usr/local/include/opencv5/opencv2/objdetect/face.hpp \
+ /usr/local/include/opencv5/opencv2/objdetect/charuco_detector.hpp \
+ /usr/local/include/opencv5/opencv2/objdetect/barcode.hpp \
+ /usr/local/include/opencv5/opencv2/photo.hpp \
+ /usr/local/include/opencv5/opencv2/photo/ccm.hpp \
+ /usr/local/include/opencv5/opencv2/photo/segmentation.hpp \
+ /usr/local/include/opencv5/opencv2/stereo.hpp \
+ /usr/local/include/opencv5/opencv2/stitching.hpp \
+ /usr/local/include/opencv5/opencv2/stitching/warpers.hpp \
+ /usr/local/include/opencv5/opencv2/stitching/detail/warpers.hpp \
+ /usr/local/include/opencv5/opencv2/core/cuda.hpp \
+ /usr/local/include/opencv5/opencv2/core/cuda_types.hpp \
+ /usr/local/include/opencv5/opencv2/core/cuda.inl.hpp \
+ /usr/local/include/opencv5/opencv2/stitching/detail/warpers_inl.hpp \
+ /usr/local/include/opencv5/opencv2/stitching/detail/warpers.hpp \
+ /usr/local/include/opencv5/opencv2/stitching/detail/matchers.hpp \
+ /usr/local/include/opencv5/opencv2/stitching/detail/motion_estimators.hpp \
+ /usr/local/include/opencv5/opencv2/stitching/detail/matchers.hpp \
+ /usr/local/include/opencv5/opencv2/stitching/detail/util.hpp \
+ /usr/include/c++/13/list /usr/include/c++/13/bits/stl_list.h \
+ /usr/include/c++/13/bits/list.tcc \
+ /usr/local/include/opencv5/opencv2/stitching/detail/util_inl.hpp \
+ /usr/include/c++/13/queue /usr/include/c++/13/deque \
+ /usr/include/c++/13/bits/stl_deque.h /usr/include/c++/13/bits/deque.tcc \
+ /usr/include/c++/13/bits/stl_queue.h \
+ /usr/local/include/opencv5/opencv2/stitching/detail/camera.hpp \
+ /usr/local/include/opencv5/opencv2/stitching/detail/exposure_compensate.hpp \
+ /usr/local/include/opencv5/opencv2/stitching/detail/seam_finders.hpp \
+ /usr/local/include/opencv5/opencv2/stitching/detail/blenders.hpp \
+ /usr/local/include/opencv5/opencv2/stitching/detail/camera.hpp \
+ /usr/local/include/opencv5/opencv2/video.hpp \
+ /usr/local/include/opencv5/opencv2/video/tracking.hpp \
+ /usr/local/include/opencv5/opencv2/video/background_segm.hpp \
+ /home/kukuna/korontana/projet/etude/S5/dev/authentification/include/LocalException.h
