@@ -1,6 +1,7 @@
 #include <utility.h>
 #include <sstream>
 #include <cmath>
+#include <LocalException.h>
 
 std::vector<float> pgstring_to_vector(const std::string& str) {
     std::vector<float> vec;
@@ -61,7 +62,7 @@ double euclideanDistance(
 }
 
 
-std::vector<float> FacesModel::formatEmbending(cv::Mat matEmbending)
+std::vector<float> formatEmbending(cv::Mat matEmbending)
 {
     std::vector<float> embending(128);
     if(matEmbending.size().width != 128 || matEmbending.size().height != 1)

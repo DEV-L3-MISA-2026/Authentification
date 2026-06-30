@@ -5,7 +5,7 @@
 #include <vector>
 #include <pqxx/pqxx>
 #include <AuthData.h>
-
+#include <vector>
 
 class AuthRepository {
 public:
@@ -18,8 +18,12 @@ public:
     AuthRepository(const AuthRepository&) = delete;
     AuthRepository& operator=(const AuthRepository&) = delete;
 
+    // check if id is present in auth_data table
+    bool hasInstance(int id);
     int getIdByUsername(const std::string& username);
     void insertEmbeddings(const AuthData& data);
+    void setFacialEmbeddingsById(int id, std::vector<float> embendding);
+    void setVocalEmbeddingById(int id, std::vector<float> embedding);
 
 private:
     // Constructeur privé

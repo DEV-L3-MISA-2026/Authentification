@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.28)
 project(FacialAuthentification VERSION 1.0 LANGUAGES CXX)
 find_package(OpenCV 5 REQUIRED)
 find_package(PkgConfig REQUIRED)
+
 pkg_search_module(PQXX REQUIRED IMPORTED_TARGET libpqxx)
 pkg_check_modules(SNDFILE REQUIRED sndfile)
 pkg_check_modules(SAMPLERATE REQUIRED samplerate)
@@ -23,7 +24,6 @@ link_directories(
     ${ONNXRUNTIME_DIR}/lib
 )
 
-
 add_executable(app 
     main.cpp 
     src/FaceDetector.cpp
@@ -32,7 +32,7 @@ add_executable(app
     src/FacesModel.cpp
     src/AudioProcessor.cpp
     src/SpeechProcessor.cpp
-    src/AuthRepository.cpp
+    src/Repository/AuthRepository.cpp
 )
 
 target_include_directories(app PRIVATE
