@@ -24,7 +24,8 @@ public:
     void insertEmbeddings(const AuthData& data);
     void setFacialEmbeddingsById(int id, std::vector<float> embendding);
     void setVocalEmbeddingById(int id, std::vector<float> embedding);
-
+    std::vector<float> getVocalEmbenddingById(int id);
+    std::vector<float> getFacialEmbenddingById(int id);
 private:
     // Constructeur privé
     AuthRepository(const std::string& connectionString);

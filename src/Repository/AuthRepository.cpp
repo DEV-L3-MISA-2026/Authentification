@@ -180,3 +180,65 @@ void AuthRepository::setVocalEmbeddingById(int id, std::vector<float> embedding)
         goto updating;
     }
 }
+
+std::vector<float> AuthRepository::getVocalEmbenddingById(int id) {
+    pqxx::nontransaction tx(conn);
+    std::string sql = "SELECT voice_embendding FROM auth_data WHERE userid=$1";
+    try {
+        pqxx::result rows = tx.exec_params(sql, id);
+        if (rows.size() == 0) 
+            throw LocalException("user's data not found !");
+
+        else if (rows[0][0].is_null()) 
+            return std::vector<float>();
+        
+        else
+        {
+            std::string embending = rows[0][0].as<std::string>();
+            std::vector<float> vec_embendding = pgstring_to_vector(embending);
+            if(vec_embendding.size() != 192)
+            {
+                throw LocalException("Error while getting vocal embendding: BAD SHAPE !");
+            }
+            return vec_embendding;
+        }
+    } catch (const pqxx::sql_error& err) {
+        std::string detail_erreur = "Erreur SQL : " + std::string(err.what()) + "\n" +
+                                    "Requête exécutée : " + err.query();
+        throw std::runtime_error(detail_erreur);
+    } catch (const std::exception& err) {
+        throw std::runtime_error("Erreur standard : " + std::string(err.what()));
+    }
+  
+
+}
+std::vector<float> AuthRepository::getFacialEmbenddingById(int id) {
+
+    pqxx::nontransaction tx(conn);
+    std::string sql = "SELECT face_embendding FROM auth_data WHERE userid=$1";
+    try {
+        pqxx::result rows = tx.exec_params(sql, id);
+        if (rows.size() == 0) 
+            throw LocalException("user's data not found !");
+
+        else if (rows[0][0].is_null()) 
+            return std::vector<float>();
+        
+        else
+        {
+            std::string embending = rows[0][0].as<std::string>();
+            std::vector<float> vec_embendding = pgstring_to_vector(embending);
+            if(vec_embendding.size() != 128)
+            {
+                throw LocalException("Error while getting facial embendding: BAD SHAPE !");
+            }
+            return vec_embendding;
+        }
+    } catch (const pqxx::sql_error& err) {
+        std::string detail_erreur = "Erreur SQL : " + std::string(err.what()) + "\n" +
+                                    "Requête exécutée : " + err.query();
+        throw std::runtime_error(detail_erreur);
+    } catch (const std::exception& err) {
+        throw std::runtime_error("Erreur standard : " + std::string(err.what()));
+    }
+}
