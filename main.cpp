@@ -52,6 +52,27 @@ int main() {
         res["score"] = cosin_score;
         return crow::response(res);
     });
+
+
+    // POST /api/voc/set/:id
+    // this route is used to set the vocal embending of user : id 
+    // to the embending of the voc posted in the body
+    CROW_ROUTE(app, "/api/voc/verify/<int>").methods(crow::HTTPMethod::POST)
+    ([&sp, &repo] (const crow::request& req, int userid) {
+        std::cout << "receiving " << req.body.size() << "bytes!" << std::endl;
+        
+        // extracting the embending directly from the data
+        std::vector<float> embendding = sp->getEmbendingFromData(req.body.data(), req.body.size());
+        
+        try 
+        {
+            repo->setVocalEmbeddingById(userid, embendding);
+        } catch(std::exception err) 
+        {
+            return crow::response(500, "Sorry, some error occured in the server, please contact the devs");
+        }
+        return crow::response("Ok");
+    });
     app.port(5000).multithreaded().run();
     return 0;
 }
