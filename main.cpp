@@ -10,8 +10,10 @@
 #include <fstream>
 
 int main() {
+    // initializing all processor
     AuthRepository::init("dbname=auth user=postgres password=mamanlah host=localhost port=5432");
     auto repo = AuthRepository::getInstance();
+
     SpeechProcessor::init("../model/speech_detection.onnx");
     auto sp = SpeechProcessor::getInstance();
     
@@ -24,35 +26,32 @@ int main() {
             
     fr::FaceRecognizer face_recognizer(face_detector, "../model/face_recognition_sface_2021dec.onnx");
 
+    // defining the api routes of the vocal signature
     crow::SimpleApp app;
-    CROW_ROUTE(app, "/")
-    ([] () {
-        return "Hello world !";
-    });
 
-    CROW_ROUTE(app, "/api/voc/test").methods(crow::HTTPMethod::POST)
-    ([&sp, &repo] (const crow::request& req) {
+    // POST /api/voc/verify/:id
+    // this route is used to verify the vocal signature of the voc of user : id
+    // in the db, and the voc given in the body
+    CROW_ROUTE(app, "/api/voc/verify/<int>").methods(crow::HTTPMethod::POST)
+    ([&sp, &repo] (const crow::request& req, int userid) {
         std::cout << "receiving " << req.body.size() << "bytes!" << std::endl;
-
-        // saving into .ogg file
+        
+        // saving into .ogg file for test purposes
         std::ofstream file("voice.ogg", std::ios::binary);
-       file.write(req.body.data(), req.body.size());
+        file.write(req.body.data(), req.body.size());
+        
+        // extracting the embending directly from the data
         std::vector<float> embendding = sp->getEmbendingFromData(req.body.data(), req.body.size());
-        std::vector<float> myEmbendding = repo->getVocalEmbenddingById(2);
+        
+        // extracting from db
+        std::vector<float> userEmbending = repo->getVocalEmbenddingById(userid);
+        float cosin_score =  cosineSimilarity(embendding, userEmbending);
 
-        std::cout << "similarity : " << cosineSimilarity(embendding, myEmbendding);
-        return crow::response("Ok");
+        crow::json::wvalue res;
+        res["allowed"] = "false";
+        res["score"] = cosin_score;
+        return crow::response(res);
     });
     app.port(5000).multithreaded().run();
     return 0;
 }
-
-    // cv::Mat img = cv::imread("../static_data/me.jpeg");
-    // cv::Mat face_embending = face_recognizer.GetCharacteristic(img);
-    // userData.username = "Mikajy";    
-    // userData.faceEmbedding = formatEmbending(face_embending);
-    // userData.voiceEmbedding = sp->getEmbending("../static_data/voice1.wav");
-
-    // std::cout << "face: " << userData.faceEmbedding.size() << " voice: " << userData.voiceEmbedding.size() << "\n";
-    // repo->setFacialEmbeddingsById(2, userData.faceEmbedding);
-    // repo->setVocalEmbeddingById(2, userData.voiceEmbedding);
