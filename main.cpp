@@ -17,9 +17,13 @@ int main() {
     vector<float> cleaned_audio  = sp->getEmbending("cleaned_voice.wav");
 
     vector<float> real_audio = sp->getEmbending("../static_data/voice1.wav");
+    vector<float> cleaned_real_audio = sp->getEmbending("cleaned_voice1.wav");
    
     cout << cosineSimilarity(normal_audio, cleaned_audio) << endl;
     cout << cosineSimilarity(real_audio, cleaned_audio) << endl;
     cout << cosineSimilarity(real_audio, normal_audio) << endl;
+    cout << cosineSimilarity(cleaned_real_audio, cleaned_audio) << endl;
+    cout << cosineSimilarity(cleaned_real_audio, normal_audio) << endl;
+
     return 0;
 }
