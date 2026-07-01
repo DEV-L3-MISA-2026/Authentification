@@ -25,7 +25,7 @@ link_directories(
 )
 
 add_executable(app 
-    main.cpp 
+    main.cpp
     src/FaceDetector.cpp
     src/FaceRecognizer.cpp
     src/utility.cpp

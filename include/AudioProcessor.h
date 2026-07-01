@@ -13,6 +13,7 @@ class AudioProcessor {
         std::vector<float> loadAudioForCleaning(const std::string& path);
         std::vector<float> cleanAudioRNNoise(const std::vector<float>& input);
 
+        
         static std::shared_ptr<AudioProcessor> getInstance();
     private:
         static std::shared_ptr<AudioProcessor> instance;

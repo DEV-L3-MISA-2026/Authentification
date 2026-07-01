@@ -45,7 +45,6 @@ std::vector<float> AudioProcessor::stereoToMono(const std::vector<float>& input)
 }
 
 std::vector<float> AudioProcessor::loadAudio(const std::string& path) {
-
     SF_INFO info{};
     SNDFILE* file = sf_open(path.c_str(), SFM_READ, &info);
 
@@ -122,7 +121,6 @@ std::vector<float> AudioProcessor::cleanAudioRNNoise(const std::vector<float>& i
     }
 
     rnnoise_destroy(st);
-
     return output;
 }
 
