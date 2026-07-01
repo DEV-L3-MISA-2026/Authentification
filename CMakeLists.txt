@@ -7,7 +7,7 @@ find_package(PkgConfig REQUIRED)
 pkg_search_module(PQXX REQUIRED IMPORTED_TARGET libpqxx)
 pkg_check_modules(SNDFILE REQUIRED sndfile)
 pkg_check_modules(SAMPLERATE REQUIRED samplerate)
-
+pkg_check_modules(RNNOISE REQUIRED rnnoise)
 
 set(ONNXRUNTIME_DIR "/usr/local")
 
@@ -46,4 +46,5 @@ target_link_libraries(app
         ${SNDFILE_LIBRARIES}
         ${SAMPLERATE_LIBRARIES}
         onnxruntime
+        ${RNNOISE_LIBRARIES}
 )

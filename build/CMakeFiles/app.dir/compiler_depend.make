@@ -1334,7 +1334,8 @@ CMakeFiles/app.dir/src/AudioProcessor.cpp.o: /home/kukuna/korontana/projet/etude
   /usr/include/x86_64-linux-gnu/sys/types.h \
   /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h \
   /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h \
-  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h
+  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h \
+  /usr/local/include/rnnoise.h
 
 CMakeFiles/app.dir/src/FaceDetector.cpp.o: /home/kukuna/korontana/projet/etude/S5/dev/authentification/src/FaceDetector.cpp \
   /home/kukuna/korontana/projet/etude/S5/dev/authentification/include/FaceDetector.h \
@@ -4038,6 +4039,8 @@ CMakeFiles/app.dir/src/utility.cpp.o: /home/kukuna/korontana/projet/etude/S5/dev
 /home/kukuna/korontana/projet/etude/S5/dev/authentification/include/FacesModel.h:
 
 /home/kukuna/korontana/projet/etude/S5/dev/authentification/src/FaceRecognizer.cpp:
+
+/usr/local/include/rnnoise.h:
 
 /usr/include/sndfile.h:
 
