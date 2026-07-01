@@ -12,8 +12,8 @@ class AudioProcessor {
         std::vector<float> loadAudio(const void* data, size_t size);
         std::vector<float> loadAudioForCleaning(const std::string& path);
         std::vector<float> cleanAudioRNNoise(const std::vector<float>& input);
+        void saveAudio(const std::string& path, const std::vector<float>& audio, int sampleRate);
 
-        
         static std::shared_ptr<AudioProcessor> getInstance();
     private:
         static std::shared_ptr<AudioProcessor> instance;

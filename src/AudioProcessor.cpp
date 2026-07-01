@@ -169,6 +169,26 @@ std::vector<float> AudioProcessor::loadAudio(
     return mono;
 }
 
+void AudioProcessor::saveAudio(
+    const std::string& path,
+    const std::vector<float>& audio,
+    int sampleRate)
+{
+    SF_INFO info{};
+    info.samplerate = sampleRate;
+    info.channels = 1;
+    info.format = SF_FORMAT_WAV | SF_FORMAT_PCM_16;
+
+    SNDFILE* file = sf_open(path.c_str(), SFM_WRITE, &info);
+
+    if (!file)
+        throw std::runtime_error("Unable to create output file.");
+
+    sf_write_float(file, audio.data(), audio.size());
+
+    sf_close(file);
+}
+
 std::shared_ptr<AudioProcessor> AudioProcessor::getInstance() {
     if (instance == nullptr)
         instance = std::shared_ptr<AudioProcessor>();
