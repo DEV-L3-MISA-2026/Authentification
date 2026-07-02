@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/kukuna/korontana/projet/etude/S5/dev/authentification
+CMAKE_SOURCE_DIR = /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/kukuna/korontana/projet/etude/S5/dev/authentification/build
+CMAKE_BINARY_DIR = /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/app.dir/depend.make
@@ -69,135 +69,135 @@ include CMakeFiles/app.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/app.dir/flags.make
 
-CMakeFiles/app.dir/main.cpp.o: CMakeFiles/app.dir/flags.make
-CMakeFiles/app.dir/main.cpp.o: /home/kukuna/korontana/projet/etude/S5/dev/authentification/main.cpp
-CMakeFiles/app.dir/main.cpp.o: CMakeFiles/app.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kukuna/korontana/projet/etude/S5/dev/authentification/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/app.dir/main.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/app.dir/main.cpp.o -MF CMakeFiles/app.dir/main.cpp.o.d -o CMakeFiles/app.dir/main.cpp.o -c /home/kukuna/korontana/projet/etude/S5/dev/authentification/main.cpp
+CMakeFiles/app.dir/src/face_api_server.cpp.o: CMakeFiles/app.dir/flags.make
+CMakeFiles/app.dir/src/face_api_server.cpp.o: /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification/src/face_api_server.cpp
+CMakeFiles/app.dir/src/face_api_server.cpp.o: CMakeFiles/app.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/app.dir/src/face_api_server.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/app.dir/src/face_api_server.cpp.o -MF CMakeFiles/app.dir/src/face_api_server.cpp.o.d -o CMakeFiles/app.dir/src/face_api_server.cpp.o -c /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification/src/face_api_server.cpp
 
-CMakeFiles/app.dir/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/app.dir/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kukuna/korontana/projet/etude/S5/dev/authentification/main.cpp > CMakeFiles/app.dir/main.cpp.i
+CMakeFiles/app.dir/src/face_api_server.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/app.dir/src/face_api_server.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification/src/face_api_server.cpp > CMakeFiles/app.dir/src/face_api_server.cpp.i
 
-CMakeFiles/app.dir/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/app.dir/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kukuna/korontana/projet/etude/S5/dev/authentification/main.cpp -o CMakeFiles/app.dir/main.cpp.s
+CMakeFiles/app.dir/src/face_api_server.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/app.dir/src/face_api_server.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification/src/face_api_server.cpp -o CMakeFiles/app.dir/src/face_api_server.cpp.s
 
 CMakeFiles/app.dir/src/FaceDetector.cpp.o: CMakeFiles/app.dir/flags.make
-CMakeFiles/app.dir/src/FaceDetector.cpp.o: /home/kukuna/korontana/projet/etude/S5/dev/authentification/src/FaceDetector.cpp
+CMakeFiles/app.dir/src/FaceDetector.cpp.o: /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification/src/FaceDetector.cpp
 CMakeFiles/app.dir/src/FaceDetector.cpp.o: CMakeFiles/app.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kukuna/korontana/projet/etude/S5/dev/authentification/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/app.dir/src/FaceDetector.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/app.dir/src/FaceDetector.cpp.o -MF CMakeFiles/app.dir/src/FaceDetector.cpp.o.d -o CMakeFiles/app.dir/src/FaceDetector.cpp.o -c /home/kukuna/korontana/projet/etude/S5/dev/authentification/src/FaceDetector.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/app.dir/src/FaceDetector.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/app.dir/src/FaceDetector.cpp.o -MF CMakeFiles/app.dir/src/FaceDetector.cpp.o.d -o CMakeFiles/app.dir/src/FaceDetector.cpp.o -c /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification/src/FaceDetector.cpp
 
 CMakeFiles/app.dir/src/FaceDetector.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/app.dir/src/FaceDetector.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kukuna/korontana/projet/etude/S5/dev/authentification/src/FaceDetector.cpp > CMakeFiles/app.dir/src/FaceDetector.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification/src/FaceDetector.cpp > CMakeFiles/app.dir/src/FaceDetector.cpp.i
 
 CMakeFiles/app.dir/src/FaceDetector.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/app.dir/src/FaceDetector.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kukuna/korontana/projet/etude/S5/dev/authentification/src/FaceDetector.cpp -o CMakeFiles/app.dir/src/FaceDetector.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification/src/FaceDetector.cpp -o CMakeFiles/app.dir/src/FaceDetector.cpp.s
 
 CMakeFiles/app.dir/src/FaceRecognizer.cpp.o: CMakeFiles/app.dir/flags.make
-CMakeFiles/app.dir/src/FaceRecognizer.cpp.o: /home/kukuna/korontana/projet/etude/S5/dev/authentification/src/FaceRecognizer.cpp
+CMakeFiles/app.dir/src/FaceRecognizer.cpp.o: /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification/src/FaceRecognizer.cpp
 CMakeFiles/app.dir/src/FaceRecognizer.cpp.o: CMakeFiles/app.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kukuna/korontana/projet/etude/S5/dev/authentification/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/app.dir/src/FaceRecognizer.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/app.dir/src/FaceRecognizer.cpp.o -MF CMakeFiles/app.dir/src/FaceRecognizer.cpp.o.d -o CMakeFiles/app.dir/src/FaceRecognizer.cpp.o -c /home/kukuna/korontana/projet/etude/S5/dev/authentification/src/FaceRecognizer.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/app.dir/src/FaceRecognizer.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/app.dir/src/FaceRecognizer.cpp.o -MF CMakeFiles/app.dir/src/FaceRecognizer.cpp.o.d -o CMakeFiles/app.dir/src/FaceRecognizer.cpp.o -c /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification/src/FaceRecognizer.cpp
 
 CMakeFiles/app.dir/src/FaceRecognizer.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/app.dir/src/FaceRecognizer.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kukuna/korontana/projet/etude/S5/dev/authentification/src/FaceRecognizer.cpp > CMakeFiles/app.dir/src/FaceRecognizer.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification/src/FaceRecognizer.cpp > CMakeFiles/app.dir/src/FaceRecognizer.cpp.i
 
 CMakeFiles/app.dir/src/FaceRecognizer.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/app.dir/src/FaceRecognizer.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kukuna/korontana/projet/etude/S5/dev/authentification/src/FaceRecognizer.cpp -o CMakeFiles/app.dir/src/FaceRecognizer.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification/src/FaceRecognizer.cpp -o CMakeFiles/app.dir/src/FaceRecognizer.cpp.s
 
 CMakeFiles/app.dir/src/utility.cpp.o: CMakeFiles/app.dir/flags.make
-CMakeFiles/app.dir/src/utility.cpp.o: /home/kukuna/korontana/projet/etude/S5/dev/authentification/src/utility.cpp
+CMakeFiles/app.dir/src/utility.cpp.o: /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification/src/utility.cpp
 CMakeFiles/app.dir/src/utility.cpp.o: CMakeFiles/app.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kukuna/korontana/projet/etude/S5/dev/authentification/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/app.dir/src/utility.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/app.dir/src/utility.cpp.o -MF CMakeFiles/app.dir/src/utility.cpp.o.d -o CMakeFiles/app.dir/src/utility.cpp.o -c /home/kukuna/korontana/projet/etude/S5/dev/authentification/src/utility.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/app.dir/src/utility.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/app.dir/src/utility.cpp.o -MF CMakeFiles/app.dir/src/utility.cpp.o.d -o CMakeFiles/app.dir/src/utility.cpp.o -c /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification/src/utility.cpp
 
 CMakeFiles/app.dir/src/utility.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/app.dir/src/utility.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kukuna/korontana/projet/etude/S5/dev/authentification/src/utility.cpp > CMakeFiles/app.dir/src/utility.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification/src/utility.cpp > CMakeFiles/app.dir/src/utility.cpp.i
 
 CMakeFiles/app.dir/src/utility.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/app.dir/src/utility.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kukuna/korontana/projet/etude/S5/dev/authentification/src/utility.cpp -o CMakeFiles/app.dir/src/utility.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification/src/utility.cpp -o CMakeFiles/app.dir/src/utility.cpp.s
 
 CMakeFiles/app.dir/src/FacesModel.cpp.o: CMakeFiles/app.dir/flags.make
-CMakeFiles/app.dir/src/FacesModel.cpp.o: /home/kukuna/korontana/projet/etude/S5/dev/authentification/src/FacesModel.cpp
+CMakeFiles/app.dir/src/FacesModel.cpp.o: /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification/src/FacesModel.cpp
 CMakeFiles/app.dir/src/FacesModel.cpp.o: CMakeFiles/app.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kukuna/korontana/projet/etude/S5/dev/authentification/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/app.dir/src/FacesModel.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/app.dir/src/FacesModel.cpp.o -MF CMakeFiles/app.dir/src/FacesModel.cpp.o.d -o CMakeFiles/app.dir/src/FacesModel.cpp.o -c /home/kukuna/korontana/projet/etude/S5/dev/authentification/src/FacesModel.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/app.dir/src/FacesModel.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/app.dir/src/FacesModel.cpp.o -MF CMakeFiles/app.dir/src/FacesModel.cpp.o.d -o CMakeFiles/app.dir/src/FacesModel.cpp.o -c /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification/src/FacesModel.cpp
 
 CMakeFiles/app.dir/src/FacesModel.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/app.dir/src/FacesModel.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kukuna/korontana/projet/etude/S5/dev/authentification/src/FacesModel.cpp > CMakeFiles/app.dir/src/FacesModel.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification/src/FacesModel.cpp > CMakeFiles/app.dir/src/FacesModel.cpp.i
 
 CMakeFiles/app.dir/src/FacesModel.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/app.dir/src/FacesModel.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kukuna/korontana/projet/etude/S5/dev/authentification/src/FacesModel.cpp -o CMakeFiles/app.dir/src/FacesModel.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification/src/FacesModel.cpp -o CMakeFiles/app.dir/src/FacesModel.cpp.s
 
 CMakeFiles/app.dir/src/AudioProcessor.cpp.o: CMakeFiles/app.dir/flags.make
-CMakeFiles/app.dir/src/AudioProcessor.cpp.o: /home/kukuna/korontana/projet/etude/S5/dev/authentification/src/AudioProcessor.cpp
+CMakeFiles/app.dir/src/AudioProcessor.cpp.o: /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification/src/AudioProcessor.cpp
 CMakeFiles/app.dir/src/AudioProcessor.cpp.o: CMakeFiles/app.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kukuna/korontana/projet/etude/S5/dev/authentification/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/app.dir/src/AudioProcessor.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/app.dir/src/AudioProcessor.cpp.o -MF CMakeFiles/app.dir/src/AudioProcessor.cpp.o.d -o CMakeFiles/app.dir/src/AudioProcessor.cpp.o -c /home/kukuna/korontana/projet/etude/S5/dev/authentification/src/AudioProcessor.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/app.dir/src/AudioProcessor.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/app.dir/src/AudioProcessor.cpp.o -MF CMakeFiles/app.dir/src/AudioProcessor.cpp.o.d -o CMakeFiles/app.dir/src/AudioProcessor.cpp.o -c /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification/src/AudioProcessor.cpp
 
 CMakeFiles/app.dir/src/AudioProcessor.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/app.dir/src/AudioProcessor.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kukuna/korontana/projet/etude/S5/dev/authentification/src/AudioProcessor.cpp > CMakeFiles/app.dir/src/AudioProcessor.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification/src/AudioProcessor.cpp > CMakeFiles/app.dir/src/AudioProcessor.cpp.i
 
 CMakeFiles/app.dir/src/AudioProcessor.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/app.dir/src/AudioProcessor.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kukuna/korontana/projet/etude/S5/dev/authentification/src/AudioProcessor.cpp -o CMakeFiles/app.dir/src/AudioProcessor.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification/src/AudioProcessor.cpp -o CMakeFiles/app.dir/src/AudioProcessor.cpp.s
 
 CMakeFiles/app.dir/src/SpeechProcessor.cpp.o: CMakeFiles/app.dir/flags.make
-CMakeFiles/app.dir/src/SpeechProcessor.cpp.o: /home/kukuna/korontana/projet/etude/S5/dev/authentification/src/SpeechProcessor.cpp
+CMakeFiles/app.dir/src/SpeechProcessor.cpp.o: /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification/src/SpeechProcessor.cpp
 CMakeFiles/app.dir/src/SpeechProcessor.cpp.o: CMakeFiles/app.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kukuna/korontana/projet/etude/S5/dev/authentification/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/app.dir/src/SpeechProcessor.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/app.dir/src/SpeechProcessor.cpp.o -MF CMakeFiles/app.dir/src/SpeechProcessor.cpp.o.d -o CMakeFiles/app.dir/src/SpeechProcessor.cpp.o -c /home/kukuna/korontana/projet/etude/S5/dev/authentification/src/SpeechProcessor.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/app.dir/src/SpeechProcessor.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/app.dir/src/SpeechProcessor.cpp.o -MF CMakeFiles/app.dir/src/SpeechProcessor.cpp.o.d -o CMakeFiles/app.dir/src/SpeechProcessor.cpp.o -c /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification/src/SpeechProcessor.cpp
 
 CMakeFiles/app.dir/src/SpeechProcessor.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/app.dir/src/SpeechProcessor.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kukuna/korontana/projet/etude/S5/dev/authentification/src/SpeechProcessor.cpp > CMakeFiles/app.dir/src/SpeechProcessor.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification/src/SpeechProcessor.cpp > CMakeFiles/app.dir/src/SpeechProcessor.cpp.i
 
 CMakeFiles/app.dir/src/SpeechProcessor.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/app.dir/src/SpeechProcessor.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kukuna/korontana/projet/etude/S5/dev/authentification/src/SpeechProcessor.cpp -o CMakeFiles/app.dir/src/SpeechProcessor.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification/src/SpeechProcessor.cpp -o CMakeFiles/app.dir/src/SpeechProcessor.cpp.s
 
 CMakeFiles/app.dir/src/Repository/AuthRepository.cpp.o: CMakeFiles/app.dir/flags.make
-CMakeFiles/app.dir/src/Repository/AuthRepository.cpp.o: /home/kukuna/korontana/projet/etude/S5/dev/authentification/src/Repository/AuthRepository.cpp
+CMakeFiles/app.dir/src/Repository/AuthRepository.cpp.o: /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification/src/Repository/AuthRepository.cpp
 CMakeFiles/app.dir/src/Repository/AuthRepository.cpp.o: CMakeFiles/app.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kukuna/korontana/projet/etude/S5/dev/authentification/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/app.dir/src/Repository/AuthRepository.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/app.dir/src/Repository/AuthRepository.cpp.o -MF CMakeFiles/app.dir/src/Repository/AuthRepository.cpp.o.d -o CMakeFiles/app.dir/src/Repository/AuthRepository.cpp.o -c /home/kukuna/korontana/projet/etude/S5/dev/authentification/src/Repository/AuthRepository.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/app.dir/src/Repository/AuthRepository.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/app.dir/src/Repository/AuthRepository.cpp.o -MF CMakeFiles/app.dir/src/Repository/AuthRepository.cpp.o.d -o CMakeFiles/app.dir/src/Repository/AuthRepository.cpp.o -c /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification/src/Repository/AuthRepository.cpp
 
 CMakeFiles/app.dir/src/Repository/AuthRepository.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/app.dir/src/Repository/AuthRepository.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kukuna/korontana/projet/etude/S5/dev/authentification/src/Repository/AuthRepository.cpp > CMakeFiles/app.dir/src/Repository/AuthRepository.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification/src/Repository/AuthRepository.cpp > CMakeFiles/app.dir/src/Repository/AuthRepository.cpp.i
 
 CMakeFiles/app.dir/src/Repository/AuthRepository.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/app.dir/src/Repository/AuthRepository.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kukuna/korontana/projet/etude/S5/dev/authentification/src/Repository/AuthRepository.cpp -o CMakeFiles/app.dir/src/Repository/AuthRepository.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification/src/Repository/AuthRepository.cpp -o CMakeFiles/app.dir/src/Repository/AuthRepository.cpp.s
 
 CMakeFiles/app.dir/src/MemoryAudioFile.cpp.o: CMakeFiles/app.dir/flags.make
-CMakeFiles/app.dir/src/MemoryAudioFile.cpp.o: /home/kukuna/korontana/projet/etude/S5/dev/authentification/src/MemoryAudioFile.cpp
+CMakeFiles/app.dir/src/MemoryAudioFile.cpp.o: /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification/src/MemoryAudioFile.cpp
 CMakeFiles/app.dir/src/MemoryAudioFile.cpp.o: CMakeFiles/app.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kukuna/korontana/projet/etude/S5/dev/authentification/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/app.dir/src/MemoryAudioFile.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/app.dir/src/MemoryAudioFile.cpp.o -MF CMakeFiles/app.dir/src/MemoryAudioFile.cpp.o.d -o CMakeFiles/app.dir/src/MemoryAudioFile.cpp.o -c /home/kukuna/korontana/projet/etude/S5/dev/authentification/src/MemoryAudioFile.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/app.dir/src/MemoryAudioFile.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/app.dir/src/MemoryAudioFile.cpp.o -MF CMakeFiles/app.dir/src/MemoryAudioFile.cpp.o.d -o CMakeFiles/app.dir/src/MemoryAudioFile.cpp.o -c /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification/src/MemoryAudioFile.cpp
 
 CMakeFiles/app.dir/src/MemoryAudioFile.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/app.dir/src/MemoryAudioFile.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kukuna/korontana/projet/etude/S5/dev/authentification/src/MemoryAudioFile.cpp > CMakeFiles/app.dir/src/MemoryAudioFile.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification/src/MemoryAudioFile.cpp > CMakeFiles/app.dir/src/MemoryAudioFile.cpp.i
 
 CMakeFiles/app.dir/src/MemoryAudioFile.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/app.dir/src/MemoryAudioFile.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kukuna/korontana/projet/etude/S5/dev/authentification/src/MemoryAudioFile.cpp -o CMakeFiles/app.dir/src/MemoryAudioFile.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification/src/MemoryAudioFile.cpp -o CMakeFiles/app.dir/src/MemoryAudioFile.cpp.s
 
 # Object files for target app
 app_OBJECTS = \
-"CMakeFiles/app.dir/main.cpp.o" \
+"CMakeFiles/app.dir/src/face_api_server.cpp.o" \
 "CMakeFiles/app.dir/src/FaceDetector.cpp.o" \
 "CMakeFiles/app.dir/src/FaceRecognizer.cpp.o" \
 "CMakeFiles/app.dir/src/utility.cpp.o" \
@@ -210,7 +210,7 @@ app_OBJECTS = \
 # External object files for target app
 app_EXTERNAL_OBJECTS =
 
-app: CMakeFiles/app.dir/main.cpp.o
+app: CMakeFiles/app.dir/src/face_api_server.cpp.o
 app: CMakeFiles/app.dir/src/FaceDetector.cpp.o
 app: CMakeFiles/app.dir/src/FaceRecognizer.cpp.o
 app: CMakeFiles/app.dir/src/utility.cpp.o
@@ -220,25 +220,24 @@ app: CMakeFiles/app.dir/src/SpeechProcessor.cpp.o
 app: CMakeFiles/app.dir/src/Repository/AuthRepository.cpp.o
 app: CMakeFiles/app.dir/src/MemoryAudioFile.cpp.o
 app: CMakeFiles/app.dir/build.make
-app: /usr/local/lib/libopencv_calib.so.5.0.0
-app: /usr/local/lib/libopencv_highgui.so.5.0.0
-app: /usr/local/lib/libopencv_objdetect.so.5.0.0
-app: /usr/local/lib/libopencv_photo.so.5.0.0
-app: /usr/local/lib/libopencv_ptcloud.so.5.0.0
-app: /usr/local/lib/libopencv_stereo.so.5.0.0
-app: /usr/local/lib/libopencv_stitching.so.5.0.0
-app: /usr/local/lib/libopencv_video.so.5.0.0
-app: /usr/local/lib/libopencv_videoio.so.5.0.0
-app: /usr/local/lib/libopencv_imgcodecs.so.5.0.0
-app: /usr/local/lib/libopencv_features.so.5.0.0
-app: /usr/local/lib/libopencv_dnn.so.5.0.0
-app: /usr/local/lib/libopencv_imgproc.so.5.0.0
-app: /usr/local/lib/libopencv_geometry.so.5.0.0
-app: /usr/local/lib/libopencv_flann.so.5.0.0
-app: /usr/local/lib/libopencv_core.so.5.0.0
+app: /usr/local/lib/libopencv_gapi.so.4.11.0
+app: /usr/local/lib/libopencv_highgui.so.4.11.0
+app: /usr/local/lib/libopencv_ml.so.4.11.0
+app: /usr/local/lib/libopencv_objdetect.so.4.11.0
+app: /usr/local/lib/libopencv_photo.so.4.11.0
+app: /usr/local/lib/libopencv_stitching.so.4.11.0
+app: /usr/local/lib/libopencv_video.so.4.11.0
+app: /usr/local/lib/libopencv_videoio.so.4.11.0
+app: /usr/local/lib/libopencv_imgcodecs.so.4.11.0
+app: /usr/local/lib/libopencv_dnn.so.4.11.0
+app: /usr/local/lib/libopencv_calib3d.so.4.11.0
+app: /usr/local/lib/libopencv_features2d.so.4.11.0
+app: /usr/local/lib/libopencv_flann.so.4.11.0
+app: /usr/local/lib/libopencv_imgproc.so.4.11.0
+app: /usr/local/lib/libopencv_core.so.4.11.0
 app: /usr/lib/x86_64-linux-gnu/libpqxx.so
 app: CMakeFiles/app.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/kukuna/korontana/projet/etude/S5/dev/authentification/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX executable app"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX executable app"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/app.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -250,6 +249,6 @@ CMakeFiles/app.dir/clean:
 .PHONY : CMakeFiles/app.dir/clean
 
 CMakeFiles/app.dir/depend:
-	cd /home/kukuna/korontana/projet/etude/S5/dev/authentification/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/kukuna/korontana/projet/etude/S5/dev/authentification /home/kukuna/korontana/projet/etude/S5/dev/authentification /home/kukuna/korontana/projet/etude/S5/dev/authentification/build /home/kukuna/korontana/projet/etude/S5/dev/authentification/build /home/kukuna/korontana/projet/etude/S5/dev/authentification/build/CMakeFiles/app.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification/build /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification/build /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification/build/CMakeFiles/app.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/app.dir/depend
 

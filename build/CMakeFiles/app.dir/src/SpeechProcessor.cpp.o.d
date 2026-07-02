@@ -1,7 +1,7 @@
 CMakeFiles/app.dir/src/SpeechProcessor.cpp.o: \
- /home/kukuna/korontana/projet/etude/S5/dev/authentification/src/SpeechProcessor.cpp \
+ /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification/src/SpeechProcessor.cpp \
  /usr/include/stdc-predef.h \
- /home/kukuna/korontana/projet/etude/S5/dev/authentification/include/SpeechProcessor.h \
+ /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification/include/SpeechProcessor.h \
  /usr/include/c++/13/string /usr/include/c++/13/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
@@ -157,13 +157,11 @@ CMakeFiles/app.dir/src/SpeechProcessor.cpp.o: \
  /usr/include/c++/13/bits/stl_vector.h \
  /usr/include/c++/13/bits/stl_bvector.h \
  /usr/include/c++/13/bits/vector.tcc \
- /usr/local/include/onnxruntime/onnxruntime_cxx_api.h \
- /usr/local/include/onnxruntime/onnxruntime_c_api.h \
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stdbool.h \
+ /opt/onnxruntime-linux-x64-1.16.3/include/onnxruntime/onnxruntime_cxx_api.h \
+ /opt/onnxruntime-linux-x64-1.16.3/include/onnxruntime/onnxruntime_c_api.h \
  /usr/include/c++/13/stdlib.h /usr/include/string.h \
  /usr/include/strings.h \
- /usr/local/include/onnxruntime/onnxruntime_ep_c_api.h \
- /usr/local/include/onnxruntime/onnxruntime_float16.h \
+ /opt/onnxruntime-linux-x64-1.16.3/include/onnxruntime/onnxruntime_float16.h \
  /usr/include/c++/13/cmath /usr/include/math.h \
  /usr/include/x86_64-linux-gnu/bits/math-vector.h \
  /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
@@ -195,21 +193,6 @@ CMakeFiles/app.dir/src/SpeechProcessor.cpp.o: \
  /usr/include/c++/13/bits/enable_special_members.h \
  /usr/include/c++/13/bits/node_handle.h \
  /usr/include/c++/13/bits/erase_if.h /usr/include/c++/13/utility \
- /usr/include/c++/13/bits/stl_relops.h /usr/include/c++/13/variant \
- /usr/include/c++/13/bits/parse_numbers.h \
- /usr/local/include/onnxruntime/onnxruntime_cxx_inline.h \
- /usr/include/c++/13/algorithm /usr/include/c++/13/bits/stl_algo.h \
- /usr/include/c++/13/bits/algorithmfwd.h \
- /usr/include/c++/13/bits/stl_heap.h \
- /usr/include/c++/13/bits/uniform_int_dist.h \
- /usr/include/c++/13/pstl/glue_algorithm_defs.h \
- /usr/include/c++/13/functional /usr/include/c++/13/bits/std_function.h \
- /usr/include/c++/13/iterator /usr/include/c++/13/bits/stream_iterator.h \
- /usr/include/c++/13/bits/streambuf_iterator.h \
- /usr/include/c++/13/streambuf /usr/include/c++/13/bits/ios_base.h \
- /usr/include/c++/13/bits/locale_classes.h \
- /usr/include/c++/13/bits/locale_classes.tcc \
- /usr/include/c++/13/system_error \
- /usr/include/x86_64-linux-gnu/c++/13/bits/error_constants.h \
- /usr/include/c++/13/bits/streambuf.tcc \
- /home/kukuna/korontana/projet/etude/S5/dev/authentification/include/AudioProcessor.h
+ /usr/include/c++/13/bits/stl_relops.h \
+ /opt/onnxruntime-linux-x64-1.16.3/include/onnxruntime/onnxruntime_cxx_inline.h \
+ /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification/include/AudioProcessor.h

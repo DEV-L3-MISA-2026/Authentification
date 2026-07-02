@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/kukuna/korontana/projet/etude/S5/dev/authentification
+CMAKE_SOURCE_DIR = /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/kukuna/korontana/projet/etude/S5/dev/authentification/build
+CMAKE_BINARY_DIR = /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/kukuna/korontana/projet/etude/S5/dev/authentification/build/CMakeFiles /home/kukuna/korontana/projet/etude/S5/dev/authentification/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification/build/CMakeFiles /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/kukuna/korontana/projet/etude/S5/dev/authentification/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -128,30 +128,6 @@ app: cmake_check_build_system
 app/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/build
 .PHONY : app/fast
-
-main.o: main.cpp.o
-.PHONY : main.o
-
-# target to build an object file
-main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/main.cpp.o
-.PHONY : main.cpp.o
-
-main.i: main.cpp.i
-.PHONY : main.i
-
-# target to preprocess a source file
-main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/main.cpp.i
-.PHONY : main.cpp.i
-
-main.s: main.cpp.s
-.PHONY : main.s
-
-# target to generate assembly for a file
-main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/main.cpp.s
-.PHONY : main.cpp.s
 
 src/AudioProcessor.o: src/AudioProcessor.cpp.o
 .PHONY : src/AudioProcessor.o
@@ -321,6 +297,30 @@ src/SpeechProcessor.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/SpeechProcessor.cpp.s
 .PHONY : src/SpeechProcessor.cpp.s
 
+src/face_api_server.o: src/face_api_server.cpp.o
+.PHONY : src/face_api_server.o
+
+# target to build an object file
+src/face_api_server.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/face_api_server.cpp.o
+.PHONY : src/face_api_server.cpp.o
+
+src/face_api_server.i: src/face_api_server.cpp.i
+.PHONY : src/face_api_server.i
+
+# target to preprocess a source file
+src/face_api_server.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/face_api_server.cpp.i
+.PHONY : src/face_api_server.cpp.i
+
+src/face_api_server.s: src/face_api_server.cpp.s
+.PHONY : src/face_api_server.s
+
+# target to generate assembly for a file
+src/face_api_server.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/face_api_server.cpp.s
+.PHONY : src/face_api_server.cpp.s
+
 src/utility.o: src/utility.cpp.o
 .PHONY : src/utility.o
 
@@ -354,9 +354,6 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... app"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
 	@echo "... src/AudioProcessor.o"
 	@echo "... src/AudioProcessor.i"
 	@echo "... src/AudioProcessor.s"
@@ -378,6 +375,9 @@ help:
 	@echo "... src/SpeechProcessor.o"
 	@echo "... src/SpeechProcessor.i"
 	@echo "... src/SpeechProcessor.s"
+	@echo "... src/face_api_server.o"
+	@echo "... src/face_api_server.i"
+	@echo "... src/face_api_server.s"
 	@echo "... src/utility.o"
 	@echo "... src/utility.i"
 	@echo "... src/utility.s"
