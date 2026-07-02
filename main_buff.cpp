@@ -57,7 +57,7 @@ int main() {
     // POST /api/voc/set/:id
     // this route is used to set the vocal embending of user : id 
     // to the embending of the voc posted in the body
-    CROW_ROUTE(app, "/api/voc/verify/<int>").methods(crow::HTTPMethod::POST)
+    CROW_ROUTE(app, "/api/voc/set/<int>").methods(crow::HTTPMethod::POST)
     ([&sp, &repo] (const crow::request& req, int userid) {
         std::cout << "receiving " << req.body.size() << "bytes!" << std::endl;
         
