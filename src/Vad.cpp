@@ -9,6 +9,12 @@ void Vad::init(const std::string& modelpath) {
 
 }
 
+void Vad::reset()
+{
+    state.assign(2 * 1 * 128, 0.f);
+    context.assign(CONTEXT_SIZE, 0.f);
+}
+
 Vad::Vad(const std::string& modelPath) :
 env(ORT_LOGGING_LEVEL_WARNING, "speaker"),
 session(env, modelPath.c_str(), Ort::SessionOptions{})
@@ -24,100 +30,123 @@ std::shared_ptr<Vad> Vad::getInstance() {
 
 bool Vad::isSpeech(const std::vector<float>& frame)
 {
-    if (frame.size() != 512)
-        throw std::runtime_error("Silero expects 512 samples.");
+    return infer(frame) >= threshold;
+}
 
-    Ort::MemoryInfo memoryInfo =
+float Vad::infer(const std::vector<float>& frame)
+{
+    if(frame.size() != WINDOW_SIZE)
+        throw std::runtime_error("Expected 512 samples");
+
+    //------------------------------------------
+    // construit context + frame
+    //------------------------------------------
+
+    std::vector<float> input;
+    input.reserve(CONTEXT_SIZE + WINDOW_SIZE);
+
+    input.insert(
+        input.end(),
+        context.begin(),
+        context.end());
+
+    input.insert(
+        input.end(),
+        frame.begin(),
+        frame.end());
+
+    //------------------------------------------
+    // prépare le prochain contexte
+    //------------------------------------------
+
+    context.assign(
+        frame.end() - CONTEXT_SIZE,
+        frame.end());
+
+    //------------------------------------------
+    // tensors
+    //------------------------------------------
+
+    Ort::MemoryInfo memory =
         Ort::MemoryInfo::CreateCpu(
             OrtArenaAllocator,
             OrtMemTypeDefault);
 
-    //------------------------------------
-    // input
-    //------------------------------------
+    std::array<int64_t,2> inputShape{
+        1,
+        static_cast<int64_t>(input.size())   // =576
+    };
 
-    std::array<int64_t, 2> inputShape{1, 512};
-
-    Ort::Value audioTensor =
+    Ort::Value inputTensor =
         Ort::Value::CreateTensor<float>(
-            memoryInfo,
-            const_cast<float*>(frame.data()),
-            frame.size(),
+            memory,
+            input.data(),
+            input.size(),
             inputShape.data(),
             inputShape.size());
 
-    //------------------------------------
-    // sample rate
-    //------------------------------------
-
     int64_t sr = 16000;
-
-    std::array<int64_t,1> srShape{1};
 
     Ort::Value srTensor =
         Ort::Value::CreateTensor<int64_t>(
-            memoryInfo,
+            memory,
             &sr,
             1,
-            srShape.data(),
-            srShape.size());
+            nullptr,
+            0);
 
-    //------------------------------------
-    // state
-    //------------------------------------
-
-    std::array<int64_t,3> stateShape{2,1,128};
+    std::array<int64_t,3> stateShape{
+        2,
+        1,
+        128
+    };
 
     Ort::Value stateTensor =
         Ort::Value::CreateTensor<float>(
-            memoryInfo,
+            memory,
             state.data(),
             state.size(),
             stateShape.data(),
             stateShape.size());
 
-    //------------------------------------
-    // inference
-    //------------------------------------
-
-    std::array<const char*,3> inputNames =
-    {
+    const char* inputNames[]={
         "input",
         "state",
         "sr"
     };
 
-    std::array<const char*,2> outputNames =
-    {
+    const char* outputNames[]={
         "output",
         "stateN"
     };
 
-    auto outputs =
+    Ort::Value inputs[]={
+        std::move(inputTensor),
+        std::move(stateTensor),
+        std::move(srTensor)
+    };
+
+    auto outputs=
         session.Run(
             Ort::RunOptions{nullptr},
-            inputNames.data(),
-            std::array<Ort::Value,3>{
-                std::move(audioTensor),
-                std::move(stateTensor),
-                std::move(srTensor)
-            }.data(),
+            inputNames,
+            inputs,
             3,
-            outputNames.data(),
+            outputNames,
             2);
 
-    float probability =
+    float probability=
         outputs[0].GetTensorMutableData<float>()[0];
 
-    float* newState =
+    float* newState=
         outputs[1].GetTensorMutableData<float>();
 
     std::copy(
         newState,
         newState + state.size(),
         state.begin());
-    std::cout <<  (probability >= 0.5) << " with probability : " << probability << "\n";
-    return probability >= 0.5;
+
+    return probability;
 }
 
 std::vector<float> Vad::removeSilence(const std::vector<float>& audio) // removes all silence from audio and reconcat it into a new one

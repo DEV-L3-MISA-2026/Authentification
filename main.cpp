@@ -22,5 +22,7 @@ int main() {
     
     vector<float> removed_silence = vad->removeSilence(anselme);
     cout << "removed silence size: " << removed_silence.size() << "\n";
+
+    audioprocessor->saveAudio("sans_silence.wav", removed_silence, 16000);
     return 0;
 }
