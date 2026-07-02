@@ -1,5 +1,6 @@
 #include <SpeechProcessor.h>
 #include <AudioProcessor.h>
+#include <Vad.h>
 
 std::shared_ptr<SpeechProcessor> SpeechProcessor::instance = nullptr;
 
@@ -22,8 +23,10 @@ SpeechProcessor::SpeechProcessor(const std::string& modelPath)
 std::vector<float> SpeechProcessor::getEmbending(const std::string& audioPath) {
     
     std::shared_ptr<AudioProcessor> audioprocessor = AudioProcessor::getInstance();
-    
+    auto vad = Vad::getInstance();
     std::vector<float> audio = audioprocessor->loadAudio(audioPath);
+    audio = vad->removeSilence(audio);
+
     std::vector<int64_t> shape = {1, (int64_t)audio.size()};
 
     // mem config
@@ -73,8 +76,9 @@ std::vector<float> SpeechProcessor::getEmbendingFromData(const void* data,
     size_t size) {
     
     std::shared_ptr<AudioProcessor> audioprocessor = AudioProcessor::getInstance();
-    
-    std::vector<float> audio = audioprocessor->loadAudio(data, size);
+    auto vad = Vad::getInstance();
+    std::vector<float> loadedAudio = audioprocessor->loadAudio(data, size);
+    std::vector<float> audio = vad->removeSilence(loadedAudio);
     std::vector<int64_t> shape = {1, (int64_t)audio.size()};
 
     // mem config

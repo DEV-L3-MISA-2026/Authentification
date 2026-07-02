@@ -53,7 +53,7 @@ sendBtn.onclick = async () => {
     if (!recordedBlob) return;
 
     const form = new FormData();
-    form.append("audio", recordedBlob, "voice.webm");
+    form.append("audio", recordedBlob, "voice.ogg");
 
     status.textContent = "Sending...";
     console.log(recordedBlob);

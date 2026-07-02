@@ -321,6 +321,30 @@ src/SpeechProcessor.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/SpeechProcessor.cpp.s
 .PHONY : src/SpeechProcessor.cpp.s
 
+src/Vad.o: src/Vad.cpp.o
+.PHONY : src/Vad.o
+
+# target to build an object file
+src/Vad.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/Vad.cpp.o
+.PHONY : src/Vad.cpp.o
+
+src/Vad.i: src/Vad.cpp.i
+.PHONY : src/Vad.i
+
+# target to preprocess a source file
+src/Vad.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/Vad.cpp.i
+.PHONY : src/Vad.cpp.i
+
+src/Vad.s: src/Vad.cpp.s
+.PHONY : src/Vad.s
+
+# target to generate assembly for a file
+src/Vad.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/Vad.cpp.s
+.PHONY : src/Vad.cpp.s
+
 src/utility.o: src/utility.cpp.o
 .PHONY : src/utility.o
 
@@ -378,6 +402,9 @@ help:
 	@echo "... src/SpeechProcessor.o"
 	@echo "... src/SpeechProcessor.i"
 	@echo "... src/SpeechProcessor.s"
+	@echo "... src/Vad.o"
+	@echo "... src/Vad.i"
+	@echo "... src/Vad.s"
 	@echo "... src/utility.o"
 	@echo "... src/utility.i"
 	@echo "... src/utility.s"

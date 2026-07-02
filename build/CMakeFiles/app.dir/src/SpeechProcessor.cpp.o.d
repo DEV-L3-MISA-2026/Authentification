@@ -212,4 +212,5 @@ CMakeFiles/app.dir/src/SpeechProcessor.cpp.o: \
  /usr/include/c++/13/system_error \
  /usr/include/x86_64-linux-gnu/c++/13/bits/error_constants.h \
  /usr/include/c++/13/bits/streambuf.tcc \
- /home/kukuna/korontana/projet/etude/S5/dev/authentification/include/AudioProcessor.h
+ /home/kukuna/korontana/projet/etude/S5/dev/authentification/include/AudioProcessor.h \
+ /home/kukuna/korontana/projet/etude/S5/dev/authentification/include/Vad.h

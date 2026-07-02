@@ -15,6 +15,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/app.dir/src/Repository/AuthRepository.cpp.o.d"
   "CMakeFiles/app.dir/src/SpeechProcessor.cpp.o"
   "CMakeFiles/app.dir/src/SpeechProcessor.cpp.o.d"
+  "CMakeFiles/app.dir/src/Vad.cpp.o"
+  "CMakeFiles/app.dir/src/Vad.cpp.o.d"
   "CMakeFiles/app.dir/src/utility.cpp.o"
   "CMakeFiles/app.dir/src/utility.cpp.o.d"
   "app"
