@@ -25,7 +25,7 @@ link_directories(
 )
 
 add_executable(app 
-    main.cpp
+    vad_testing.cpp
     src/FaceDetector.cpp
     src/FaceRecognizer.cpp
     src/utility.cpp

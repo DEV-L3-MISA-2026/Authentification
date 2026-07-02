@@ -93,11 +93,10 @@ std::vector<float> AudioProcessor::loadAudioForCleaning(const std::string& path)
     else
         throw std::runtime_error("Unsupported number of channels.");
 
-    // resampling to 16MHz
     mono = this->resample(
         mono,
         info.samplerate,
-        16000
+        48000
     );
     sf_close(file);
     return mono;

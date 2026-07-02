@@ -11,6 +11,18 @@ int main() {
     auto audioprocessor = AudioProcessor::getInstance();
     SpeechProcessor::init("../model/speech_detection.onnx");
 
+    vector<float> audio = audioprocessor->loadAudioForCleaning("../static_data/anselme.wav");
+    vector<float> cleaned = audioprocessor->cleanAudioRNNoise(audio);
+    
+    // saving the cleaned version in another file
+    audioprocessor->saveAudio("cleaned_anselme.wav", cleaned, 48000);
+
+    vector<float> audio22 = audioprocessor->loadAudioForCleaning("../static_data/anselme2.wav");
+    vector<float> cleaned2 = audioprocessor->cleanAudioRNNoise(audio22);
+    
+    // saving the cleaned version in another file
+    audioprocessor->saveAudio("cleaned_anselme2.wav", cleaned2, 48000);
+
     auto sp = SpeechProcessor::getInstance();
     
     // testing the result

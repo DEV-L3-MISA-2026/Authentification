@@ -129,30 +129,6 @@ app/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/build
 .PHONY : app/fast
 
-main.o: main.cpp.o
-.PHONY : main.o
-
-# target to build an object file
-main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/main.cpp.o
-.PHONY : main.cpp.o
-
-main.i: main.cpp.i
-.PHONY : main.i
-
-# target to preprocess a source file
-main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/main.cpp.i
-.PHONY : main.cpp.i
-
-main.s: main.cpp.s
-.PHONY : main.s
-
-# target to generate assembly for a file
-main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/main.cpp.s
-.PHONY : main.cpp.s
-
 src/AudioProcessor.o: src/AudioProcessor.cpp.o
 .PHONY : src/AudioProcessor.o
 
@@ -345,6 +321,30 @@ src/utility.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/utility.cpp.s
 .PHONY : src/utility.cpp.s
 
+vad_testing.o: vad_testing.cpp.o
+.PHONY : vad_testing.o
+
+# target to build an object file
+vad_testing.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/vad_testing.cpp.o
+.PHONY : vad_testing.cpp.o
+
+vad_testing.i: vad_testing.cpp.i
+.PHONY : vad_testing.i
+
+# target to preprocess a source file
+vad_testing.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/vad_testing.cpp.i
+.PHONY : vad_testing.cpp.i
+
+vad_testing.s: vad_testing.cpp.s
+.PHONY : vad_testing.s
+
+# target to generate assembly for a file
+vad_testing.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/vad_testing.cpp.s
+.PHONY : vad_testing.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -354,9 +354,6 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... app"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
 	@echo "... src/AudioProcessor.o"
 	@echo "... src/AudioProcessor.i"
 	@echo "... src/AudioProcessor.s"
@@ -381,6 +378,9 @@ help:
 	@echo "... src/utility.o"
 	@echo "... src/utility.i"
 	@echo "... src/utility.s"
+	@echo "... vad_testing.o"
+	@echo "... vad_testing.i"
+	@echo "... vad_testing.s"
 .PHONY : help
 
 
