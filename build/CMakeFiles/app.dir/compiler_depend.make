@@ -2670,6 +2670,7 @@ CMakeFiles/app.dir/src/Repository/AuthRepository.cpp.o: /home/kukuna/korontana/p
 CMakeFiles/app.dir/src/SpeechProcessor.cpp.o: /home/kukuna/korontana/projet/etude/S5/dev/authentification/src/SpeechProcessor.cpp \
   /home/kukuna/korontana/projet/etude/S5/dev/authentification/include/AudioProcessor.h \
   /home/kukuna/korontana/projet/etude/S5/dev/authentification/include/SpeechProcessor.h \
+  /home/kukuna/korontana/projet/etude/S5/dev/authentification/include/Vad.h \
   /usr/include/alloca.h \
   /usr/include/asm-generic/errno-base.h \
   /usr/include/asm-generic/errno.h \

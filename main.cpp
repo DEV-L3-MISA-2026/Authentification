@@ -7,22 +7,21 @@
 #include <Vad.h>
 using namespace std;
 
-int main() {
-    
+int main(int argc, char** argv) {
+    if (argc != 3)
+    {
+        cout << "usage: ./app path_audio1 path_audio2" << endl;
+        exit(1);
+    }
     auto audioprocessor = AudioProcessor::getInstance();
     SpeechProcessor::init("../model/speech_detection.onnx");
     auto sp = SpeechProcessor::getInstance();
     // vad 
     Vad::init("../model/silero_vad.onnx");
-    auto vad = Vad::getInstance();
-    
-    vector<float> anselme = audioprocessor->loadAudio("anselme.wav");
+    vector<float> audio1 = sp->getEmbending(string(argv[1]));
+    vector<float> audio2 = sp->getEmbending(string(argv[2]));
 
-    cout << "loaded the audio : " << anselme.size() << " bytes \n";
-    
-    vector<float> removed_silence = vad->removeSilence(anselme);
-    cout << "removed silence size: " << removed_silence.size() << "\n";
+    cout << "similarity of " << argv[1] << " and " << argv[2] << cosineSimilarity(audio1, audio2) << "\n"; 
 
-    audioprocessor->saveAudio("sans_silence.wav", removed_silence, 16000);
     return 0;
 }
