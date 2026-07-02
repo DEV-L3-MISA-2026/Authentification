@@ -377,4 +377,5 @@ CMakeFiles/app.dir/main.cpp.o: \
  /usr/local/include/opencv5/opencv2/stitching/detail/camera.hpp \
  /usr/local/include/opencv5/opencv2/video.hpp \
  /usr/local/include/opencv5/opencv2/video/tracking.hpp \
- /usr/local/include/opencv5/opencv2/video/background_segm.hpp
+ /usr/local/include/opencv5/opencv2/video/background_segm.hpp \
+ /home/kukuna/korontana/projet/etude/S5/dev/authentification/include/Vad.h

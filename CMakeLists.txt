@@ -25,7 +25,7 @@ link_directories(
 )
 
 add_executable(app 
-    vad_testing.cpp
+    main.cpp
     src/FaceDetector.cpp
     src/FaceRecognizer.cpp
     src/utility.cpp
@@ -34,6 +34,7 @@ add_executable(app
     src/SpeechProcessor.cpp
     src/Repository/AuthRepository.cpp
     src/MemoryAudioFile.cpp
+    src/Vad.cpp
 )
 
 target_include_directories(app PRIVATE

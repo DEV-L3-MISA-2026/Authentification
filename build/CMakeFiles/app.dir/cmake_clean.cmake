@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/app.dir/main.cpp.o"
+  "CMakeFiles/app.dir/main.cpp.o.d"
   "CMakeFiles/app.dir/src/AudioProcessor.cpp.o"
   "CMakeFiles/app.dir/src/AudioProcessor.cpp.o.d"
   "CMakeFiles/app.dir/src/FaceDetector.cpp.o"
@@ -13,10 +15,10 @@ file(REMOVE_RECURSE
   "CMakeFiles/app.dir/src/Repository/AuthRepository.cpp.o.d"
   "CMakeFiles/app.dir/src/SpeechProcessor.cpp.o"
   "CMakeFiles/app.dir/src/SpeechProcessor.cpp.o.d"
+  "CMakeFiles/app.dir/src/Vad.cpp.o"
+  "CMakeFiles/app.dir/src/Vad.cpp.o.d"
   "CMakeFiles/app.dir/src/utility.cpp.o"
   "CMakeFiles/app.dir/src/utility.cpp.o.d"
-  "CMakeFiles/app.dir/vad_testing.cpp.o"
-  "CMakeFiles/app.dir/vad_testing.cpp.o.d"
   "app"
   "app.pdb"
 )
