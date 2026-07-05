@@ -1,0 +1,266 @@
+@page "/face/process"
+@using System.Text.Json
+@inject FaceApiService FaceService
+@inject IJSRuntime JSRuntime
+
+<PageTitle>Reconnaissance Faciale</PageTitle>
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-5">
+                    <div class="text-center mb-4">
+                        <h2 class="fw-semibold">Reconnaissance faciale</h2>
+                        <p class="text-muted">Utilisateur : <span class="fw-medium">@CurrentUserName</span></p>
+                    </div>
+
+                    <div class="row g-4">
+                        <!-- Scanner Section -->
+                        <div class="col-md-7">
+                            <div class="card border-0 bg-light h-100">
+                                <div class="card-body p-4">
+                                    <div class="position-relative">
+                                        <!-- Scanner Frame -->
+                                        <div class="position-relative overflow-hidden bg-dark" style="border-radius: 8px; aspect-ratio: 4/3;">
+                                            <video id="faceVideo" autoplay playsinline class="w-100 h-100 object-fit-cover"></video>
+                                            
+                                            <!-- Scanner Overlay -->
+                                            <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center">
+                                                <div class="position-absolute w-100" style="height: 2px; background: #000; top: 50%; animation: scan 3s ease-in-out infinite;"></div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Controls -->
+                                        <div class="d-flex gap-2 mt-3">
+                                            <button type="button" @onclick="CaptureImageAsync" class="btn btn-dark flex-fill" style="border-radius: 6px; padding: 10px;" disabled="@(!IsStreaming || IsLoading)">
+                                                <i class="bi bi-camera"></i> Capturer
+                                            </button>
+                                            @if (!IsStreaming)
+                                            {
+                                                <span class="text-muted ms-2">Initialisation cam&eacute;ra...</span>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Preview Section -->
+                        <div class="col-md-5">
+                            <div class="card border-0 bg-light h-100">
+                                <div class="card-body p-4">
+                                    <h5 class="fw-semibold mb-3">Aper&ccedil;u</h5>
+                                    
+                                    <div class="text-center p-4 mb-3 border border-dashed rounded bg-white" style="border-style: dashed; min-height: 250px; display: flex; align-items: center; justify-content: center;">
+                                        @if (!string.IsNullOrEmpty(PreviewImageDataUrl))
+                                        {
+                                            <img src="@PreviewImageDataUrl" class="img-fluid rounded" style="max-height: 250px;" />
+                                        }
+                                        else
+                                        {
+                                            <div class="text-muted">
+                                                <i class="bi bi-person" style="font-size: 3rem; opacity: 0.3;"></i>
+                                                <p class="mt-2">Aucune capture</p>
+                                            </div>
+                                        }
+                                    </div>
+
+                                    <button type="button" @onclick="ProcessFaceFromCameraAsync" class="btn btn-dark w-100 mb-2" style="border-radius: 6px; padding: 12px; font-weight: 500;" disabled="@(CapturedImage == null || IsLoading)">
+                                        @if (IsLoading)
+                                        {
+                                            <span class="spinner-border spinner-border-sm" role="status"></span>
+                                        }
+                                        else
+                                        {
+                                            <i class="bi bi-check-circle"></i>
+                                        }
+                                        @(IsLoading ? "Traitement en cours..." : "Traiter")
+                                    </button>
+
+                                    @if (!string.IsNullOrEmpty(StatusMessage))
+                                    {
+                                        <div class="alert mt-3 @(IsSuccess ? "alert-success" : "alert-danger")" style="border-radius: 6px;">
+                                            @StatusMessage
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    @@keyframes scan {
+        0%, 100% { top: 10%; opacity: 0; }
+        50% { top: 80%; opacity: 1; }
+    }
+</style>
+
+@code {
+    private IJSObjectReference? cameraModule;
+    private string? CurrentUserName { get; set; }
+    private string? UserId { get; set; }
+    private string? StatusMessage { get; set; }
+    private bool IsSuccess { get; set; }
+    private bool IsLoading { get; set; }
+    private bool IsStreaming { get; set; }
+    private byte[]? CapturedImage { get; set; }
+    private string? PreviewImageDataUrl { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        CurrentUserName = "Utilisateur Demo";
+        UserId = "demo-user";
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await InitializeCameraAsync();
+        }
+    }
+
+    private async Task InitializeCameraAsync()
+    {
+        try
+        {
+            cameraModule ??= await JSRuntime.InvokeAsync<IJSObjectReference>("import", "/js/fingerprint-camera.js");
+            var result = await cameraModule.InvokeAsync<JsonElement>("initCamera", "faceVideo");
+            if (result.GetProperty("success").GetBoolean())
+            {
+                IsStreaming = true;
+                StateHasChanged();
+            }
+            else
+            {
+                StatusMessage = result.GetProperty("message").GetString();
+                IsSuccess = false;
+                StateHasChanged();
+            }
+        }
+        catch (Exception ex)
+        {
+            StatusMessage = $"Erreur cam&eacute;ra: {ex.Message}";
+            IsSuccess = false;
+            StateHasChanged();
+        }
+    }
+
+    private async Task CaptureImageAsync()
+    {
+        try
+        {
+            if (cameraModule == null)
+            {
+                StatusMessage = "Cam&eacute;ra non initialis&eacute;e";
+                IsSuccess = false;
+                StateHasChanged();
+                return;
+            }
+
+            var result = await cameraModule.InvokeAsync<JsonElement>("captureImage");
+            
+            if (!result.GetProperty("success").GetBoolean())
+            {
+                StatusMessage = result.GetProperty("message").GetString();
+                IsSuccess = false;
+                StateHasChanged();
+                return;
+            }
+
+            var imageData = result.GetProperty("imageData").GetString();
+            var base64Data = imageData!.Split(',')[1];
+            CapturedImage = Convert.FromBase64String(base64Data);
+            PreviewImageDataUrl = imageData;
+            
+            StatusMessage = "";
+            StateHasChanged();
+        }
+        catch (Exception ex)
+        {
+            StatusMessage = $"Erreur capture: {ex.Message}";
+            IsSuccess = false;
+            StateHasChanged();
+        }
+    }
+
+    private async Task ToggleTorchAsync(bool turnOn)
+    {
+        try
+        {
+            if (cameraModule == null) return;
+            var result = await cameraModule.InvokeAsync<JsonElement>("setTorch", turnOn);
+            if (!result.GetProperty("success").GetBoolean())
+            {
+                StatusMessage = result.GetProperty("message").GetString();
+                IsSuccess = false;
+                StateHasChanged();
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine($"Erreur torch: {ex.Message}");
+        }
+    }
+
+    private async Task ProcessFaceFromCameraAsync()
+    {
+        if (string.IsNullOrEmpty(UserId))
+        {
+            StatusMessage = "Veuillez entrer un User ID";
+            IsSuccess = false;
+            StateHasChanged();
+            return;
+        }
+
+        if (CapturedImage == null || CapturedImage.Length == 0)
+        {
+            StatusMessage = "Veuillez capturer une image d'abord";
+            IsSuccess = false;
+            StateHasChanged();
+            return;
+        }
+
+        IsLoading = true;
+        StatusMessage = "Capture et traitement en cours...";
+        IsSuccess = false;
+        StateHasChanged();
+
+        try
+        {
+            var response = await FaceService.ProcessAsync(UserId);
+            
+            StatusMessage = response.Message;
+            IsSuccess = response.Success;
+        }
+        catch (Exception ex)
+        {
+            StatusMessage = $"Erreur: {ex.Message}";
+            IsSuccess = false;
+        }
+        finally
+        {
+            IsLoading = false;
+            StateHasChanged();
+        }
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        try
+        {
+            if (cameraModule != null)
+            {
+                await cameraModule.InvokeVoidAsync("stopCamera");
+                await cameraModule.DisposeAsync();
+            }
+        }
+        catch { }
+    }
+}
