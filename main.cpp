@@ -8,8 +8,9 @@
 #include <utility.h>
 #include <crow.h>
 #include <fstream>
-
+#include <Vad.h>
 int main() {
+    Vad::init("../model/silero_vad.onnx");
     // initializing all processor
     AuthRepository::init("dbname=auth user=postgres password=mamanlah host=localhost port=5432");
     auto repo = AuthRepository::getInstance();

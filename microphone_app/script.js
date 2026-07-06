@@ -59,7 +59,7 @@ sendBtn.onclick = async () => {
     console.log(recordedBlob);
     console.log(recordedBlob.size);
     console.log(recordedBlob.type);
-await fetch("http://localhost:5000/api/voc/test", {
+await fetch("http://localhost:5000/api/voc/verify/2", {
     method: "POST",
     body: recordedBlob
 });
