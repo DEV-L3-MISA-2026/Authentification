@@ -71,7 +71,6 @@ std::vector<float> SpeechProcessor::getEmbending(const std::string& audioPath) {
     );
 }
 
-
 std::vector<float> SpeechProcessor::getEmbendingFromData(const void* data,
     size_t size) {
     

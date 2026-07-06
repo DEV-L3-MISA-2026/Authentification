@@ -29,9 +29,11 @@ int main() {
     // defining the api routes of the vocal signature
     crow::SimpleApp app;
 
+    // Audacity        
     // POST /api/voc/verify/:id
     // this route is used to verify the vocal signature of the voc of user : id
     // in the db, and the voc given in the body
+    
     CROW_ROUTE(app, "/api/voc/verify/<int>").methods(crow::HTTPMethod::POST)
     ([&sp, &repo] (const crow::request& req, int userid) {
         std::cout << "receiving " << req.body.size() << "bytes!" << std::endl;
