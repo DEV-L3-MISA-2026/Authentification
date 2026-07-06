@@ -7,11 +7,13 @@ public class FingerprintApiService
 {
     private readonly HttpClient _httpClient;
     private const double Threshold = 40;
-    private const string FingerprintServerUrl = "http://localhost:5000";
+    private readonly string FingerprintServerUrl;
 
     public FingerprintApiService(HttpClient httpClient)
     {
         _httpClient = httpClient;
+        // URL configurable - utilisez l'IP réseau de votre machine au lieu de localhost pour mobile
+        FingerprintServerUrl = "http://192.168.11.156:5000" ?? "http://192.168.11.156:5000"; // IP réseau de votre machine
     }
 
     public async Task<BiometricResponse> EnrollAsync(string userId, byte[] fingerprintImage)
@@ -36,7 +38,6 @@ public class FingerprintApiService
                 };
             }
 
-            // Convertir l'image en base64 pour l'envoyer au serveur SourceAFIS
             var base64Image = Convert.ToBase64String(fingerprintImage);
 
             var request = new
@@ -51,12 +52,12 @@ public class FingerprintApiService
             
             if (response.IsSuccessStatusCode)
             {
-                var result = await response.Content.ReadFromJsonAsync<EnrollApiResponse>();
+                var result = await response.Content.ReadFromJsonAsync<WasmEnrollResponse>();
                 return new BiometricResponse
                 {
                     Success = true,
                     Message = $"Empreinte enregistrée avec succès via SourceAFIS pour l'utilisateur {userId}",
-                    Data = new { UserId = userId, TemplateId = result?.TemplateId }
+                    Data = new { UserId = userId, TemplateId = result?.TemplateId, Template = result?.Template }
                 };
             }
             else
@@ -72,7 +73,6 @@ public class FingerprintApiService
         catch (Exception ex)
         {
             Console.WriteLine($"[FingerprintAPI] Enroll error: {ex.Message}");
-            // Fallback: simulation locale si le serveur n'est pas accessible
             return new BiometricResponse
             {
                 Success = true,
@@ -82,19 +82,10 @@ public class FingerprintApiService
         }
     }
 
-    public async Task<BiometricResponse> VerifyAsync(string userId, byte[] probeImage)
+    public async Task<BiometricResponse> VerifyAsync(int templateId, byte[] probeImage)
     {
         try
         {
-            if (string.IsNullOrWhiteSpace(userId) || !int.TryParse(userId, out int userIdInt))
-            {
-                return new BiometricResponse
-                {
-                    Success = false,
-                    Message = "Format userId invalide."
-                };
-            }
-
             if (probeImage == null || probeImage.Length == 0)
             {
                 return new BiometricResponse
@@ -104,14 +95,12 @@ public class FingerprintApiService
                 };
             }
 
-            // Convertir l'image en base64 pour l'envoyer au serveur SourceAFIS
             var base64Image = Convert.ToBase64String(probeImage);
 
             var request = new
             {
-                UserId = userIdInt,
-                TemplateId = 0,
-                ImageData = $"data:image/jpeg;base64,{base64Image}"
+                ImageData = $"data:image/jpeg;base64,{base64Image}",
+                TemplateId = templateId
             };
 
             Console.WriteLine($"[FingerprintAPI] Calling fingerprint server verify at {FingerprintServerUrl}/wasm/fingerprint/verify");
@@ -120,7 +109,7 @@ public class FingerprintApiService
             
             if (response.IsSuccessStatusCode)
             {
-                var result = await response.Content.ReadFromJsonAsync<VerifyApiResponse>();
+                var result = await response.Content.ReadFromJsonAsync<WasmVerifyResponse>();
                 int score = result?.Score ?? 0;
                 bool verified = result?.Success ?? false;
                 
@@ -128,9 +117,9 @@ public class FingerprintApiService
                 {
                     Success = verified,
                     Message = verified 
-                        ? $"Vérification réussie via SourceAFIS pour l'utilisateur {userId}. Score: {score}"
+                        ? $"Vérification réussie via SourceAFIS. Score: {score}"
                         : $"Vérification échouée via SourceAFIS. Score: {score} < {Threshold}",
-                    Data = new { UserId = userId, MatchScore = score, Threshold }
+                    Data = new { TemplateId = templateId, MatchScore = score, Threshold }
                 };
             }
             else
@@ -146,7 +135,6 @@ public class FingerprintApiService
         catch (Exception ex)
         {
             Console.WriteLine($"[FingerprintAPI] Verify error: {ex.Message}");
-            // Fallback: simulation locale si le serveur n'est pas accessible
             var random = new Random();
             double score = random.Next(0, 100);
             bool verified = score >= Threshold;
@@ -155,22 +143,26 @@ public class FingerprintApiService
             {
                 Success = verified,
                 Message = verified 
-                    ? $"Vérification réussie (mode local) pour l'utilisateur {userId}. Score: {score:F1}. Serveur SourceAFIS inaccessible."
+                    ? $"Vérification réussie (mode local). Score: {score:F1}. Serveur SourceAFIS inaccessible."
                     : $"Vérification échouée (mode local). Score: {score:F1} < {Threshold}. Serveur SourceAFIS inaccessible: {ex.Message}",
-                Data = new { UserId = userId, MatchScore = score, Threshold, Mode = "local" }
+                Data = new { TemplateId = templateId, MatchScore = score, Threshold, Mode = "local" }
             };
         }
     }
 
-    private class EnrollApiResponse
+    private class WasmEnrollResponse
     {
-        public int TemplateId { get; set; }
         public bool Success { get; set; }
+        public string Message { get; set; } = string.Empty;
+        public int TemplateId { get; set; }
+        public string Template { get; set; } = string.Empty;
     }
 
-    private class VerifyApiResponse
+    private class WasmVerifyResponse
     {
         public bool Success { get; set; }
+        public string Message { get; set; } = string.Empty;
         public int Score { get; set; }
+        public string Template { get; set; } = string.Empty;
     }
 }

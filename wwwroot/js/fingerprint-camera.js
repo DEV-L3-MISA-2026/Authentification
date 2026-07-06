@@ -6,7 +6,6 @@ let mediaStream = null;
 // On mobile, we use 'user' facing mode to avoid inversion issues
 async function getStreamWithFallback() {
     const constraintsList = [
-        { video: { facingMode: { ideal: 'user' }, width: { ideal: 640 }, height: { ideal: 480 } }, audio: false },
         { video: { facingMode: { ideal: 'environment' }, width: { ideal: 640 }, height: { ideal: 480 } }, audio: false },
         { video: true, audio: false } // last resort: whatever camera is available
     ];

@@ -1,37 +1,145 @@
+using System.Net.Http.Json;
 using biometrika.Models;
 
 namespace biometrika.Services;
 
 public class FaceApiService
 {
-    public Task<BiometricResponse> ProcessAsync(string userId)
+    private readonly HttpClient _httpClient;
+    private readonly string FaceServerUrl;
+
+    public FaceApiService(HttpClient httpClient)
+    {
+        _httpClient = httpClient;
+        // URL configurable - utilisez l'IP réseau de votre machine au lieu de localhost pour mobile
+        FaceServerUrl = "http://192.168.11.156:5238"; // Port biometrika-server
+    }
+
+    public async Task<BiometricResponse> EnrollAsync(string userId, byte[] faceImage)
     {
         try
         {
-            if (string.IsNullOrWhiteSpace(userId) || !int.TryParse(userId, out _))
+            if (string.IsNullOrWhiteSpace(userId) || !int.TryParse(userId, out int userIdInt))
             {
-                return Task.FromResult(new BiometricResponse
+                return new BiometricResponse
                 {
                     Success = false,
                     Message = "Format userId invalide. Doit être un nombre entier."
-                });
+                };
             }
 
-            // Simulation: traitement facial
-            return Task.FromResult(new BiometricResponse
+            if (faceImage == null || faceImage.Length == 0)
             {
-                Success = true,
-                Message = $"Reconnaissance faciale traitée avec succès (API simulation) pour l'utilisateur {userId}",
-                Data = new { UserId = userId, Timestamp = DateTime.UtcNow }
-            });
+                return new BiometricResponse
+                {
+                    Success = false,
+                    Message = "Image vide."
+                };
+            }
+
+            var base64Image = Convert.ToBase64String(faceImage);
+
+            var request = new
+            {
+                UserId = userIdInt,
+                ImageData = $"data:image/jpeg;base64,{base64Image}"
+            };
+
+            var response = await _httpClient.PostAsJsonAsync($"{FaceServerUrl}/wasm/face/enroll", request);
+            
+            if (response.IsSuccessStatusCode)
+            {
+                var result = await response.Content.ReadFromJsonAsync<WasmFaceResponse>();
+                return new BiometricResponse
+                {
+                    Success = true,
+                    Message = $"Template facial enregistré pour l'utilisateur {userId}",
+                    Data = new { UserId = userId, TemplateId = result?.TemplateId }
+                };
+            }
+            else
+            {
+                var error = await response.Content.ReadAsStringAsync();
+                return new BiometricResponse
+                {
+                    Success = false,
+                    Message = $"Erreur serveur facial: {error}"
+                };
+            }
         }
         catch (Exception ex)
         {
-            return Task.FromResult(new BiometricResponse
+            return new BiometricResponse
             {
                 Success = false,
-                Message = $"Erreur API faciale: {ex.Message}"
-            });
+                Message = $"Erreur réseau facial: {ex.Message}"
+            };
         }
+    }
+
+    public async Task<BiometricResponse> VerifyAsync(int templateId, byte[] probeImage)
+    {
+        try
+        {
+            if (probeImage == null || probeImage.Length == 0)
+            {
+                return new BiometricResponse
+                {
+                    Success = false,
+                    Message = "Image de vérification vide."
+                };
+            }
+
+            var base64Image = Convert.ToBase64String(probeImage);
+
+            var request = new
+            {
+                TemplateId = templateId,
+                ImageData = $"data:image/jpeg;base64,{base64Image}"
+            };
+
+            var response = await _httpClient.PostAsJsonAsync($"{FaceServerUrl}/wasm/face/verify", request);
+            
+            if (response.IsSuccessStatusCode)
+            {
+                var result = await response.Content.ReadFromJsonAsync<WasmFaceResponse>();
+                int score = result?.Score ?? 0;
+                bool verified = result?.Success ?? false;
+                
+                return new BiometricResponse
+                {
+                    Success = verified,
+                    Message = verified 
+                        ? $"Vérification faciale réussie. Score: {score}"
+                        : $"Vérification faciale échouée. Score: {score}",
+                    Data = new { TemplateId = templateId, MatchScore = score }
+                };
+            }
+            else
+            {
+                var error = await response.Content.ReadAsStringAsync();
+                return new BiometricResponse
+                {
+                    Success = false,
+                    Message = $"Erreur serveur facial: {error}"
+                };
+            }
+        }
+        catch (Exception ex)
+        {
+            return new BiometricResponse
+            {
+                Success = false,
+                Message = $"Erreur réseau faciale: {ex.Message}"
+            };
+        }
+    }
+
+    private class WasmFaceResponse
+    {
+        public bool Success { get; set; }
+        public string Message { get; set; } = string.Empty;
+        public int TemplateId { get; set; }
+        public int Score { get; set; }
     }
 }

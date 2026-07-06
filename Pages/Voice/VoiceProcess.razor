@@ -30,7 +30,7 @@
                                         <button type="button" @onclick="StartRecordingAsync" class="btn btn-dark flex-fill" style="border-radius: 6px; padding: 10px;" disabled="@IsRecording">
                                             <i class="bi bi-record-fill"></i> Enregistrer
                                         </button>
-                                        <button type="button" @onclick="StopRecordingAsync" class="btn btn-dark flex-fill" style="border-radius: 6px; padding: 10px;" disabled="@(!IsRecording">
+                                        <button type="button" @onclick="StopRecordingAsync" class="btn btn-dark flex-fill" style="border-radius: 6px; padding: 10px;" disabled="@(!IsRecording)">
                                             <i class="bi bi-stop-fill"></i> Arrêter
                                         </button>
                                     </div>
@@ -151,7 +151,7 @@
 
         try
         {
-            var response = await VoiceService.ProcessVoiceAsync(UserId, Result);
+            var response = await VoiceService.ProcessAsync(UserId);
             
             StatusMessage = response.Message;
             IsSuccess = response.Success;
