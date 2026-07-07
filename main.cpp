@@ -12,7 +12,7 @@
 int main() {
     Vad::init("../model/silero_vad.onnx");
     // initializing all processor
-    AuthRepository::init("dbname=auth user=postgres password=mamanlah host=localhost port=5432");
+    AuthRepository::init("dbname=authentification user=postgres password=s host=localhost port=5432");
     auto repo = AuthRepository::getInstance();
 
     SpeechProcessor::init("../model/speech_detection.onnx");

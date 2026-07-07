@@ -1,7 +1,7 @@
 CMakeFiles/app.dir/src/MemoryAudioFile.cpp.o: \
- /home/kukuna/korontana/projet/etude/S5/dev/authentification/src/MemoryAudioFile.cpp \
+ /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification/src/MemoryAudioFile.cpp \
  /usr/include/stdc-predef.h \
- /home/kukuna/korontana/projet/etude/S5/dev/authentification/include/MemoryAudioFile.h \
+ /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification/include/MemoryAudioFile.h \
  /usr/include/sndfile.h /usr/include/stdio.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
  /usr/include/features.h /usr/include/features-time64.h \
