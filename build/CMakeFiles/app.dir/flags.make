@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = -DCROW_USE_BOOST
 
-CXX_INCLUDES = -I/usr/include/opus -I/opt/onnxruntime-linux-x64-1.16.3/include -I/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification/include -isystem /usr/local/include/opencv4
+CXX_INCLUDES = -I/usr/include/opus -I/opt/onnxruntime-linux-x64-1.16.3/include -I/home/kukuna/korontana/projet/etude/S5/dev/authentification/include -isystem /usr/local/include/opencv5
 
 CXX_FLAGS = 
 

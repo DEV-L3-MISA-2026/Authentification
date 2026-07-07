@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.28)
 
 project(FacialAuthentification VERSION 1.0 LANGUAGES CXX)
-find_package(OpenCV 4 REQUIRED)
+find_package(OpenCV 5 REQUIRED)
 find_package(PkgConfig REQUIRED)
 
 pkg_search_module(PQXX REQUIRED IMPORTED_TARGET libpqxx)
@@ -24,9 +24,11 @@ link_directories(
     ${ONNXRUNTIME_DIR}/lib
 )
 
+file(GLOB SERVICES_SOURCES "src/Services/*.cpp")
+file(GLOB CONTROLLERS_SOURCES "src/Controllers/*.cpp")
+
 add_executable(app 
     main.cpp
-    src/face_api_server.cpp
     src/FaceDetector.cpp
     src/FaceRecognizer.cpp
     src/utility.cpp
@@ -36,6 +38,8 @@ add_executable(app
     src/Repository/AuthRepository.cpp
     src/MemoryAudioFile.cpp
     src/Vad.cpp
+    ${SERVICES_SOURCES}
+    ${CONTROLLERS_SOURCES}
 )
 
 target_include_directories(app PRIVATE

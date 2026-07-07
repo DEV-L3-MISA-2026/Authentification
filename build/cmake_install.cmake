@@ -1,4 +1,4 @@
-# Install script for directory: /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification
+# Install script for directory: /home/kukuna/korontana/projet/etude/S5/dev/authentification
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/kukuna/korontana/projet/etude/S5/dev/authentification/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

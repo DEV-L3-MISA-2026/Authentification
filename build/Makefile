@@ -177,6 +177,54 @@ src/AudioProcessor.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/AudioProcessor.cpp.s
 .PHONY : src/AudioProcessor.cpp.s
 
+src/Controllers/FaceController.o: src/Controllers/FaceController.cpp.o
+.PHONY : src/Controllers/FaceController.o
+
+# target to build an object file
+src/Controllers/FaceController.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/Controllers/FaceController.cpp.o
+.PHONY : src/Controllers/FaceController.cpp.o
+
+src/Controllers/FaceController.i: src/Controllers/FaceController.cpp.i
+.PHONY : src/Controllers/FaceController.i
+
+# target to preprocess a source file
+src/Controllers/FaceController.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/Controllers/FaceController.cpp.i
+.PHONY : src/Controllers/FaceController.cpp.i
+
+src/Controllers/FaceController.s: src/Controllers/FaceController.cpp.s
+.PHONY : src/Controllers/FaceController.s
+
+# target to generate assembly for a file
+src/Controllers/FaceController.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/Controllers/FaceController.cpp.s
+.PHONY : src/Controllers/FaceController.cpp.s
+
+src/Controllers/VocController.o: src/Controllers/VocController.cpp.o
+.PHONY : src/Controllers/VocController.o
+
+# target to build an object file
+src/Controllers/VocController.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/Controllers/VocController.cpp.o
+.PHONY : src/Controllers/VocController.cpp.o
+
+src/Controllers/VocController.i: src/Controllers/VocController.cpp.i
+.PHONY : src/Controllers/VocController.i
+
+# target to preprocess a source file
+src/Controllers/VocController.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/Controllers/VocController.cpp.i
+.PHONY : src/Controllers/VocController.cpp.i
+
+src/Controllers/VocController.s: src/Controllers/VocController.cpp.s
+.PHONY : src/Controllers/VocController.s
+
+# target to generate assembly for a file
+src/Controllers/VocController.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/Controllers/VocController.cpp.s
+.PHONY : src/Controllers/VocController.cpp.s
+
 src/FaceDetector.o: src/FaceDetector.cpp.o
 .PHONY : src/FaceDetector.o
 
@@ -297,6 +345,54 @@ src/Repository/AuthRepository.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/Repository/AuthRepository.cpp.s
 .PHONY : src/Repository/AuthRepository.cpp.s
 
+src/Services/FaceService.o: src/Services/FaceService.cpp.o
+.PHONY : src/Services/FaceService.o
+
+# target to build an object file
+src/Services/FaceService.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/Services/FaceService.cpp.o
+.PHONY : src/Services/FaceService.cpp.o
+
+src/Services/FaceService.i: src/Services/FaceService.cpp.i
+.PHONY : src/Services/FaceService.i
+
+# target to preprocess a source file
+src/Services/FaceService.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/Services/FaceService.cpp.i
+.PHONY : src/Services/FaceService.cpp.i
+
+src/Services/FaceService.s: src/Services/FaceService.cpp.s
+.PHONY : src/Services/FaceService.s
+
+# target to generate assembly for a file
+src/Services/FaceService.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/Services/FaceService.cpp.s
+.PHONY : src/Services/FaceService.cpp.s
+
+src/Services/VocService.o: src/Services/VocService.cpp.o
+.PHONY : src/Services/VocService.o
+
+# target to build an object file
+src/Services/VocService.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/Services/VocService.cpp.o
+.PHONY : src/Services/VocService.cpp.o
+
+src/Services/VocService.i: src/Services/VocService.cpp.i
+.PHONY : src/Services/VocService.i
+
+# target to preprocess a source file
+src/Services/VocService.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/Services/VocService.cpp.i
+.PHONY : src/Services/VocService.cpp.i
+
+src/Services/VocService.s: src/Services/VocService.cpp.s
+.PHONY : src/Services/VocService.s
+
+# target to generate assembly for a file
+src/Services/VocService.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/Services/VocService.cpp.s
+.PHONY : src/Services/VocService.cpp.s
+
 src/SpeechProcessor.o: src/SpeechProcessor.cpp.o
 .PHONY : src/SpeechProcessor.o
 
@@ -384,6 +480,12 @@ help:
 	@echo "... src/AudioProcessor.o"
 	@echo "... src/AudioProcessor.i"
 	@echo "... src/AudioProcessor.s"
+	@echo "... src/Controllers/FaceController.o"
+	@echo "... src/Controllers/FaceController.i"
+	@echo "... src/Controllers/FaceController.s"
+	@echo "... src/Controllers/VocController.o"
+	@echo "... src/Controllers/VocController.i"
+	@echo "... src/Controllers/VocController.s"
 	@echo "... src/FaceDetector.o"
 	@echo "... src/FaceDetector.i"
 	@echo "... src/FaceDetector.s"
@@ -399,6 +501,12 @@ help:
 	@echo "... src/Repository/AuthRepository.o"
 	@echo "... src/Repository/AuthRepository.i"
 	@echo "... src/Repository/AuthRepository.s"
+	@echo "... src/Services/FaceService.o"
+	@echo "... src/Services/FaceService.i"
+	@echo "... src/Services/FaceService.s"
+	@echo "... src/Services/VocService.o"
+	@echo "... src/Services/VocService.i"
+	@echo "... src/Services/VocService.s"
 	@echo "... src/SpeechProcessor.o"
 	@echo "... src/SpeechProcessor.i"
 	@echo "... src/SpeechProcessor.s"
