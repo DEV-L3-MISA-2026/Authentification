@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Biometrika - Gestion Users & Empreintes</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        
+        .user-form {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: #555;
+        }
+        
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        .form-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            background: #007bff;
+            color: white;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        button:hover {
+            background: #0056b3;
+        }
+        
+        button.secondary {
+            background: #6c757d;
+        }
+        
+        button.danger {
+            background: #dc3545;
+        }
+        
+        button.danger:hover {
+            background: #c82333;
+        }
+        
+        button.success {
+            background: #28a745;
+        }
+        
+        .users-section {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .users-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        
+        .users-table th,
+        .users-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .users-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .users-table tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .action-btns {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .action-btns button {
+            padding: 6px 12px;
+            font-size: 12px;
+        }
+        
+        .user-details {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 4px;
+            display: none;
+        }
+        
+        .user-details.active {
+            display: block;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            max-width: 500px;
+            width: 90%;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .close-btn {
+            background: none;
+            color: #999;
+            font-size: 24px;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+        }
+        
+        .close-btn:hover {
+            background: none;
+            color: #333;
+        }
+        
+        .api-selector {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+        
+        .api-url {
+            font-family: monospace;
+            background: white;
+            padding: 8px;
+            border-radius: 4px;
+            margin: 5px 0;
+            font-size: 12px;
+        }
+        
+        .hidden-input {
+            display: none;
+        }
+        
+        .result-box {
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 12px;
+            white-space: pre-wrap;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .result-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .result-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .result-info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        
+        .template-item {
+            background: white;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .template-info {
+            flex: 1;
+        }
+        
+        .template-actions {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .tabs {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 20px;
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            background: #e9ecef;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .tab.active {
+            background: #007bff;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔐 Test Biometrika - Gestion Users & Empreintes</h1>
+        
+        <!-- Onglets -->
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('users')">👥 Users</button>
+            <button class="tab" onclick="showTab('templates')">🔑 Templates</button>
+            <button class="tab" onclick="showTab('logs')">📋 Logs</button>
+        </div>
+        
+        <!-- Section Users -->
+        <div id="users-tab">
+            <div class="user-form">
+                <h2 id="formTitle">Créer un utilisateur</h2>
+                <div class="form-group">
+                    <label>Nom complet:</label>
+                    <input type="text" id="userName" placeholder="Ex: Jean Dupont">
+                </div>
+                <div class="form-group">
+                    <label>Email:</label>
+                    <input type="email" id="userEmail" placeholder="Ex: jean.dupont@example.com">
+                </div>
+                <div class="form-group">
+                    <label>Rôle:</label>
+                    <input type="text" id="userRole" placeholder="Ex: Admin, User, etc.">
+                </div>
+                <div class="form-actions">
+                    <button class="success" onclick="saveUser()">💾 Sauvegarder</button>
+                    <button class="secondary" onclick="resetForm()">🔄 Réinitialiser</button>
+                </div>
+                <input type="hidden" id="editUserId">
+            </div>
+            
+            <div class="users-section">
+                <h2>Liste des utilisateurs</h2>
+                <table class="users-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nom</th>
+                            <th>Email</th>
+                            <th>Rôle</th>
+                            <th>Créé le</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="usersTableBody">
+                        <!-- Les utilisateurs seront chargés ici -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- Section Templates -->
+        <div id="templates-tab" style="display: none;">
+            <div class="user-form">
+                <h2>Enroller une empreinte</h2>
+                <div class="form-group">
+                    <label>Utilisateur:</label>
+                    <select id="enrollUserId" onchange="loadUserTemplates()">
+                        <option value="">-- Sélectionner un utilisateur --</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Image empreinte (Base64 ou fichier):</label>
+                    <input type="file" id="enrollImage" accept="image/*">
+                    <textarea id="enrollImageBase64" rows="3" placeholder="Ou collez le base64 ici..."></textarea>
+                </div>
+                <div class="tabs">
+                    <button class="tab active" id="mode-upload" onclick="setEnrollMode('upload')">📁 Upload</button>
+                    <button class="tab" id="mode-camera" onclick="setEnrollMode('camera')">📷 Caméra</button>
+                </div>
+                <video id="camera" style="display:none; max-width: 100%;" autoplay></video>
+                <canvas id="canvas" style="display:none;"></canvas>
+                <div class="form-actions">
+                    <button class="success" onclick="enrollFingerprint()">✅ Enroller</button>
+                    <button class="secondary" onclick="startCamera()">📷 Démarrer caméra</button>
+                    <button class="danger" onclick="stopCamera()">⏹️ Arrêter caméra</button>
+                </div>
+                <div id="enrollResult" class="result-box" style="display: none;"></div>
+            </div>
+            
+            <div class="users-section">
+                <h2>Vérifier une empreinte</h2>
+                <div class="form-group">
+                    <label>Utilisateur:</label>
+                    <select id="verifyUserId" onchange="loadUserTemplates()">
+                        <option value="">-- Sélectionner un utilisateur --</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Template à vérifier:</label>
+                    <select id="verifyTemplateId">
+                        <option value="">-- Sélectionner un template --</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Image à vérifier:</label>
+                    <input type="file" id="verifyImage" accept="image/*">
+                    <textarea id="verifyImageBase64" rows="3" placeholder="Ou collez le base64 ici..."></textarea>
+                </div>
+                <div class="form-actions">
+                    <button class="success" onclick="verifyFingerprint()">✅ Vérifier</button>
+                </div>
+                <div id="verifyResult" class="result-box" style="display: none;"></div>
+            </div>
+            
+            <div class="users-section">
+                <h2>Templates enregistrés</h2>
+                <div id="templatesList">
+                    <p style="color: #999;">Sélectionnez un utilisateur pour voir ses templates</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Section Logs -->
+        <div id="logs-tab" style="display: none;">
+            <div class="users-section">
+                <h2>Logs d'authentification</h2>
+                <div id="logsList"></div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Configuration API
+        const API_BASE = 'http://localhost:5000/wasm/fingerprint';
+        const API_BACKEND = 'http://localhost:5000';
+        let users = JSON.parse(localStorage.getItem('biometrika_users')) || [];
+        let templates = JSON.parse(localStorage.getItem('biometrika_templates')) || [];
+        let authLogs = JSON.parse(localStorage.getItem('biometrika_logs')) || [];
+        let cameraStream = null;
+        let currentUserId = null;
+        
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', () => {
+            renderUsers();
+            renderLogs();
+            populateUserSelects();
+            
+            // Upload d'image - convertir en base64 automatiquement
+            document.getElementById('enrollImage').addEventListener('change', handleImageUpload);
+            document.getElementById('verifyImage').addEventListener('change', handleImageUpload);
+        });
+        
+        // Gestion des onglets
+        function showTab(tab) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            document.getElementById('users-tab').style.display = tab === 'users' ? 'block' : 'none';
+            document.getElementById('templates-tab').style.display = tab === 'templates' ? 'block' : 'none';
+            document.getElementById('logs-tab').style.display = tab === 'logs' ? 'block' : 'none';
+            
+            if (tab === 'logs') renderLogs();
+        }
+        
+        // CRUD Users
+        function renderUsers() {
+            const tbody = document.getElementById('usersTableBody');
+            if (users.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" style="text-align: center;">Aucun utilisateur</td></tr>';
+                return;
+            }
+            
+            tbody.innerHTML = users.map(user => `
+                <tr>
+                    <td>${user.id}</td>
+                    <td>${user.name}</td>
+                    <td>${user.email}</td>
+                    <td>${user.role || 'N/A'}</td>
+                    <td>${new Date(user.createdAt).toLocaleString()}</td>
+                    <td>
+                        <div class="action-btns">
+                            <button onclick="editUser(${user.id})">✏️ Modifier</button>
+                            <button onclick="deleteUser(${user.id})" class="danger">🗑️ Supprimer</button>
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
+            
+            populateUserSelects();
+        }
+        
+        function saveUser() {
+            const name = document.getElementById('userName').value.trim();
+            const email = document.getElementById('userEmail').value.trim();
+            const role = document.getElementById('userRole').value.trim();
+            const editId = document.getElementById('editUserId').value;
+            
+            if (!name || !email) {
+                alert('Nom et email obligatoires');
+                return;
+            }
+            
+            if (editId) {
+                // Modification
+                const index = users.findIndex(u => u.id === parseInt(editId));
+                if (index !== -1) {
+                    users[index] = { ...users[index], name, email, role };
+                }
+                document.getElementById('editUserId').value = '';
+                document.getElementById('formTitle').textContent = 'Créer un utilisateur';
+            } else {
+                // Création
+                const newUser = {
+                    id: users.length > 0 ? Math.max(...users.map(u => u.id)) + 1 : 1,
+                    name,
+                    email,
+                    role,
+                    createdAt: new Date().toISOString()
+                };
+                users.push(newUser);
+            }
+            
+            localStorage.setItem('biometrika_users', JSON.stringify(users));
+            resetForm();
+            renderUsers();
+        }
+        
+        function editUser(id) {
+            const user = users.find(u => u.id === id);
+            if (!user) return;
+            
+            document.getElementById('userName').value = user.name;
+            document.getElementById('userEmail').value = user.email;
+            document.getElementById('userRole').value = user.role || '';
+            document.getElementById('editUserId').value = user.id;
+            document.getElementById('formTitle').textContent = 'Modifier l\'utilisateur';
+        }
+        
+        function deleteUser(id) {
+            if (!confirm('Supprimer cet utilisateur ?')) return;
+            
+            users = users.filter(u => u.id !== id);
+            templates = templates.filter(t => t.userId !== id);
+            localStorage.setItem('biometrika_users', JSON.stringify(users));
+            localStorage.setItem('biometrika_templates', JSON.stringify(templates));
+            renderUsers();
+        }
+        
+        function resetForm() {
+            document.getElementById('userName').value = '';
+            document.getElementById('userEmail').value = '';
+            document.getElementById('userRole').value = '';
+            document.getElementById('editUserId').value = '';
+            document.getElementById('formTitle').textContent = 'Créer un utilisateur';
+        }
+        
+        // Gestion des templates
+        function populateUserSelects() {
+            const selects = [document.getElementById('enrollUserId'), document.getElementById('verifyUserId')];
+            selects.forEach(select => {
+                if (!select) return;
+                const currentValue = select.value;
+                select.innerHTML = '<option value="">-- Sélectionner un utilisateur --</option>' +
+                    users.map(u => `<option value="${u.id}">${u.name} (${u.email})</option>`).join('');
+                select.value = currentValue;
+            });
+        }
+        
+        function loadUserTemplates() {
+            const userId = document.getElementById('verifyUserId').value;
+            currentUserId = userId;
+            const templateSelect = document.getElementById('verifyTemplateId');
+            const templatesList = document.getElementById('templatesList');
+            
+            if (!userId) {
+                templateSelect.innerHTML = '<option value="">-- Sélectionner un template --</option>';
+                templatesList.innerHTML = '<p style="color: #999;">Sélectionnez un utilisateur pour voir ses templates</p>';
+                return;
+            }
+            
+            const userTemplates = templates.filter(t => t.userId === parseInt(userId));
+            
+            // Remplir le select pour vérification
+            templateSelect.innerHTML = '<option value="">-- Sélectionner un template --</option>' +
+                userTemplates.map(t => `<option value="${t.id}">Template #${t.id} - ${new Date(t.createdAt).toLocaleString()}</option>`).join('');
+            
+            // Afficher la liste des templates
+            if (userTemplates.length === 0) {
+                templatesList.innerHTML = '<p style="color: #999;">Aucun template pour cet utilisateur</p>';
+                return;
+            }
+            
+            templatesList.innerHTML = userTemplates.map(t => `
+                <div class="template-item">
+                    <div class="template-info">
+                        <strong>Template #${t.id}</strong><br>
+                        <small>Créé le: ${new Date(t.createdAt).toLocaleString()}</small>
+                    </div>
+                    <div class="template-actions">
+                        <button onclick="viewTemplate(${t.id})" class="secondary">👁️ Voir</button>
+                        <button onclick="deleteTemplate(${t.id})" class="danger">🗑️</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function setEnrollMode(mode) {
+            document.getElementById('mode-upload').classList.toggle('active', mode === 'upload');
+            document.getElementById('mode-camera').classList.toggle('active', mode === 'camera');
+            
+            const fileInput = document.getElementById('enrollImage');
+            const base64Input = document.getElementById('enrollImageBase64');
+            const camera = document.getElementById('camera');
+            
+            if (mode === 'upload') {
+                fileInput.parentElement.style.display = 'block';
+                base64Input.parentElement.style.display = 'none';
+                camera.style.display = 'none';
+            } else {
+                fileInput.parentElement.style.display = 'none';
+                base64Input.parentElement.style.display = 'none';
+                camera.style.display = 'block';
+            }
+        }
+        
+        function handleImageUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const isEnroll = event.target.id === 'enrollImage';
+                const textarea = isEnroll ? 
+                    document.getElementById('enrollImageBase64') : 
+                    document.getElementById('verifyImageBase64');
+                textarea.value = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+        
+        async function startCamera() {
+            try {
+                const video = document.getElementById('camera');
+                cameraStream = await navigator.mediaDevices.getUserMedia({ 
+                    video: { facingMode: 'environment' } 
+                });
+                video.srcObject = cameraStream;
+            } catch (err) {
+                alert('Erreur caméra: ' + err.message);
+            }
+        }
+        
+        function stopCamera() {
+            if (cameraStream) {
+                cameraStream.getTracks().forEach(track => track.stop());
+                cameraStream = null;
+            }
+        }
+        
+        async function captureImage() {
+            const video = document.getElementById('camera');
+            const canvas = document.getElementById('canvas');
+            
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            canvas.getContext('2d').drawImage(video, 0, 0);
+            
+            return canvas.toDataURL('image/png');
+        }
+        
+        // Appels API Biométrie
+        async function enrollFingerprint() {
+            const userId = document.getElementById('enrollUserId').value;
+            if (!userId) {
+                alert('Sélectionnez un utilisateur');
+                return;
+            }
+            
+            const imageInput = document.getElementById('camera').style.display === 'block' ? null : document.getElementById('enrollImage');
+            const base64Input = document.getElementById('enrollImageBase64');
+            
+            let imageData = base64Input.value.trim();
+            
+            if (!imageData && imageInput.files.length > 0) {
+                imageData = await new Promise(resolve => {
+                    const reader = new FileReader();
+                    reader.onload = e => resolve(e.target.result);
+                    reader.readAsDataURL(imageInput.files[0]);
+                });
+            }
+            
+            if (!imageData) {
+                alert('Fournissez une image d\'empreinte');
+                return;
+            }
+            
+            displayResult('enrollResult', '⏳ Enrôlement en cours...', 'info');
+            
+            try {
+                const response = await fetch(`${API_BASE}/enroll`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ imageData, userId: parseInt(userId) })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    // Sauvegarder template localement
+                    const template = {
+                        id: result.templateId,
+                        userId: parseInt(userId),
+                        createdAt: new Date().toISOString()
+                    };
+                    templates.push(template);
+                    localStorage.setItem('biometrika_templates', JSON.stringify(templates));
+                    
+                    displayResult('enrollResult', 
+                        `✅ Enrôlement réussi !\n\nTemplate ID: ${result.templateId}\nScore: ${result.score}\nMessage: ${result.message}`,
+                        'success');
+                    
+                    loadUserTemplates();
+                } else {
+                    displayResult('enrollResult', `❌ Échec: ${result.message}`, 'error');
+                }
+            } catch (err) {
+                displayResult('enrollResult', `❌ Erreur réseau: ${err.message}`, 'error');
+            }
+        }
+        
+        async function verifyFingerprint() {
+            const userId = document.getElementById('verifyUserId').value;
+            const templateId = document.getElementById('verifyTemplateId').value;
+            
+            if (!userId || !templateId) {
+                alert('Sélectionnez un utilisateur et un template');
+                return;
+            }
+            
+            const base64Input = document.getElementById('verifyImageBase64');
+            const imageInput = document.getElementById('verifyImage');
+            
+            let imageData = base64Input.value.trim();
+            
+            if (!imageData && imageInput.files.length > 0) {
+                imageData = await new Promise(resolve => {
+                    const reader = new FileReader();
+                    reader.onload = e => resolve(e.target.result);
+                    reader.readAsDataURL(imageInput.files[0]);
+                });
+            }
+            
+            if (!imageData) {
+                alert('Fournissez une image d\'empreinte à vérifier');
+                return;
+            }
+            
+            displayResult('verifyResult', '⏳ Vérification en cours...', 'info');
+            
+            try {
+                const response = await fetch(`${API_BASE}/verify`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        imageData, 
+                        userId: parseInt(userId),
+                        templateId: parseInt(templateId)
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    // Sauvegarder log
+                    const log = {
+                        id: authLogs.length + 1,
+                        userId: parseInt(userId),
+                        templateId: parseInt(templateId),
+                        score: result.score,
+                        success: true,
+                        createdAt: new Date().toISOString()
+                    };
+                    authLogs.push(log);
+                    localStorage.setItem('biometrika_logs', JSON.stringify(authLogs));
+                    
+                    displayResult('verifyResult', 
+                        `✅ Vérification réussie !\n\nScore: ${result.score}\nMessage: ${result.message}`,
+                        'success');
+                } else {
+                    const log = {
+                        id: authLogs.length + 1,
+                        userId: parseInt(userId),
+                        templateId: parseInt(templateId),
+                        score: result.score,
+                        success: false,
+                        createdAt: new Date().toISOString()
+                    };
+                    authLogs.push(log);
+                    localStorage.setItem('biometrika_logs', JSON.stringify(authLogs));
+                    
+                    displayResult('verifyResult', 
+                        `❌ Vérification échouée\n\nScore: ${result.score}\nMessage: ${result.message}`,
+                        'error');
+                }
+            } catch (err) {
+                displayResult('verifyResult', `❌ Erreur réseau: ${err.message}`, 'error');
+            }
+        }
+        
+        function viewTemplate(id) {
+            const template = templates.find(t => t.id === id);
+            if (template) {
+                alert(`Template ID: ${template.id}\nUser ID: ${template.userId}\nCréé: ${new Date(template.createdAt).toLocaleString()}`);
+            }
+        }
+        
+        function deleteTemplate(id) {
+            if (!confirm('Supprimer ce template ?')) return;
+            templates = templates.filter(t => t.id !== id);
+            localStorage.setItem('biometrika_templates', JSON.stringify(templates));
+            loadUserTemplates();
+        }
+        
+        function renderLogs() {
+            const logsList = document.getElementById('logsList');
+            
+            if (authLogs.length === 0) {
+                logsList.innerHTML = '<p style="color: #999;">Aucun log d\'authentification</p>';
+                return;
+            }
+            
+            logsList.innerHTML = authLogs.slice().reverse().map(log => {
+                const user = users.find(u => u.id === log.userId);
+                const template = templates.find(t => t.id === log.templateId);
+                return `
+                <div class="template-item">
+                    <div class="template-info">
+                        <strong>Log #${log.id}</strong><br>
+                        User: ${user ? user.name : 'Unknown'} (ID: ${log.userId})<br>
+                        Template: #${log.templateId}${template ? ` - ${new Date(template.createdAt).toLocaleString()}` : ''}<br>
+                        Score: ${log.score}<br>
+                        Statut: ${log.success ? '✅ Succès' : '❌ Échec'}<br>
+                        <small>${new Date(log.createdAt).toLocaleString()}</small>
+                    </div>
+                </div>
+            `}).join('');
+        }
+        
+        function displayResult(elementId, message, type) {
+            const element = document.getElementById(elementId);
+            element.textContent = message;
+            element.className = `result-box result-${type}`;
+            element.style.display = 'block';
+        }
+    </script>
+</body>
+</html>

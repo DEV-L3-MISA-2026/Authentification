@@ -1,103 +1,63 @@
-@page "/face/enroll/{userId:int}"
-@page "/face/verify/{userId:int}/{templateId:int}"
 @page "/face/process"
-@using System.Text.Json
-@inject FaceApiService FaceService
-@inject IJSRuntime JSRuntime
 @inject NavigationManager Navigation
 
-<PageTitle>@(Action == "enroll" ? "Enregistrement Facial" : "Vérification Faciale")</PageTitle>
+<PageTitle>Reconnaissance Faciale</PageTitle>
 
 <div class="container py-5">
     <div class="row justify-content-center">
         <div class="col-lg-10">
             <div class="card border-0 shadow-sm">
                 <div class="card-body p-5">
-                    <div class="text-center mb-4">
-                        <h2 class="fw-semibold">@(Action == "enroll" ? "Enregistrement facial" : "Vérification faciale")</h2>
-                        @if (UserId > 0)
-                        {
-                            <p class="text-muted">Utilisateur ID: @UserId</p>
-                        }
-                        @if (Action == "verify" && TemplateId > 0)
-                        {
-                            <p class="text-muted">Template ID: @TemplateId</p>
-                        }
+                    <div class="text-center mb-5">
+                        <h2 class="fw-semibold mb-3">Reconnaissance Faciale</h2>
+                        <p class="text-muted">Sélectionnez une opération à effectuer</p>
                     </div>
 
                     <div class="row g-4">
-                        <!-- Scanner Section -->
-                        <div class="col-md-7">
+                        <!-- Enrollment Section -->
+                        <div class="col-md-6">
                             <div class="card border-0 bg-light h-100">
-                                <div class="card-body p-4">
-                                    <div class="position-relative">
-                                        <div class="position-relative overflow-hidden bg-dark" style="border-radius: 8px; aspect-ratio: 4/3;">
-                                            <video id="faceVideo" autoplay playsinline class="w-100 h-100 object-fit-cover"></video>
-                                            <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center">
-                                                <div class="position-absolute w-100" style="height: 2px; background: #000; top: 50%; animation: scan 3s ease-in-out infinite;"></div>
-                                            </div>
-                                        </div>
-
-                                        <div class="d-flex gap-2 mt-3">
-                                            <button type="button" @onclick="CaptureImageAsync" class="btn btn-dark flex-fill" style="border-radius: 6px; padding: 10px;" disabled="@(!IsStreaming || IsLoading)">
-                                                <i class="bi bi-camera"></i> Capturer
-                                            </button>
-                                            <button type="button" @onclick="ToggleTorchAsync" class="btn btn-outline-secondary" style="border-radius: 6px; padding: 10px;" disabled="@(!IsStreaming)" title="Flash (Torch)">
-                                                <i class="bi @(IsTorchOn ? "bi-lightning" : "bi-lightning-fill")"></i>
-                                            </button>
-                                            @if (!IsStreaming)
-                                            {
-                                                <span class="text-muted ms-2">Initialisation caméra...</span>
-                                            }
-                                        </div>
+                                <div class="card-body p-4 text-center">
+                                    <div class="mb-4">
+                                        <i class="bi bi-person-plus" style="font-size: 4rem; opacity: 0.6;"></i>
                                     </div>
+                                    <h3 class="fw-semibold mb-3">Enregistrement Facial</h3>
+                                    <p class="text-muted mb-4">Enregistrer un nouveau visage pour un utilisateur</p>
+                                    
+                                    <div class="mb-3">
+                                        <label class="form-label">ID Utilisateur</label>
+                                        <input type="number" class="form-control" @bind="EnrollUserId" placeholder="Entrez l'ID utilisateur" min="1" />
+                                    </div>
+                                    
+                                    <button type="button" class="btn btn-dark w-100" style="border-radius: 6px; padding: 12px;" @onclick="GoToEnroll" disabled="@(EnrollUserId <= 0)">
+                                        <i class="bi bi-camera"></i> Enregistrer un visage
+                                    </button>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Preview Section -->
-                        <div class="col-md-5">
+                        <!-- Verification Section -->
+                        <div class="col-md-6">
                             <div class="card border-0 bg-light h-100">
-                                <div class="card-body p-4">
-                                    <h5 class="fw-semibold mb-3">Aperçu</h5>
-                                    
-                                    <div class="text-center p-4 mb-3 border border-dashed rounded bg-white" style="border-style: dashed; min-height: 250px; display: flex; align-items: center; justify-content: center;">
-                                        @if (!string.IsNullOrEmpty(PreviewImageDataUrl))
-                                        {
-                                            <img src="@PreviewImageDataUrl" class="img-fluid rounded" style="max-height: 250px;" />
-                                        }
-                                        else
-                                        {
-                                            <div class="text-muted">
-                                                <i class="bi bi-person" style="font-size: 3rem; opacity: 0.3;"></i>
-                                                <p class="mt-2">Aucune capture</p>
-                                            </div>
-                                        }
+                                <div class="card-body p-4 text-center">
+                                    <div class="mb-4">
+                                        <i class="bi bi-person-check" style="font-size: 4rem; opacity: 0.6;"></i>
                                     </div>
-
-                                    <button type="button" @onclick="ProcessImageAsync" class="btn btn-dark w-100 mb-2" style="border-radius: 6px; padding: 12px; font-weight: 500;" disabled="@(CapturedImage == null || IsLoading)">
-                                        @if (IsLoading)
-                                        {
-                                            <span class="spinner-border spinner-border-sm" role="status"></span>
-                                        }
-                                        else
-                                        {
-                                            <i class="bi bi-check-circle"></i>
-                                        }
-                                        @(IsLoading ? "Traitement en cours..." : (Action == "enroll" ? "Enregistrer" : "Vérifier"))
+                                    <h3 class="fw-semibold mb-3">Vérification Faciale</h3>
+                                    <p class="text-muted mb-4">Vérifier l'identité d'un utilisateur par son visage</p>
+                                    
+                                    <div class="mb-3">
+                                        <label class="form-label">ID Utilisateur</label>
+                                        <input type="number" class="form-control" @bind="VerifyUserId" placeholder="Entrez l'ID utilisateur" min="1" />
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">ID Template</label>
+                                        <input type="number" class="form-control" @bind="VerifyTemplateId" placeholder="Entrez l'ID template" min="1" />
+                                    </div>
+                                    
+                                    <button type="button" class="btn btn-dark w-100" style="border-radius: 6px; padding: 12px;" @onclick="GoToVerify" disabled="@(VerifyUserId <= 0 || VerifyTemplateId <= 0)">
+                                        <i class="bi bi-check-circle"></i> Vérifier un visage
                                     </button>
-
-                                    @if (!string.IsNullOrEmpty(StatusMessage))
-                                    {
-                                        <div class="alert mt-3 @(IsSuccess ? "alert-success" : "alert-danger")" style="border-radius: 6px;">
-                                            @StatusMessage
-                                            @if (MatchScore > 0)
-                                            {
-                                                <br />
-                                                <small>Score de correspondance: @MatchScore</small>
-                                            }
-                                        </div>
-                                    }
                                 </div>
                             </div>
                         </div>
@@ -108,220 +68,24 @@
     </div>
 </div>
 
-<style>
-    @@keyframes scan {
-        0%, 100% { top: 10%; opacity: 0; }
-        50% { top: 80%; opacity: 1; }
-    }
-</style>
-
 @code {
-    [Parameter]
-    public int UserId { get; set; }
-    
-    [Parameter]
-    public int TemplateId { get; set; }
-    
-    private string Action => Navigation.ToAbsoluteUri(Navigation.Uri).AbsolutePath.Split('/')[2]; // "enroll" ou "verify"
-    
-    private IJSObjectReference? cameraModule;
-    private string? StatusMessage { get; set; }
-    private bool IsSuccess { get; set; }
-    private bool IsLoading { get; set; }
-    private bool IsStreaming { get; set; }
-    private bool IsTorchOn { get; set; }
-    private int MatchScore { get; set; }
-    private byte[]? CapturedImage { get; set; }
-    private string? PreviewImageDataUrl { get; set; }
-    private int LastTemplateId { get; set; }
+    private int EnrollUserId { get; set; }
+    private int VerifyUserId { get; set; }
+    private int VerifyTemplateId { get; set; }
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
+    private void GoToEnroll()
     {
-        if (firstRender)
+        if (EnrollUserId > 0)
         {
-            await InitializeCameraAsync();
+            Navigation.NavigateTo($"/face/enroll/{EnrollUserId}");
         }
     }
 
-    private async Task InitializeCameraAsync()
+    private void GoToVerify()
     {
-        try
+        if (VerifyUserId > 0 && VerifyTemplateId > 0)
         {
-            cameraModule ??= await JSRuntime.InvokeAsync<IJSObjectReference>("import", "/js/fingerprint-camera.js");
-            var result = await cameraModule.InvokeAsync<JsonElement>("initCamera", "faceVideo");
-            if (result.GetProperty("success").GetBoolean())
-            {
-                IsStreaming = true;
-                StateHasChanged();
-            }
-            else
-            {
-                StatusMessage = result.GetProperty("message").GetString();
-                IsSuccess = false;
-                StateHasChanged();
-            }
+            Navigation.NavigateTo($"/face/verify/{VerifyUserId}/{VerifyTemplateId}");
         }
-        catch (Exception ex)
-        {
-            StatusMessage = $"Erreur caméra: {ex.Message}";
-            IsSuccess = false;
-            StateHasChanged();
-        }
-    }
-
-    private async Task CaptureImageAsync()
-    {
-        try
-        {
-            if (cameraModule == null)
-            {
-                StatusMessage = "Caméra non initialisée";
-                IsSuccess = false;
-                StateHasChanged();
-                return;
-            }
-
-            StatusMessage = "Capture en cours...";
-            IsSuccess = false;
-            StateHasChanged();
-
-            var result = await cameraModule.InvokeAsync<JsonElement>("captureImage");
-            
-            if (!result.GetProperty("success").GetBoolean())
-            {
-                StatusMessage = result.GetProperty("message").GetString();
-                IsSuccess = false;
-                StateHasChanged();
-                return;
-            }
-
-            var imageData = result.GetProperty("imageData").GetString();
-            var base64Data = imageData!.Split(',')[1];
-            CapturedImage = Convert.FromBase64String(base64Data);
-            PreviewImageDataUrl = imageData;
-            StatusMessage = "Image capturée. Cliquez sur le bouton pour continuer.";
-            IsSuccess = true;
-            StateHasChanged();
-        }
-        catch (Exception ex)
-        {
-            StatusMessage = $"Erreur capture: {ex.Message}";
-            IsSuccess = false;
-            StateHasChanged();
-        }
-    }
-
-    private async Task ToggleTorchAsync()
-    {
-        try
-        {
-            if (cameraModule == null) return;
-            var result = await cameraModule.InvokeAsync<JsonElement>("setTorch", !IsTorchOn);
-            if (result.GetProperty("success").GetBoolean())
-            {
-                IsTorchOn = !IsTorchOn;
-                StateHasChanged();
-            }
-            else
-            {
-                StatusMessage = result.GetProperty("message").GetString() ?? "Flash non disponible";
-                IsSuccess = false;
-                StateHasChanged();
-            }
-        }
-        catch (Exception ex)
-        {
-            Console.Error.WriteLine($"Erreur torch: {ex.Message}");
-        }
-    }
-
-    private async Task ProcessImageAsync()
-    {
-        if (CapturedImage == null || CapturedImage.Length == 0)
-        {
-            StatusMessage = "Aucune image à traiter";
-            IsSuccess = false;
-            StateHasChanged();
-            return;
-        }
-
-        IsLoading = true;
-        MatchScore = 0;
-        StateHasChanged();
-
-        try
-        {
-            BiometricResponse response;
-            
-            if (Action == "enroll" || UserId > 0 && TemplateId == 0)
-            {
-                response = await FaceService.EnrollAsync(UserId.ToString(), CapturedImage);
-            }
-            else
-            {
-                if (TemplateId <= 0)
-                {
-                    StatusMessage = "Template ID requis - utilisez /face/verify/{userId}/{templateId}";
-                    IsSuccess = false;
-                    IsLoading = false;
-                    StateHasChanged();
-                    return;
-                }
-                response = await FaceService.VerifyAsync(TemplateId, CapturedImage);
-            }
-
-            if (response.Success)
-            {
-                StatusMessage = response.Message;
-                IsSuccess = true;
-                
-                if (response.Data != null)
-                {
-                    try
-                    {
-                        var dataJson = JsonSerializer.Serialize(response.Data);
-                        var doc = JsonDocument.Parse(dataJson);
-                        var root = doc.RootElement;
-                        if (root.TryGetProperty("TemplateId", out var idProp))
-                        {
-                            LastTemplateId = idProp.GetInt32();
-                        }
-                        if (root.TryGetProperty("MatchScore", out var scoreProp))
-                        {
-                            MatchScore = scoreProp.GetInt32();
-                        }
-                    }
-                    catch { }
-                }
-            }
-            else
-            {
-                StatusMessage = response.Message;
-                IsSuccess = false;
-            }
-        }
-        catch (Exception ex)
-        {
-            StatusMessage = $"Erreur: {ex.Message}";
-            IsSuccess = false;
-        }
-        finally
-        {
-            IsLoading = false;
-            StateHasChanged();
-        }
-    }
-
-    public async ValueTask DisposeAsync()
-    {
-        try
-        {
-            if (cameraModule != null)
-            {
-                await cameraModule.InvokeVoidAsync("stopCamera");
-                await cameraModule.DisposeAsync();
-            }
-        }
-        catch { }
     }
 }

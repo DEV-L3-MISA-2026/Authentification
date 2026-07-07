@@ -1,18 +1,28 @@
 using System.Net.Http.Json;
 using biometrika.Models;
+using Microsoft.AspNetCore.Components;
 
 namespace biometrika.Services;
 
 public class FaceApiService
 {
     private readonly HttpClient _httpClient;
+    private readonly NavigationManager _navigation;
     private readonly string FaceServerUrl;
 
-    public FaceApiService(HttpClient httpClient)
+    public FaceApiService(HttpClient httpClient, NavigationManager navigation)
     {
         _httpClient = httpClient;
-        // URL configurable - utilisez l'IP réseau de votre machine au lieu de localhost pour mobile
-        FaceServerUrl = "http://192.168.11.156:5238"; // Port biometrika-server
+        _navigation = navigation;
+        
+        // Construction dynamique de l'URL du serveur facial
+        // Utilise le même hôte que la page actuelle, mais avec le port 5238
+        // Cela fonctionne à la fois en localhost (http://localhost:5238) 
+        // et depuis un téléphone (http://192.168.x.x:5238)
+        var baseUri = new Uri(_navigation.BaseUri);
+        FaceServerUrl = $"http://{baseUri.Host}:5238";
+        
+        Console.WriteLine($"[FaceAPI] URL configurée: {FaceServerUrl} (depuis baseUri: {_navigation.BaseUri})");
     }
 
     public async Task<BiometricResponse> EnrollAsync(string userId, byte[] faceImage)
@@ -46,7 +56,7 @@ public class FaceApiService
             };
 
             var response = await _httpClient.PostAsJsonAsync($"{FaceServerUrl}/wasm/face/enroll", request);
-            
+
             if (response.IsSuccessStatusCode)
             {
                 var result = await response.Content.ReadFromJsonAsync<WasmFaceResponse>();
@@ -99,17 +109,17 @@ public class FaceApiService
             };
 
             var response = await _httpClient.PostAsJsonAsync($"{FaceServerUrl}/wasm/face/verify", request);
-            
+
             if (response.IsSuccessStatusCode)
             {
                 var result = await response.Content.ReadFromJsonAsync<WasmFaceResponse>();
                 int score = result?.Score ?? 0;
                 bool verified = result?.Success ?? false;
-                
+
                 return new BiometricResponse
                 {
                     Success = verified,
-                    Message = verified 
+                    Message = verified
                         ? $"Vérification faciale réussie. Score: {score}"
                         : $"Vérification faciale échouée. Score: {score}",
                     Data = new { TemplateId = templateId, MatchScore = score }

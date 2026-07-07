@@ -1,19 +1,29 @@
 using System.Net.Http.Json;
 using biometrika.Models;
+using Microsoft.AspNetCore.Components;
 
 namespace biometrika.Services;
 
 public class FingerprintApiService
 {
     private readonly HttpClient _httpClient;
+    private readonly NavigationManager _navigation;
     private const double Threshold = 40;
     private readonly string FingerprintServerUrl;
 
-    public FingerprintApiService(HttpClient httpClient)
+    public FingerprintApiService(HttpClient httpClient, NavigationManager navigation)
     {
         _httpClient = httpClient;
-        // URL configurable - utilisez l'IP réseau de votre machine au lieu de localhost pour mobile
-        FingerprintServerUrl = "http://192.168.11.156:5000" ?? "http://192.168.11.156:5000"; // IP réseau de votre machine
+        _navigation = navigation;
+        
+        // Construction dynamique de l'URL du serveur fingerprint
+        // Utilise le même hôte que la page actuelle, mais avec le port 5000
+        // Cela fonctionne à la fois en localhost (http://localhost:5000) 
+        // et depuis un téléphone (http://192.168.x.x:5000)
+        var baseUri = new Uri(_navigation.BaseUri);
+        FingerprintServerUrl = $"http://{baseUri.Host}:5000";
+
+        Console.WriteLine($"[FingerprintAPI] URL configurée: {FingerprintServerUrl} (depuis baseUri: {_navigation.BaseUri})");
     }
 
     public async Task<BiometricResponse> EnrollAsync(string userId, byte[] fingerprintImage)
