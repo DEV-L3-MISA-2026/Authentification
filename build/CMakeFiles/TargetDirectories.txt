@@ -1,3 +1,0 @@
-/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification/build/CMakeFiles/app.dir
-/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification/build/CMakeFiles/edit_cache.dir
-/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/auth/Authentification/build/CMakeFiles/rebuild_cache.dir

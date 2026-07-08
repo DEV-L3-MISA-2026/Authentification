@@ -78,7 +78,7 @@ void AuthRepository::insertEmbeddings(const AuthData& data)
 
 bool AuthRepository::hasInstance(int id) {
     pqxx::nontransaction px(this->conn);
-    std::string sql = "SELECT * FROM auth_da WHERE userid = $1";
+    std::string sql = "SELECT * FROM auth_data WHERE userid = $1";
     try {
         pqxx::result row = px.exec_params(sql, id);
         return row.size() > 0;
@@ -209,8 +209,6 @@ std::vector<float> AuthRepository::getVocalEmbenddingById(int id) {
     } catch (const std::exception& err) {
         throw std::runtime_error("Erreur standard : " + std::string(err.what()));
     }
-  
-
 }
 std::vector<float> AuthRepository::getFacialEmbenddingById(int id) {
 

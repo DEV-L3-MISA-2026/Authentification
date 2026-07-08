@@ -4,9 +4,14 @@
 
 std::shared_ptr<FacesModel> FacesModel::instance = nullptr;
 FacesModel::FacesModel() 
-    : conn("dbname=auth user=postgres password=mamanlah host=localhost port=5432") // <- ICI
+    : conn([]() -> std::string {
+        const char* pg_conn_env = std::getenv("PG_CONN");
+        return pg_conn_env
+            ? std::string(pg_conn_env)
+            : "dbname=biometrika user=postgres password=s host=localhost port=5432";
+      }())
 {
-    std::cout << "Connexion réussie à la base de données 'auth'." << std::endl;
+    std::cout << "Connexion réussie à la base de données 'biometrika'." << std::endl;
 }
 
 std::shared_ptr<FacesModel> FacesModel::GetInstance() 
