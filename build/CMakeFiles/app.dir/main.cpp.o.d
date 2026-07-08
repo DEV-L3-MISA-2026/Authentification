@@ -1405,6 +1405,7 @@ CMakeFiles/app.dir/main.cpp.o: \
  /home/kukuna/korontana/projet/etude/S5/dev/authentification/include/crow/http_server.h \
  /home/kukuna/korontana/projet/etude/S5/dev/authentification/include/crow/version.h \
  /home/kukuna/korontana/projet/etude/S5/dev/authentification/include/crow/app.h \
+ /home/kukuna/korontana/projet/etude/S5/dev/authentification/include/crow/middlewares/cors.h \
  /home/kukuna/korontana/projet/etude/S5/dev/authentification/include/Repository/AuthRepository.h \
  /usr/include/pqxx/pqxx /usr/include/pqxx/internal/header-pre.hxx \
  /usr/include/pqxx/internal/cxx-features.hxx \

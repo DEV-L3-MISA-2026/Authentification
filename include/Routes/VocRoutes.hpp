@@ -3,7 +3,8 @@
 #include <crow.h>
 #include <Controllers/VocController.h>
 
-inline void registerVocRoutes(crow::SimpleApp& app, std::shared_ptr<VocController> vocController) {
+template <typename AppType>
+inline void registerVocRoutes(AppType& app, std::shared_ptr<VocController> vocController) {
     // verify the vocal signature of userid against the audio provided in the body
     CROW_ROUTE(app, "/api/voc/verify/<int>")
         .methods("POST"_method)

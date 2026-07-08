@@ -40,7 +40,7 @@ startBtn.onclick = async () => {
         if (recorder.state === "recording") {
             recorder.stop();
         }
-    }, 3000);
+    }, 8000);
 };
 
 stopBtn.onclick = () => {
@@ -59,10 +59,16 @@ sendBtn.onclick = async () => {
     console.log(recordedBlob);
     console.log(recordedBlob.size);
     console.log(recordedBlob.type);
-await fetch("http://localhost:5000/api/voc/verify/2", {
+
+    const data = await fetch("http://localhost:7007/api/voc/verify/2", {
     method: "POST",
     body: recordedBlob
-});
+
+    });
+
+    const donnee = await data.json();
+
+    console.log("score : ", donnee.score);
 
     status.textContent = "Sent";
 

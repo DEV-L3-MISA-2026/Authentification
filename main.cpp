@@ -3,6 +3,7 @@
 
 #include <opencv2/opencv.hpp>
 #include <crow.h>
+#include <crow/middlewares/cors.h>
 
 #include <Repository/AuthRepository.h>
 #include <FaceRecognizer.h>
@@ -16,6 +17,19 @@
 #include <Routes/FaceRoutes.hpp>
 #include <Routes/VocRoutes.hpp>
 #include <utility.h>
+
+
+template <typename AppType>
+void setCors(AppType& app, const std::string& allowed_origin = "*") {
+    // On extrait la référence du gestionnaire CORS de l'application
+    auto& cors = app.template get_middleware<crow::CORSHandler>();
+    
+    // Configuration globale des règles de partage
+    cors.global()
+        .origin(allowed_origin)
+        .methods("GET"_method, "POST"_method, "PUT"_method, "DELETE"_method, "OPTIONS"_method)
+        .headers("Content-Type", "Authorization", "X-Requested-With");
+}
 
 int main() {
     // init all models and tools
@@ -47,8 +61,7 @@ int main() {
     auto vocController = std::make_shared<VocController>(vocService);
 
     // ---- crow and routings
-    crow::SimpleApp app;
-
+    crow::App<crow::CORSHandler> app;
     CROW_ROUTE(app, "/").methods("OPTIONS"_method)([]() {
         crow::response res;
         set_cors(res);

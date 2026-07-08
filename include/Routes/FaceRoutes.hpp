@@ -3,7 +3,8 @@
 #include <crow.h>
 #include <Controllers/FaceController.h>
 
-inline void registerFaceRoutes(crow::SimpleApp& app, std::shared_ptr<FaceController> faceController) {
+template <typename AppType>
+inline void registerFaceRoutes(AppType& app, std::shared_ptr<FaceController> faceController) {
     // enroll faces embedding
     CROW_ROUTE(app, "/api/face/enroll")
         .methods("POST"_method)
