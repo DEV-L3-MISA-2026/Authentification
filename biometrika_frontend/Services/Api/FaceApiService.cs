@@ -51,11 +51,10 @@ public class FaceApiService
 
             var request = new
             {
-                UserId = userIdInt,
                 ImageData = $"data:image/jpeg;base64,{base64Image}"
             };
 
-            var response = await _httpClient.PostAsJsonAsync($"{FaceServerUrl}/wasm/face/enroll", request);
+            var response = await _httpClient.PostAsJsonAsync($"{FaceServerUrl}/wasm/face/enroll/{userIdInt}", request);
 
             if (response.IsSuccessStatusCode)
             {
@@ -87,7 +86,7 @@ public class FaceApiService
         }
     }
 
-    public async Task<BiometricResponse> VerifyAsync(int templateId, byte[] probeImage)
+    public async Task<BiometricResponse> VerifyAsync(int userId, byte[] probeImage)
     {
         try
         {
@@ -104,11 +103,10 @@ public class FaceApiService
 
             var request = new
             {
-                TemplateId = templateId,
                 ImageData = $"data:image/jpeg;base64,{base64Image}"
             };
 
-            var response = await _httpClient.PostAsJsonAsync($"{FaceServerUrl}/wasm/face/verify", request);
+            var response = await _httpClient.PostAsJsonAsync($"{FaceServerUrl}/wasm/face/verify/{userId}", request);
 
             if (response.IsSuccessStatusCode)
             {
@@ -122,7 +120,7 @@ public class FaceApiService
                     Message = verified
                         ? $"Vérification faciale réussie. Score: {score}"
                         : $"Vérification faciale échouée. Score: {score}",
-                    Data = new { TemplateId = templateId, MatchScore = score }
+                    Data = new { UserId = userId, MatchScore = score }
                 };
             }
             else

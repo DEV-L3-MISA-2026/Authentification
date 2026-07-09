@@ -1,4 +1,4 @@
-@page "/face/verify/{userId:int}/{templateId:int}"
+@page "/face/verify/{userId:int}/"
 @page "/face/verify"
 @using System.Text.Json
 @inject FaceApiService FaceService
@@ -16,11 +16,11 @@
                         <h2 class="fw-semibold">Vérification faciale</h2>
                         @if (UserId > 0)
                         {
-                            <p class="text-muted">Utilisateur ID: @UserId | Template ID: @TemplateId</p>
+                            <p class="text-muted">Utilisateur ID: @UserId</p>
                         }
-                        @if (UserId <= 0 || TemplateId <= 0)
+                        @if (UserId <= 0)
                         {
-                            <p class="text-warning">URL: /face/verify/{userId}/{templateId}</p>
+                            <p class="text-warning">URL: /face/verify/{userId}</p>
                         }
                     </div>
 
@@ -117,9 +117,6 @@
 @code {
     [Parameter]
     public int UserId { get; set; }
-    
-    [Parameter]
-    public int TemplateId { get; set; }
     
     private IJSObjectReference? cameraModule;
     private string? StatusMessage { get; set; }
@@ -241,9 +238,9 @@
             return;
         }
 
-        if (TemplateId <= 0)
+        if (UserId <= 0)
         {
-            StatusMessage = "Template ID requis - utilisez /face/verify/{userId}/{templateId}";
+            StatusMessage = "User ID requis - utilisez /face/verify/{userId}";
             IsSuccess = false;
             StateHasChanged();
             return;
@@ -255,7 +252,7 @@
 
         try
         {
-            var response = await FaceService.VerifyAsync(TemplateId, CapturedImage);
+            var response = await FaceService.VerifyAsync(UserId, CapturedImage);
             
             StatusMessage = response.Success ? $"Succès: {response.Message}" : $"Échec: {response.Message}";
             IsSuccess = response.Success;

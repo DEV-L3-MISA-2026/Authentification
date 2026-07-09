@@ -50,12 +50,7 @@
                                         <label class="form-label">ID Utilisateur</label>
                                         <input type="number" class="form-control" @bind="VerifyUserId" placeholder="Entrez l'ID utilisateur" min="1" />
                                     </div>
-                                    <div class="mb-3">
-                                        <label class="form-label">ID Template</label>
-                                        <input type="number" class="form-control" @bind="VerifyTemplateId" placeholder="Entrez l'ID template" min="1" />
-                                    </div>
-                                    
-                                    <button type="button" class="btn btn-dark w-100" style="border-radius: 6px; padding: 12px;" @onclick="GoToVerify" disabled="@(VerifyUserId <= 0 || VerifyTemplateId <= 0)">
+                                    <button type="button" class="btn btn-dark w-100" style="border-radius: 6px; padding: 12px;" @onclick="GoToVerify" disabled="@(VerifyUserId <= 0)">
                                         <i class="bi bi-check-circle"></i> Vérifier un visage
                                     </button>
                                 </div>
@@ -71,7 +66,6 @@
 @code {
     private int EnrollUserId { get; set; }
     private int VerifyUserId { get; set; }
-    private int VerifyTemplateId { get; set; }
 
     private void GoToEnroll()
     {
@@ -83,9 +77,9 @@
 
     private void GoToVerify()
     {
-        if (VerifyUserId > 0 && VerifyTemplateId > 0)
+        if (VerifyUserId > 0)
         {
-            Navigation.NavigateTo($"/face/verify/{VerifyUserId}/{VerifyTemplateId}");
+            Navigation.NavigateTo($"/face/verify/{VerifyUserId}/");
         }
     }
 }

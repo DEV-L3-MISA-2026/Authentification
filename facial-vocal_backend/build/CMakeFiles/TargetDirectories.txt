@@ -1,0 +1,3 @@
+/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/DEV-L3/Authentification/facial-vocal_backend/build/CMakeFiles/app.dir
+/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/DEV-L3/Authentification/facial-vocal_backend/build/CMakeFiles/edit_cache.dir
+/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/DEV-L3/Authentification/facial-vocal_backend/build/CMakeFiles/rebuild_cache.dir

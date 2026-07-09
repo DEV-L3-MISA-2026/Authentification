@@ -17,11 +17,11 @@ public class FingerprintApiService
         _navigation = navigation;
         
         // Construction dynamique de l'URL du serveur fingerprint
-        // Utilise le même hôte que la page actuelle, mais avec le port 5000
-        // Cela fonctionne à la fois en localhost (http://localhost:5000) 
-        // et depuis un téléphone (http://192.168.x.x:5000)
+        // Utilise le même hôte que la page actuelle, mais avec le port 7000 (HTTPS)
+        // Cela fonctionne à la fois en localhost (https://localhost:7000) 
+        // et depuis un téléphone (https://192.168.x.x:7000)
         var baseUri = new Uri(_navigation.BaseUri);
-        FingerprintServerUrl = $"http://{baseUri.Host}:5000";
+        FingerprintServerUrl = $"https://{baseUri.Host}:7000";
 
         Console.WriteLine($"[FingerprintAPI] URL configurée: {FingerprintServerUrl} (depuis baseUri: {_navigation.BaseUri})");
     }

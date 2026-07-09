@@ -37,6 +37,10 @@ builder.Services.AddScoped<ITemplateExtractorService, TemplateExtractorService>(
 
 var app = builder.Build();
 
+// Servir les fichiers statiques (wwwroot) pour la page de capture mobile
+app.UseDefaultFiles();  // Sert index.html automatiquement pour /mobile/
+app.UseStaticFiles();
+
 Console.WriteLine("[App] Application démarrée sur " + app.Urls.FirstOrDefault() ?? "http://localhost:5000");
 
 // Configure the HTTP request pipeline.

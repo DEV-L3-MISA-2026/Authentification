@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Capture Empreinte</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0f0f1a;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            padding: 20px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+        .header h1 { font-size: 22px; font-weight: 700; }
+        .header #info { font-size: 14px; color: #aaa; margin-top: 6px; }
+
+        .camera-container {
+            display: flex;
+            flex: 1;
+            align-items: center;
+            justify-content: center;
+            background: #000;
+            position: relative;
+            overflow: hidden;
+        }
+        video { width: 100%; height: 100%; object-fit: cover; }
+        .scan-line {
+            position: absolute;
+            left: 10%; right: 10%;
+            height: 2px;
+            background: #00ff88;
+            box-shadow: 0 0 10px #00ff88;
+            animation: scan 2s ease-in-out infinite;
+            opacity: 0.6;
+        }
+        @keyframes scan {
+            0%, 100% { top: 15%; opacity: 0.3; }
+            50% { top: 75%; opacity: 0.8; }
+        }
+
+        .preview-container {
+            display: none;
+            flex: 1;
+            align-items: center;
+            justify-content: center;
+            background: #000;
+        }
+        .preview-container.active { display: flex; }
+        .preview-img { max-width: 100%; max-height: 100%; object-fit: contain; }
+
+        .controls {
+            background: #1a1a2e;
+            padding: 16px 20px;
+            display: flex;
+            gap: 12px;
+            flex-shrink: 0;
+            justify-content: center;
+        }
+        .btn {
+            padding: 14px 28px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            flex: 1;
+            max-width: 220px;
+        }
+        .btn:active { transform: scale(0.96); }
+        .btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+        .btn-capture { background: #2979ff; color: #fff; }
+        .btn-submit { background: #00c853; color: #fff; }
+        .btn-retry { background: #ff6d00; color: #fff; }
+        .btn-done { background: #555; color: #fff; }
+
+        .status {
+            padding: 16px;
+            text-align: center;
+            font-size: 15px;
+            flex-shrink: 0;
+            display: none;
+        }
+        .status.active { display: block; }
+        .status.success { background: #00c853; color: #fff; }
+        .status.error { background: #d50000; color: #fff; }
+        .status.info { background: #2962ff; color: #fff; }
+
+        .loading {
+            display: none;
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 10;
+        }
+        .loading.active { display: block; }
+        .spinner {
+            width: 48px; height: 48px;
+            border: 4px solid rgba(255,255,255,0.3);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 12px;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🔐 Capture</h1>
+        <div id="info">Chargement...</div>
+    </div>
+
+    <div class="camera-container" id="cameraScreen">
+        <video id="video" autoplay playsinline muted></video>
+        <div class="scan-line"></div>
+        <div class="loading" id="loadingOverlay">
+            <div class="spinner"></div>
+            <div>Traitement...</div>
+        </div>
+    </div>
+
+    <div class="preview-container" id="previewScreen">
+        <img id="previewImg" class="preview-img" alt="Aperçu" />
+    </div>
+
+    <div class="status" id="statusBar"></div>
+
+    <div class="controls">
+        <button class="btn btn-capture" id="captureBtn" onclick="capture()">📸 Capturer</button>
+        <button class="btn btn-submit" id="submitBtn" onclick="submit()" style="display:none;">📤 Envoyer</button>
+        <button class="btn btn-retry" id="retryBtn" onclick="retry()" style="display:none;">🔄 Recommencer</button>
+        <button class="btn btn-done" id="doneBtn" onclick="finish()" style="display:none;">✅ Terminé</button>
+    </div>
+
+    <script>
+        // Lire les paramètres de l'URL (envoyés par le PC)
+        const params = new URLSearchParams(window.location.search);
+        const sessionId = params.get('session') || '';
+        const mode = params.get('mode') || 'enroll';
+        const userId = params.get('userId') || '1';
+        const templateId = params.get('templateId') || '0';
+        // Utiliser HTTPS pour communiquer avec le backend
+        const backendUrl = window.location.protocol === 'https:' ? window.location.origin : window.location.origin.replace('http:', 'https:');
+
+        let mediaStream = null;
+        let capturedImage = null;
+
+        // Afficher les infos
+        const modeLabel = mode === 'enroll' ? '📝 Enregistrement' : '🔍 Vérification';
+        const infoText = mode === 'enroll'
+            ? `${modeLabel} - Utilisateur #${userId}`
+            : `${modeLabel} - User #${userId} - Template #${templateId}`;
+        document.getElementById('info').textContent = infoText;
+
+        // Démarrer la caméra directement
+        async function startCamera() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({
+                    video: { facingMode: { ideal: 'environment' }, width: { ideal: 640 }, height: { ideal: 480 } },
+                    audio: false
+                });
+                mediaStream = stream;
+                const video = document.getElementById('video');
+                video.srcObject = stream;
+                await video.play();
+                document.getElementById('captureBtn').style.display = 'block';
+            } catch (err) {
+                showStatus('Erreur caméra: ' + (err.message || err), 'error');
+                document.getElementById('captureBtn').style.display = 'block';
+            }
+        }
+
+        function capture() {
+            const video = document.getElementById('video');
+            if (!video || !mediaStream) return;
+
+            const canvas = document.createElement('canvas');
+            canvas.width = video.videoWidth || 640;
+            canvas.height = video.videoHeight || 480;
+            canvas.getContext('2d').drawImage(video, 0, 0);
+            capturedImage = canvas.toDataURL('image/jpeg', 0.9);
+
+            document.getElementById('previewImg').src = capturedImage;
+            document.getElementById('cameraScreen').style.display = 'none';
+            document.getElementById('previewScreen').classList.add('active');
+
+            document.getElementById('captureBtn').style.display = 'none';
+            document.getElementById('submitBtn').style.display = 'block';
+            document.getElementById('retryBtn').style.display = 'block';
+            showStatus('Image capturée. Envoyer ?', 'info');
+        }
+
+        function retry() {
+            capturedImage = null;
+            document.getElementById('previewScreen').classList.remove('active');
+            document.getElementById('cameraScreen').style.display = 'flex';
+            document.getElementById('submitBtn').style.display = 'none';
+            document.getElementById('retryBtn').style.display = 'none';
+            document.getElementById('captureBtn').style.display = 'block';
+            document.getElementById('statusBar').className = 'status';
+            document.getElementById('statusBar').classList.remove('active');
+        }
+
+        async function submit() {
+            if (!capturedImage) return;
+
+            document.getElementById('loadingOverlay').classList.add('active');
+            document.getElementById('submitBtn').disabled = true;
+            document.getElementById('retryBtn').disabled = true;
+
+            try {
+                const body = { sessionId, imageData: capturedImage };
+                const resp = await fetch(`${backendUrl}/api/mobile-session/submit`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(body)
+                });
+
+                const result = await resp.json();
+                document.getElementById('loadingOverlay').classList.remove('active');
+
+                document.getElementById('submitBtn').style.display = 'none';
+                document.getElementById('retryBtn').style.display = 'none';
+                document.getElementById('doneBtn').style.display = 'block';
+
+                if (result.success) {
+                    const label = mode === 'enroll' ? 'Template ID' : 'Score';
+                    const value = mode === 'enroll' ? (result.templateId || 'OK') : ((result.score || 0) + '/100');
+                    showSuccess('✅ ' + (mode === 'enroll' ? 'Enregistré !' : 'Vérifié !'), label, value, result.message);
+                } else {
+                    showSuccess('❌ Erreur', '', '', result.message || 'Échec');
+                }
+            } catch (err) {
+                document.getElementById('loadingOverlay').classList.remove('active');
+                showStatus('❌ ' + (err.message || err), 'error');
+                document.getElementById('submitBtn').disabled = false;
+                document.getElementById('retryBtn').disabled = false;
+                document.getElementById('submitBtn').style.display = 'block';
+                document.getElementById('retryBtn').style.display = 'block';
+            }
+        }
+
+        function finish() {
+            showStatus('✅ Vous pouvez fermer cette page.', 'success');
+            document.getElementById('doneBtn').style.display = 'none';
+            stopCamera();
+        }
+
+        function showSuccess(icon, label, value, msg) {
+            document.getElementById('previewScreen').classList.remove('active');
+            const bar = document.getElementById('statusBar');
+            bar.className = 'status active success';
+            bar.innerHTML = `
+                <div style="font-size:48px;margin-bottom:8px;">${icon}</div>
+                ${label ? `<div style="font-size:13px;color:#ddd;margin-top:8px;">${label}</div>` : ''}
+                ${value ? `<div style="font-size:28px;font-weight:800;">${value}</div>` : ''}
+                <div style="font-size:14px;margin-top:8px;color:#ddd;">${msg || ''}</div>
+            `;
+        }
+
+        function showStatus(msg, type) {
+            const bar = document.getElementById('statusBar');
+            bar.textContent = msg;
+            bar.className = 'status active ' + type;
+        }
+
+        function stopCamera() {
+            if (mediaStream) {
+                mediaStream.getTracks().forEach(t => t.stop());
+                mediaStream = null;
+            }
+        }
+
+        window.addEventListener('beforeunload', () => stopCamera());
+        startCamera();
+    </script>
+</body>
+</html>

@@ -236,11 +236,8 @@ int main() {
         }
     });
 
-    // WASM-compatible endpoints for Blazor frontend (CORS handled in responses)
-    // POST /wasm/face/enroll - Register face for a user
-    // Le preflight OPTIONS est intercepté et géré automatiquement par le
-    // middleware CORSHandler configuré plus haut ; pas besoin de le gérer ici.
-    CROW_ROUTE(app, "/wasm/face/enroll").methods("POST"_method)([&](const crow::request& req, crow::response& res) {
+    // POST /wasm/face/enroll/{user_id} - Register face for a user (userId in URL)
+    CROW_ROUTE(app, "/wasm/face/enroll/<int>").methods("POST"_method)([&](const crow::request& req, crow::response& res, int user_id) {
         try {
             auto json = crow::json::load(req.body);
             if (!json) {
@@ -250,11 +247,6 @@ int main() {
                 return;
             }
 
-            // Tolérant à la casse : on accepte "UserId" ou "userId"
-            int user_id = 0;
-            if (json.has("UserId")) user_id = json["UserId"].i();
-            else if (json.has("userId")) user_id = json["userId"].i();
-
             std::string image_b64;
             if (json.has("ImageData")) image_b64 = json["ImageData"].s();
             else if (json.has("imageData")) image_b64 = json["imageData"].s();
@@ -262,7 +254,7 @@ int main() {
 
             if (user_id <= 0 || image_b64.empty()) {
                 res.code = 400;
-                res.write("{\"Success\":false,\"Message\":\"UserId and ImageData are required\"}");
+                res.write("{\"Success\":false,\"Message\":\"ImageData is required\"}");
                 res.end();
                 return;
             }
@@ -299,15 +291,11 @@ int main() {
             std::vector<float> embedding = facemodel->formatEmbending(characteristic);
 
             auto repo = AuthRepository::getInstance();
-            
-            // Generate template ID (using user_id as template_id for simplicity)
-            int template_id = user_id;
-
             repo->setFacialEmbeddingsById(user_id, embedding);
 
             res.code = 200;
             res.set_header("Content-Type", "application/json");
-            std::string body = "{\"Success\":true,\"Message\":\"Template facial enregistré pour l'utilisateur " + std::to_string(user_id) + "\",\"TemplateId\":" + std::to_string(template_id) + "}";
+            std::string body = "{\"Success\":true,\"Message\":\"Visage enregistré pour l'utilisateur " + std::to_string(user_id) + "\"}";
             res.write(body);
             res.end();
         } catch (const std::exception& e) {
@@ -318,10 +306,8 @@ int main() {
         }
     });
 
-    // POST /wasm/face/verify - Verify face against registered user
-    // Le preflight OPTIONS est intercepté et géré automatiquement par le
-    // middleware CORSHandler configuré plus haut ; pas besoin de le gérer ici.
-    CROW_ROUTE(app, "/wasm/face/verify").methods("POST"_method)([&](const crow::request& req, crow::response& res) {
+    // POST /wasm/face/verify/{user_id} - Verify face against registered user (userId in URL)
+    CROW_ROUTE(app, "/wasm/face/verify/<int>").methods("POST"_method)([&](const crow::request& req, crow::response& res, int user_id) {
         try {
             auto json = crow::json::load(req.body);
             if (!json) {
@@ -331,19 +317,14 @@ int main() {
                 return;
             }
 
-            // Tolérant à la casse : on accepte "TemplateId" ou "templateId"
-            int template_id = 0;
-            if (json.has("TemplateId")) template_id = json["TemplateId"].i();
-            else if (json.has("templateId")) template_id = json["templateId"].i();
-
             std::string image_b64;
             if (json.has("ImageData")) image_b64 = json["ImageData"].s();
             else if (json.has("imageData")) image_b64 = json["imageData"].s();
             else if (json.has("image")) image_b64 = json["image"].s();
 
-            if (template_id <= 0 || image_b64.empty()) {
+            if (user_id <= 0 || image_b64.empty()) {
                 res.code = 400;
-                res.write("{\"Success\":false,\"Message\":\"TemplateId and ImageData are required\"}");
+                res.write("{\"Success\":false,\"Message\":\"ImageData is required\"}");
                 res.end();
                 return;
             }
@@ -380,8 +361,7 @@ int main() {
             std::vector<float> live_embedding = facemodel->formatEmbending(characteristic);
 
             auto repo = AuthRepository::getInstance();
-            // Using template_id directly as user_id for facial data lookup
-            std::vector<float> stored_embedding = repo->getFacialEmbenddingById(template_id);
+            std::vector<float> stored_embedding = repo->getFacialEmbenddingById(user_id);
             if (stored_embedding.empty()) {
                 res.code = 400;
                 res.write("{\"Success\":false,\"Message\":\"No face data enrolled for user\"}");
@@ -397,10 +377,10 @@ int main() {
             char buf[512];
             int score = static_cast<int>(similarity * 100);
             snprintf(buf, sizeof(buf),
-                "{\"Success\":%s,\"Message\":\"Vérification faciale %s\",\"Score\":%d,\"TemplateId\":%d}",
+                "{\"Success\":%s,\"Message\":\"Vérification faciale %s\",\"Score\":%d}",
                 verified ? "true" : "false",
                 verified ? "réussie" : "échouée",
-                score, template_id);
+                score);
             res.write(buf);
             res.end();
         } catch (const std::exception& e) {

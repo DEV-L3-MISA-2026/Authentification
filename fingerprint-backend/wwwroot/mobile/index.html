@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Biometrika Mobile</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0f0f1a;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 20px;
+        }
+        .logo {
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+        h1 { font-size: 24px; font-weight: 700; margin-bottom: 8px; }
+        p { color: #888; font-size: 14px; text-align: center; margin-bottom: 30px; }
+        .spinner {
+            width: 40px; height: 40px;
+            border: 4px solid rgba(255,255,255,0.15);
+            border-top-color: #2979ff;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 20px;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .status-text { color: #555; font-size: 13px; }
+        .info-box {
+            background: #1a1a2e;
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-top: 20px;
+            text-align: center;
+            max-width: 320px;
+        }
+        .info-box p { font-size: 12px; color: #666; margin-bottom: 0; }
+    </style>
+</head>
+<body>
+    <div class="logo">🔐</div>
+    <h1>Biometrika Mobile</h1>
+    <p>En attente d'une demande de capture...</p>
+    <div class="spinner"></div>
+    <div class="status-text" id="statusText">Connecté au serveur</div>
+    <div class="info-box">
+        <p>Ouvrez cette page sur votre téléphone, puis cliquez sur "Enroll" ou "Verify" sur l'ordinateur. La capture démarrera automatiquement.</p>
+    </div>
+
+    <script>
+        // Utiliser HTTPS si disponible, sinon HTTP
+        const backendUrl = window.location.protocol === 'https:' ? window.location.origin : window.location.origin.replace('http:', 'https:');
+        let polling = true;
+
+        async function checkForSession() {
+            try {
+                const resp = await fetch(`${backendUrl}/api/mobile-session/pending`);
+                if (resp.ok) {
+                    const data = await resp.json();
+                    if (data.sessionId) {
+                        // Redirection automatique vers la capture
+                        const url = `${backendUrl}/mobile/capture.html?mode=${data.mode}&userId=${data.userId}&templateId=${data.templateId}&session=${data.sessionId}`;
+                        window.location.href = url;
+                    }
+                }
+                document.getElementById('statusText').textContent = 'Connecté au serveur';
+            } catch (err) {
+                document.getElementById('statusText').textContent = 'Connexion...';
+            }
+
+            if (polling) {
+                setTimeout(checkForSession, 2000);
+            }
+        }
+
+        checkForSession();
+    </script>
+</body>
+</html>
