@@ -3,6 +3,9 @@ cmake_minimum_required(VERSION 3.28)
 project(FacialAuthentification VERSION 1.0 LANGUAGES CXX)
 find_package(OpenCV 5 REQUIRED)
 find_package(PkgConfig REQUIRED)
+find_package(cpr REQUIRED)
+find_package(jwt-cpp CONFIG REQUIRED)
+
 
 pkg_search_module(PQXX REQUIRED IMPORTED_TARGET libpqxx)
 pkg_check_modules(SNDFILE REQUIRED sndfile)
@@ -56,4 +59,6 @@ target_link_libraries(app
         ${SAMPLERATE_LIBRARIES}
         onnxruntime
         ${RNNOISE_LIBRARIES}
+        cpr::cpr
+        jwt-cpp::jwt-cpp
 )

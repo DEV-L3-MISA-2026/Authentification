@@ -242,3 +242,86 @@ std::vector<float> AuthRepository::getFacialEmbenddingById(int id) {
         throw std::runtime_error("Erreur standard : " + std::string(err.what()));
     }
 }
+
+
+namespace {
+    // "{1,2,3}" — Postgres array literal, same spirit as vector_to_pgstring()
+    // already used for embeddings elsewhere in this file.
+    std::string int_vector_to_pgarray(const std::vector<int>& values) {
+        std::string result = "{";
+        for (size_t i = 0; i < values.size(); ++i) {
+            if (i > 0) result += ",";
+            result += std::to_string(values[i]);
+        }
+        result += "}";
+        return result;
+    }
+}
+
+std::string AuthRepository::createSession(const std::string& payloadJson, const std::vector<int>& userIds)
+{
+    if (userIds.empty())
+        throw LocalException("cannot create a session with an empty user list !");
+
+    std::string user_ids_pg = int_vector_to_pgarray(userIds);
+
+    pqxx::work tx(this->conn);
+    std::string sql =
+        "INSERT INTO auth_sessions (payload, user_ids) "
+        "VALUES ($1::jsonb, $2::int[]) "
+        "RETURNING id::text";
+
+    try {
+        pqxx::result rows = tx.exec_params(sql, payloadJson, user_ids_pg);
+        tx.commit();
+
+        if (rows.empty())
+            throw LocalException("failed to create session: no id returned");
+
+        return rows[0][0].as<std::string>();
+    } catch (const pqxx::sql_error& err) {
+        std::string detail_erreur = "Erreur SQL : " + std::string(err.what()) + "\n" +
+                                    "Requête exécutée : " + err.query();
+        throw std::runtime_error(detail_erreur);
+    } catch (const std::exception& err) {
+        throw std::runtime_error("Erreur standard : " + std::string(err.what()));
+    }
+}
+
+std::string AuthRepository::getSessionPayload(const std::string& sessionId)
+{
+    pqxx::nontransaction tx(this->conn);
+    std::string sql = "SELECT payload::text FROM auth_sessions WHERE id=$1::uuid";
+
+    try {
+        pqxx::result rows = tx.exec_params(sql, sessionId);
+
+        if (rows.empty())
+            throw LocalException("session not found !");
+
+        return rows[0][0].as<std::string>();
+    } catch (const pqxx::sql_error& err) {
+        std::string detail_erreur = "Erreur SQL : " + std::string(err.what()) + "\n" +
+                                    "Requête exécutée : " + err.query();
+        throw std::runtime_error(detail_erreur);
+    } catch (const std::exception& err) {
+        throw std::runtime_error("Erreur standard : " + std::string(err.what()));
+    }
+}
+
+void AuthRepository::markSessionSubmitted(const std::string& sessionId)
+{
+    pqxx::work tx(this->conn);
+    std::string sql = "UPDATE auth_sessions SET submitted_at = now() WHERE id=$1::uuid";
+
+    try {
+        tx.exec_params(sql, sessionId);
+        tx.commit();
+    } catch (const pqxx::sql_error& err) {
+        std::string detail_erreur = "Erreur SQL : " + std::string(err.what()) + "\n" +
+                                    "Requête exécutée : " + err.query();
+        throw std::runtime_error(detail_erreur);
+    } catch (const std::exception& err) {
+        throw std::runtime_error("Erreur standard : " + std::string(err.what()));
+    }
+}

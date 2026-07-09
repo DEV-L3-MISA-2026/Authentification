@@ -1461,8 +1461,11 @@ CMakeFiles/app.dir/main.cpp.o: \
  /home/kukuna/korontana/projet/etude/S5/dev/authentification/include/Vad.h \
  /home/kukuna/korontana/projet/etude/S5/dev/authentification/include/Services/FaceService.h \
  /home/kukuna/korontana/projet/etude/S5/dev/authentification/include/Services/VocService.h \
+ /home/kukuna/korontana/projet/etude/S5/dev/authentification/include/Services/AuthService.h \
  /home/kukuna/korontana/projet/etude/S5/dev/authentification/include/Controllers/FaceController.h \
  /home/kukuna/korontana/projet/etude/S5/dev/authentification/include/Controllers/VocController.h \
+ /home/kukuna/korontana/projet/etude/S5/dev/authentification/include/Controllers/AuthController.h \
  /home/kukuna/korontana/projet/etude/S5/dev/authentification/include/Routes/FaceRoutes.hpp \
  /home/kukuna/korontana/projet/etude/S5/dev/authentification/include/Routes/VocRoutes.hpp \
+ /home/kukuna/korontana/projet/etude/S5/dev/authentification/include/Routes/AuthRoutes.hpp \
  /home/kukuna/korontana/projet/etude/S5/dev/authentification/include/utility.h

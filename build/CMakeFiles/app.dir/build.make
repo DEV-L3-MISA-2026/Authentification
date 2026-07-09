@@ -209,10 +209,24 @@ CMakeFiles/app.dir/src/Vad.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/app.dir/src/Vad.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kukuna/korontana/projet/etude/S5/dev/authentification/src/Vad.cpp -o CMakeFiles/app.dir/src/Vad.cpp.s
 
+CMakeFiles/app.dir/src/Services/AuthService.cpp.o: CMakeFiles/app.dir/flags.make
+CMakeFiles/app.dir/src/Services/AuthService.cpp.o: /home/kukuna/korontana/projet/etude/S5/dev/authentification/src/Services/AuthService.cpp
+CMakeFiles/app.dir/src/Services/AuthService.cpp.o: CMakeFiles/app.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kukuna/korontana/projet/etude/S5/dev/authentification/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/app.dir/src/Services/AuthService.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/app.dir/src/Services/AuthService.cpp.o -MF CMakeFiles/app.dir/src/Services/AuthService.cpp.o.d -o CMakeFiles/app.dir/src/Services/AuthService.cpp.o -c /home/kukuna/korontana/projet/etude/S5/dev/authentification/src/Services/AuthService.cpp
+
+CMakeFiles/app.dir/src/Services/AuthService.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/app.dir/src/Services/AuthService.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kukuna/korontana/projet/etude/S5/dev/authentification/src/Services/AuthService.cpp > CMakeFiles/app.dir/src/Services/AuthService.cpp.i
+
+CMakeFiles/app.dir/src/Services/AuthService.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/app.dir/src/Services/AuthService.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kukuna/korontana/projet/etude/S5/dev/authentification/src/Services/AuthService.cpp -o CMakeFiles/app.dir/src/Services/AuthService.cpp.s
+
 CMakeFiles/app.dir/src/Services/FaceService.cpp.o: CMakeFiles/app.dir/flags.make
 CMakeFiles/app.dir/src/Services/FaceService.cpp.o: /home/kukuna/korontana/projet/etude/S5/dev/authentification/src/Services/FaceService.cpp
 CMakeFiles/app.dir/src/Services/FaceService.cpp.o: CMakeFiles/app.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kukuna/korontana/projet/etude/S5/dev/authentification/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/app.dir/src/Services/FaceService.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kukuna/korontana/projet/etude/S5/dev/authentification/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/app.dir/src/Services/FaceService.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/app.dir/src/Services/FaceService.cpp.o -MF CMakeFiles/app.dir/src/Services/FaceService.cpp.o.d -o CMakeFiles/app.dir/src/Services/FaceService.cpp.o -c /home/kukuna/korontana/projet/etude/S5/dev/authentification/src/Services/FaceService.cpp
 
 CMakeFiles/app.dir/src/Services/FaceService.cpp.i: cmake_force
@@ -226,7 +240,7 @@ CMakeFiles/app.dir/src/Services/FaceService.cpp.s: cmake_force
 CMakeFiles/app.dir/src/Services/VocService.cpp.o: CMakeFiles/app.dir/flags.make
 CMakeFiles/app.dir/src/Services/VocService.cpp.o: /home/kukuna/korontana/projet/etude/S5/dev/authentification/src/Services/VocService.cpp
 CMakeFiles/app.dir/src/Services/VocService.cpp.o: CMakeFiles/app.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kukuna/korontana/projet/etude/S5/dev/authentification/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/app.dir/src/Services/VocService.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kukuna/korontana/projet/etude/S5/dev/authentification/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/app.dir/src/Services/VocService.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/app.dir/src/Services/VocService.cpp.o -MF CMakeFiles/app.dir/src/Services/VocService.cpp.o.d -o CMakeFiles/app.dir/src/Services/VocService.cpp.o -c /home/kukuna/korontana/projet/etude/S5/dev/authentification/src/Services/VocService.cpp
 
 CMakeFiles/app.dir/src/Services/VocService.cpp.i: cmake_force
@@ -237,10 +251,24 @@ CMakeFiles/app.dir/src/Services/VocService.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/app.dir/src/Services/VocService.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kukuna/korontana/projet/etude/S5/dev/authentification/src/Services/VocService.cpp -o CMakeFiles/app.dir/src/Services/VocService.cpp.s
 
+CMakeFiles/app.dir/src/Controllers/AuthController.cpp.o: CMakeFiles/app.dir/flags.make
+CMakeFiles/app.dir/src/Controllers/AuthController.cpp.o: /home/kukuna/korontana/projet/etude/S5/dev/authentification/src/Controllers/AuthController.cpp
+CMakeFiles/app.dir/src/Controllers/AuthController.cpp.o: CMakeFiles/app.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kukuna/korontana/projet/etude/S5/dev/authentification/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/app.dir/src/Controllers/AuthController.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/app.dir/src/Controllers/AuthController.cpp.o -MF CMakeFiles/app.dir/src/Controllers/AuthController.cpp.o.d -o CMakeFiles/app.dir/src/Controllers/AuthController.cpp.o -c /home/kukuna/korontana/projet/etude/S5/dev/authentification/src/Controllers/AuthController.cpp
+
+CMakeFiles/app.dir/src/Controllers/AuthController.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/app.dir/src/Controllers/AuthController.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kukuna/korontana/projet/etude/S5/dev/authentification/src/Controllers/AuthController.cpp > CMakeFiles/app.dir/src/Controllers/AuthController.cpp.i
+
+CMakeFiles/app.dir/src/Controllers/AuthController.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/app.dir/src/Controllers/AuthController.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kukuna/korontana/projet/etude/S5/dev/authentification/src/Controllers/AuthController.cpp -o CMakeFiles/app.dir/src/Controllers/AuthController.cpp.s
+
 CMakeFiles/app.dir/src/Controllers/FaceController.cpp.o: CMakeFiles/app.dir/flags.make
 CMakeFiles/app.dir/src/Controllers/FaceController.cpp.o: /home/kukuna/korontana/projet/etude/S5/dev/authentification/src/Controllers/FaceController.cpp
 CMakeFiles/app.dir/src/Controllers/FaceController.cpp.o: CMakeFiles/app.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kukuna/korontana/projet/etude/S5/dev/authentification/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/app.dir/src/Controllers/FaceController.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kukuna/korontana/projet/etude/S5/dev/authentification/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/app.dir/src/Controllers/FaceController.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/app.dir/src/Controllers/FaceController.cpp.o -MF CMakeFiles/app.dir/src/Controllers/FaceController.cpp.o.d -o CMakeFiles/app.dir/src/Controllers/FaceController.cpp.o -c /home/kukuna/korontana/projet/etude/S5/dev/authentification/src/Controllers/FaceController.cpp
 
 CMakeFiles/app.dir/src/Controllers/FaceController.cpp.i: cmake_force
@@ -254,7 +282,7 @@ CMakeFiles/app.dir/src/Controllers/FaceController.cpp.s: cmake_force
 CMakeFiles/app.dir/src/Controllers/VocController.cpp.o: CMakeFiles/app.dir/flags.make
 CMakeFiles/app.dir/src/Controllers/VocController.cpp.o: /home/kukuna/korontana/projet/etude/S5/dev/authentification/src/Controllers/VocController.cpp
 CMakeFiles/app.dir/src/Controllers/VocController.cpp.o: CMakeFiles/app.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kukuna/korontana/projet/etude/S5/dev/authentification/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/app.dir/src/Controllers/VocController.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kukuna/korontana/projet/etude/S5/dev/authentification/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/app.dir/src/Controllers/VocController.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/app.dir/src/Controllers/VocController.cpp.o -MF CMakeFiles/app.dir/src/Controllers/VocController.cpp.o.d -o CMakeFiles/app.dir/src/Controllers/VocController.cpp.o -c /home/kukuna/korontana/projet/etude/S5/dev/authentification/src/Controllers/VocController.cpp
 
 CMakeFiles/app.dir/src/Controllers/VocController.cpp.i: cmake_force
@@ -277,8 +305,10 @@ app_OBJECTS = \
 "CMakeFiles/app.dir/src/Repository/AuthRepository.cpp.o" \
 "CMakeFiles/app.dir/src/MemoryAudioFile.cpp.o" \
 "CMakeFiles/app.dir/src/Vad.cpp.o" \
+"CMakeFiles/app.dir/src/Services/AuthService.cpp.o" \
 "CMakeFiles/app.dir/src/Services/FaceService.cpp.o" \
 "CMakeFiles/app.dir/src/Services/VocService.cpp.o" \
+"CMakeFiles/app.dir/src/Controllers/AuthController.cpp.o" \
 "CMakeFiles/app.dir/src/Controllers/FaceController.cpp.o" \
 "CMakeFiles/app.dir/src/Controllers/VocController.cpp.o"
 
@@ -295,8 +325,10 @@ app: CMakeFiles/app.dir/src/SpeechProcessor.cpp.o
 app: CMakeFiles/app.dir/src/Repository/AuthRepository.cpp.o
 app: CMakeFiles/app.dir/src/MemoryAudioFile.cpp.o
 app: CMakeFiles/app.dir/src/Vad.cpp.o
+app: CMakeFiles/app.dir/src/Services/AuthService.cpp.o
 app: CMakeFiles/app.dir/src/Services/FaceService.cpp.o
 app: CMakeFiles/app.dir/src/Services/VocService.cpp.o
+app: CMakeFiles/app.dir/src/Controllers/AuthController.cpp.o
 app: CMakeFiles/app.dir/src/Controllers/FaceController.cpp.o
 app: CMakeFiles/app.dir/src/Controllers/VocController.cpp.o
 app: CMakeFiles/app.dir/build.make
@@ -309,6 +341,7 @@ app: /usr/local/lib/libopencv_stereo.so.5.0.0
 app: /usr/local/lib/libopencv_stitching.so.5.0.0
 app: /usr/local/lib/libopencv_video.so.5.0.0
 app: /usr/local/lib/libopencv_videoio.so.5.0.0
+app: /usr/local/lib/libcpr.a
 app: /usr/local/lib/libopencv_imgcodecs.so.5.0.0
 app: /usr/local/lib/libopencv_features.so.5.0.0
 app: /usr/local/lib/libopencv_dnn.so.5.0.0
@@ -317,8 +350,11 @@ app: /usr/local/lib/libopencv_geometry.so.5.0.0
 app: /usr/local/lib/libopencv_flann.so.5.0.0
 app: /usr/local/lib/libopencv_core.so.5.0.0
 app: /usr/lib/x86_64-linux-gnu/libpqxx.so
+app: /usr/lib/x86_64-linux-gnu/libcurl.so
+app: /usr/lib/x86_64-linux-gnu/libssl.so
+app: /usr/lib/x86_64-linux-gnu/libcrypto.so
 app: CMakeFiles/app.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/kukuna/korontana/projet/etude/S5/dev/authentification/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Linking CXX executable app"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/kukuna/korontana/projet/etude/S5/dev/authentification/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Linking CXX executable app"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/app.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

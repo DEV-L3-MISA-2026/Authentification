@@ -12,10 +12,13 @@
 
 #include <Services/FaceService.h>
 #include <Services/VocService.h>
+#include <Services/AuthService.h>
 #include <Controllers/FaceController.h>
 #include <Controllers/VocController.h>
+#include <Controllers/AuthController.h>
 #include <Routes/FaceRoutes.hpp>
 #include <Routes/VocRoutes.hpp>
+#include <Routes/AuthRoutes.hpp>
 #include <utility.h>
 
 
@@ -55,13 +58,16 @@ int main() {
     // ---- construction des services
     auto faceService = std::make_shared<FaceService>(faceDetector, faceRecognizer, authRepository);
     auto vocService = std::make_shared<VocService>(speechProcessor, authRepository);
-
+    auto authService = std::make_shared<AuthService>("test_secret", "localhost:8000/submit");
     // ---- construction des controllers
     auto faceController = std::make_shared<FaceController>(faceService);
     auto vocController = std::make_shared<VocController>(vocService);
 
+    auto authController = std::make_shared<AuthController>(authService);
     // ---- crow and routings
     crow::App<crow::CORSHandler> app;
+    setCors(app);
+   
     CROW_ROUTE(app, "/").methods("OPTIONS"_method)([]() {
         crow::response res;
         set_cors(res);
@@ -78,6 +84,7 @@ int main() {
 
     registerFaceRoutes(app, faceController);
     registerVocRoutes(app, vocController);
+    registerAuthRoutes(app, authController);
 
     std::cout << "Starting REST API server on http://0.0.0.0:7007" << std::endl;
     std::cout << "Endpoints:" << std::endl;

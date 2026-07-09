@@ -26,6 +26,14 @@ public:
     void setVocalEmbeddingById(int id, std::vector<float> embedding);
     std::vector<float> getVocalEmbenddingById(int id);
     std::vector<float> getFacialEmbenddingById(int id);
+    std::string createSession(const std::string& payloadJson, const std::vector<int>& userIds);
+
+    // Reads back the raw JSON payload stored for a session.
+    std::string getSessionPayload(const std::string& sessionId);
+
+    // Marks a session as submitted (called once /submit has been posted to successfully).
+    void markSessionSubmitted(const std::string& sessionId);
+
 private:
     // Constructeur privé
     AuthRepository(const std::string& connectionString);

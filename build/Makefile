@@ -177,6 +177,30 @@ src/AudioProcessor.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/AudioProcessor.cpp.s
 .PHONY : src/AudioProcessor.cpp.s
 
+src/Controllers/AuthController.o: src/Controllers/AuthController.cpp.o
+.PHONY : src/Controllers/AuthController.o
+
+# target to build an object file
+src/Controllers/AuthController.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/Controllers/AuthController.cpp.o
+.PHONY : src/Controllers/AuthController.cpp.o
+
+src/Controllers/AuthController.i: src/Controllers/AuthController.cpp.i
+.PHONY : src/Controllers/AuthController.i
+
+# target to preprocess a source file
+src/Controllers/AuthController.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/Controllers/AuthController.cpp.i
+.PHONY : src/Controllers/AuthController.cpp.i
+
+src/Controllers/AuthController.s: src/Controllers/AuthController.cpp.s
+.PHONY : src/Controllers/AuthController.s
+
+# target to generate assembly for a file
+src/Controllers/AuthController.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/Controllers/AuthController.cpp.s
+.PHONY : src/Controllers/AuthController.cpp.s
+
 src/Controllers/FaceController.o: src/Controllers/FaceController.cpp.o
 .PHONY : src/Controllers/FaceController.o
 
@@ -345,6 +369,30 @@ src/Repository/AuthRepository.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/Repository/AuthRepository.cpp.s
 .PHONY : src/Repository/AuthRepository.cpp.s
 
+src/Services/AuthService.o: src/Services/AuthService.cpp.o
+.PHONY : src/Services/AuthService.o
+
+# target to build an object file
+src/Services/AuthService.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/Services/AuthService.cpp.o
+.PHONY : src/Services/AuthService.cpp.o
+
+src/Services/AuthService.i: src/Services/AuthService.cpp.i
+.PHONY : src/Services/AuthService.i
+
+# target to preprocess a source file
+src/Services/AuthService.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/Services/AuthService.cpp.i
+.PHONY : src/Services/AuthService.cpp.i
+
+src/Services/AuthService.s: src/Services/AuthService.cpp.s
+.PHONY : src/Services/AuthService.s
+
+# target to generate assembly for a file
+src/Services/AuthService.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/Services/AuthService.cpp.s
+.PHONY : src/Services/AuthService.cpp.s
+
 src/Services/FaceService.o: src/Services/FaceService.cpp.o
 .PHONY : src/Services/FaceService.o
 
@@ -480,6 +528,9 @@ help:
 	@echo "... src/AudioProcessor.o"
 	@echo "... src/AudioProcessor.i"
 	@echo "... src/AudioProcessor.s"
+	@echo "... src/Controllers/AuthController.o"
+	@echo "... src/Controllers/AuthController.i"
+	@echo "... src/Controllers/AuthController.s"
 	@echo "... src/Controllers/FaceController.o"
 	@echo "... src/Controllers/FaceController.i"
 	@echo "... src/Controllers/FaceController.s"
@@ -501,6 +552,9 @@ help:
 	@echo "... src/Repository/AuthRepository.o"
 	@echo "... src/Repository/AuthRepository.i"
 	@echo "... src/Repository/AuthRepository.s"
+	@echo "... src/Services/AuthService.o"
+	@echo "... src/Services/AuthService.i"
+	@echo "... src/Services/AuthService.s"
 	@echo "... src/Services/FaceService.o"
 	@echo "... src/Services/FaceService.i"
 	@echo "... src/Services/FaceService.s"
