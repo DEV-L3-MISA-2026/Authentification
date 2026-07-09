@@ -1,0 +1,307 @@
+@page "/fingerprint/verify/{userId:int}/{templateId:int}"
+@page "/fingerprint/verify"
+@using System.Text.Json
+@inject FingerprintApiService FingerprintService
+@inject IJSRuntime JSRuntime
+@inject NavigationManager Navigation
+
+<PageTitle>Vérification d'Empreintes Digitales</PageTitle>
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-5">
+                    <div class="text-center mb-4">
+                        <h2 class="fw-semibold">Vérification d'empreinte</h2>
+                        @if (UserId > 0)
+                        {
+                            <p class="text-muted">Utilisateur ID: @UserId | Template ID: @TemplateId</p>
+                        }
+                        @if (UserId <= 0 || TemplateId <= 0)
+                        {
+                            <p class="text-warning">URL: /fingerprint/verify/{userId}/{templateId}</p>
+                        }
+                    </div>
+
+                    <div class="row g-4">
+                        <!-- Scanner Section -->
+                        <div class="col-md-7">
+                            <div class="card border-0 bg-light h-100">
+                                <div class="card-body p-4">
+                                    <div class="position-relative">
+                                        <div class="position-relative overflow-hidden bg-dark" style="border-radius: 8px; aspect-ratio: 4/3;">
+                                            <video id="verifyVideo" autoplay playsinline class="w-100 h-100 object-fit-cover"></video>
+                                            <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center">
+                                                <div class="position-absolute w-100" style="height: 2px; background: #000; top: 50%; animation: scan 3s ease-in-out infinite;"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex gap-2 mt-3">
+                                            <button type="button" @onclick="CaptureImageAsync" class="btn btn-dark flex-fill" style="border-radius: 6px; padding: 10px;" disabled="@(!IsStreaming || IsLoading)">
+                                                <i class="bi bi-camera"></i> Capturer
+                                            </button>
+                                            <button type="button" @onclick="ToggleTorchAsync" class="btn btn-outline-secondary" style="border-radius: 6px; padding: 10px;" disabled="@(!IsStreaming)" title="Flash (Torch)">
+                                                <i class="bi @(IsTorchOn ? "bi-lightning" : "bi-lightning-fill")"></i>
+                                            </button>
+                                            @if (!IsStreaming)
+                                            {
+                                                <span class="text-muted ms-2">Initialisation caméra...</span>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Preview Section -->
+                        <div class="col-md-5">
+                            <div class="card border-0 bg-light h-100">
+                                <div class="card-body p-4">
+                                    <h5 class="fw-semibold mb-3">Aperçu</h5>
+                                    
+                                    <div class="text-center p-4 mb-3 border border-dashed rounded bg-white" style="border-style: dashed; min-height: 250px; display: flex; align-items: center; justify-content: center;">
+                                        @if (!string.IsNullOrEmpty(PreviewImageDataUrl))
+                                        {
+                                            <img src="@PreviewImageDataUrl" class="img-fluid rounded" style="max-height: 250px;" />
+                                        }
+                                        else
+                                        {
+                                            <div class="text-muted">
+                                                <i class="bi bi-fingerprint" style="font-size: 3rem; opacity: 0.3;"></i>
+                                                <p class="mt-2">Aucune capture</p>
+                                            </div>
+                                        }
+                                    </div>
+
+                                    <button type="button" @onclick="ProcessVerificationAsync" class="btn btn-dark w-100 mb-2" style="border-radius: 6px; padding: 12px; font-weight: 500;" disabled="@(CapturedImage == null || IsLoading)">
+                                        @if (IsLoading)
+                                        {
+                                            <span class="spinner-border spinner-border-sm" role="status"></span>
+                                        }
+                                        else
+                                        {
+                                            <i class="bi bi-check-circle"></i>
+                                        }
+                                        @(IsLoading ? "Vérification en cours..." : "Vérifier")
+                                    </button>
+
+                                    @if (!string.IsNullOrEmpty(StatusMessage))
+                                    {
+                                        <div class="alert mt-3 @(IsSuccess ? "alert-success" : "alert-danger")" style="border-radius: 6px;">
+                                            @StatusMessage
+                                            @if (MatchScore > 0)
+                                            {
+                                                <br />
+                                                <small>Score de correspondance: @MatchScore</small>
+                                            }
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    @@keyframes scan {
+        0%, 100% { top: 10%; opacity: 0; }
+        50% { top: 80%; opacity: 1; }
+    }
+</style>
+
+@code {
+    [Parameter]
+    public int UserId { get; set; }
+    
+    [Parameter]
+    public int TemplateId { get; set; }
+    
+    private IJSObjectReference? cameraModule;
+    private string? StatusMessage { get; set; }
+    private bool IsSuccess { get; set; }
+    private bool IsLoading { get; set; }
+    private bool IsStreaming { get; set; }
+    private bool IsTorchOn { get; set; }
+    private int MatchScore { get; set; }
+    private byte[]? CapturedImage { get; set; }
+    private string? PreviewImageDataUrl { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await InitializeCameraAsync();
+        }
+    }
+
+    private async Task InitializeCameraAsync()
+    {
+        try
+        {
+            cameraModule ??= await JSRuntime.InvokeAsync<IJSObjectReference>("import", "/js/fingerprint-camera.js");
+            var result = await cameraModule.InvokeAsync<JsonElement>("initCamera", "verifyVideo");
+            if (result.GetProperty("success").GetBoolean())
+            {
+                IsStreaming = true;
+                StateHasChanged();
+            }
+            else
+            {
+                StatusMessage = result.GetProperty("message").GetString();
+                IsSuccess = false;
+                StateHasChanged();
+            }
+        }
+        catch (Exception ex)
+        {
+            StatusMessage = $"Erreur caméra: {ex.Message}";
+            IsSuccess = false;
+            StateHasChanged();
+        }
+    }
+
+    private async Task CaptureImageAsync()
+    {
+        try
+        {
+            if (cameraModule == null)
+            {
+                StatusMessage = "Caméra non initialisée - module JS non chargé. Réessayez dans 2 secondes...";
+                IsSuccess = false;
+                StateHasChanged();
+                
+                await Task.Delay(2000);
+                cameraModule = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "/js/fingerprint-camera.js");
+                StateHasChanged();
+                return;
+            }
+
+            StatusMessage = "Capture en cours...";
+            IsSuccess = false;
+            StateHasChanged();
+
+            var result = await cameraModule.InvokeAsync<JsonElement>("captureImage");
+            
+            if (!result.GetProperty("success").GetBoolean())
+            {
+                StatusMessage = result.GetProperty("message").GetString();
+                IsSuccess = false;
+                StateHasChanged();
+                return;
+            }
+
+            var imageData = result.GetProperty("imageData").GetString();
+            var base64Data = imageData!.Split(',')[1];
+            CapturedImage = Convert.FromBase64String(base64Data);
+            PreviewImageDataUrl = imageData;
+            StatusMessage = "Image capturée. Cliquez sur Vérifier pour continuer.";
+            IsSuccess = true;
+            StateHasChanged();
+        }
+        catch (Exception ex)
+        {
+            StatusMessage = $"Erreur capture: {ex.Message}";
+            IsSuccess = false;
+            StateHasChanged();
+        }
+    }
+
+    private async Task ToggleTorchAsync()
+    {
+        try
+        {
+            if (cameraModule == null) return;
+            var result = await cameraModule.InvokeAsync<JsonElement>("setTorch", !IsTorchOn);
+            if (result.GetProperty("success").GetBoolean())
+            {
+                IsTorchOn = !IsTorchOn;
+                StateHasChanged();
+            }
+            else
+            {
+                StatusMessage = result.GetProperty("message").GetString() ?? "Flash non disponible";
+                IsSuccess = false;
+                StateHasChanged();
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine($"Erreur torch: {ex.Message}");
+        }
+    }
+
+    private async Task ProcessVerificationAsync()
+    {
+        if (CapturedImage == null || CapturedImage.Length == 0)
+        {
+            StatusMessage = "Aucune image à traiter";
+            IsSuccess = false;
+            StateHasChanged();
+            return;
+        }
+
+        if (TemplateId <= 0)
+        {
+            StatusMessage = "Template ID requis - utilisez /fingerprint/verify/{userId}/{templateId}";
+            IsSuccess = false;
+            StateHasChanged();
+            return;
+        }
+
+        IsLoading = true;
+        MatchScore = 0;
+        StateHasChanged();
+
+        try
+        {
+            var response = await FingerprintService.VerifyAsync(TemplateId, CapturedImage);
+            
+            StatusMessage = response.Success ? $"Succès: {response.Message}" : $"Échec: {response.Message}";
+            IsSuccess = response.Success;
+
+            if (response.Data != null)
+            {
+                try
+                {
+                    var dataJson = JsonSerializer.Serialize(response.Data);
+                    var dict = JsonSerializer.Deserialize<Dictionary<string, object>>(dataJson);
+                    if (dict != null && dict.ContainsKey("MatchScore"))
+                    {
+                        MatchScore = dict["MatchScore"] is JsonElement element && element.ValueKind == JsonValueKind.Number
+                            ? element.GetInt32()
+                            : Convert.ToInt32(dict["MatchScore"]);
+                    }
+                }
+                catch { }
+            }
+        }
+        catch (Exception ex)
+        {
+            StatusMessage = $"Erreur: {ex.Message}";
+            IsSuccess = false;
+        }
+        finally
+        {
+            IsLoading = false;
+            StateHasChanged();
+        }
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        try
+        {
+            if (cameraModule != null)
+            {
+                await cameraModule.InvokeVoidAsync("stopCamera");
+                await cameraModule.DisposeAsync();
+            }
+        }
+        catch { }
+    }
+}

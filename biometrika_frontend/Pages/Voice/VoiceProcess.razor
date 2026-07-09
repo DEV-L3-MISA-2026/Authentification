@@ -1,0 +1,170 @@
+@page "/voice/process"
+@inject VoiceApiService VoiceService
+@inject IJSRuntime JSRuntime
+
+<PageTitle>Reconnaissance Vocale</PageTitle>
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-5">
+                    <div class="text-center mb-4">
+                        <h2 class="fw-semibold">Reconnaissance vocale</h2>
+                        <p class="text-muted">Utilisateur : <span class="fw-medium">@CurrentUserName</span></p>
+                    </div>
+
+                    <div class="row g-4">
+                        <!-- Audio Section -->
+                        <div class="col-md-7">
+                            <div class="card border-0 bg-light h-100">
+                                <div class="card-body p-4">
+                                    <div class="text-center p-5 mb-3 border border-dashed rounded bg-white" style="border-style: dashed; min-height: 250px; display: flex; align-items: center; justify-content: center;">
+                                        <div class="text-muted">
+                                            <i class="bi bi-mic" style="font-size: 3rem; opacity: 0.3;"></i>
+                                            <p class="mt-2">Prêt à enregistrer</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex gap-2 mt-3">
+                                        <button type="button" @onclick="StartRecordingAsync" class="btn btn-dark flex-fill" style="border-radius: 6px; padding: 10px;" disabled="@IsRecording">
+                                            <i class="bi bi-record-fill"></i> Enregistrer
+                                        </button>
+                                        <button type="button" @onclick="StopRecordingAsync" class="btn btn-dark flex-fill" style="border-radius: 6px; padding: 10px;" disabled="@(!IsRecording)">
+                                            <i class="bi bi-stop-fill"></i> Arrêter
+                                        </button>
+                                    </div>
+
+                                    @if (!string.IsNullOrEmpty(StatusMessage))
+                                    {
+                                        <div class="alert alert-info mt-3" style="border-radius: 6px;">
+                                            @StatusMessage
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Result Section -->
+                        <div class="col-md-5">
+                            <div class="card border-0 bg-light h-100">
+                                <div class="card-body p-4">
+                                    <h5 class="fw-semibold mb-3">Résultat</h5>
+                                    
+                                    <div class="p-4 mb-3 bg-white border rounded" style="min-height: 250px;">
+                                        @if (IsProcessing)
+                                        {
+                                            <div class="text-center">
+                                                <div class="spinner-border text-dark mb-2" role="status"></div>
+                                                <p class="text-muted">Traitement en cours...</p>
+                                            </div>
+                                        }
+                                        else if (!string.IsNullOrEmpty(Result))
+                                        {
+                                            <p class="mb-0">@Result</p>
+                                        }
+                                        else
+                                        {
+                                            <p class="text-muted mb-0">Aucun résultat</p>
+                                        }
+                                    </div>
+
+                                    <button type="button" @onclick="ProcessVoiceAsync" class="btn btn-dark w-100 mb-2" style="border-radius: 6px; padding: 12px; font-weight: 500;" disabled="@(string.IsNullOrEmpty(Result) || IsProcessing)">
+                                        <i class="bi bi-check-circle"></i> Traiter
+                                    </button>
+
+                                    @if (!string.IsNullOrEmpty(StatusMessage) && IsProcessing)
+                                    {
+                                        <div class="alert mt-3 @(IsSuccess ? "alert-success" : "alert-danger")" style="border-radius: 6px;">
+                                            @StatusMessage
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private string? CurrentUserName { get; set; }
+    private string? UserId { get; set; }
+    private string? StatusMessage { get; set; }
+    private bool IsSuccess { get; set; }
+    private bool IsRecording { get; set; }
+    private bool IsProcessing { get; set; }
+    private string? Result { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        CurrentUserName = "Utilisateur Demo";
+        UserId = "demo-user";
+    }
+
+    private async Task StartRecordingAsync()
+    {
+        StatusMessage = "Enregistrement démarré...";
+        IsRecording = true;
+        StateHasChanged();
+
+        try
+        {
+            await Task.Delay(3000); // Simulation enregistrement 3 secondes
+            Result = "Ceci est un exemple de texte transcrit.";
+            StatusMessage = "Enregistrement terminé";
+        }
+        catch (Exception ex)
+        {
+            StatusMessage = $"Erreur: {ex.Message}";
+        }
+        finally
+        {
+            IsRecording = false;
+            StateHasChanged();
+        }
+    }
+
+    private async Task StopRecordingAsync()
+    {
+        StatusMessage = "Enregistrement arrêté";
+        IsRecording = false;
+        StateHasChanged();
+    }
+
+    private async Task ProcessVoiceAsync()
+    {
+        if (string.IsNullOrEmpty(Result))
+        {
+            StatusMessage = "Aucun résultat à traiter";
+            IsSuccess = false;
+            StateHasChanged();
+            return;
+        }
+
+        IsProcessing = true;
+        StatusMessage = "Traitement en cours...";
+        IsSuccess = false;
+        StateHasChanged();
+
+        try
+        {
+            var response = await VoiceService.ProcessAsync(UserId);
+            
+            StatusMessage = response.Message;
+            IsSuccess = response.Success;
+        }
+        catch (Exception ex)
+        {
+            StatusMessage = $"Erreur: {ex.Message}";
+            IsSuccess = false;
+        }
+        finally
+        {
+            IsProcessing = false;
+            StateHasChanged();
+        }
+    }
+}
