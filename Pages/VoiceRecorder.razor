@@ -1,0 +1,43 @@
+@page "/voice-recorder"
+@inject VoiceRecorderService Recorder
+@implements IAsyncDisposable
+
+<h2>Voice Recorder</h2>
+
+<button @onclick="Recorder.StartAsync" disabled="@(Recorder.State != RecordingState.Idle)">Start</button>
+<button @onclick="Recorder.StopAsync" disabled="@(Recorder.State != RecordingState.Recording)">Stop</button>
+<button @onclick="Send" disabled="@(Recorder.State != RecordingState.Ready)">Send</button>
+<button @onclick="Recorder.ResetAsync" disabled="@(Recorder.State == RecordingState.Idle)">Reset</button>
+
+<p>@StatusText</p>
+
+@code {
+    private const string EndpointUrl = "http://localhost:7007/api/voc/verify/2";
+    private string StatusText => Recorder.State switch
+    {
+        RecordingState.Idle => "Idle",
+        RecordingState.Recording => "Recording... (max 3s)",
+        RecordingState.Ready => "Recorded (ready to send)",
+        RecordingState.Sending => "Sending...",
+        RecordingState.Sent => "Sent",
+        _ => ""
+    };
+
+    protected override void OnInitialized()
+    {
+        Recorder.StateChanged += OnStateChanged;
+    }
+
+    private void OnStateChanged()
+    {
+        InvokeAsync(StateHasChanged);
+    }
+
+    private Task Send() => Recorder.SendAsync(EndpointUrl);
+
+    public async ValueTask DisposeAsync()
+    {
+        Recorder.StateChanged -= OnStateChanged;
+        await Recorder.ResetAsync();
+    }
+}

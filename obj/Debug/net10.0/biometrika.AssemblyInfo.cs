@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("biometrika")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+38174a8fe143e3bbd52e7e48a155e080e7e48d41")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9a646b1e091ddc3aebd1c764bbe78cf9d7dbeee2")]
 [assembly: System.Reflection.AssemblyProductAttribute("biometrika")]
 [assembly: System.Reflection.AssemblyTitleAttribute("biometrika")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

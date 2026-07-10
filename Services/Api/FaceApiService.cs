@@ -55,7 +55,7 @@ public class FaceApiService
                 ImageData = $"data:image/jpeg;base64,{base64Image}"
             };
 
-            var response = await _httpClient.PostAsJsonAsync($"{FaceServerUrl}/wasm/face/enroll", request);
+            var response = await _httpClient.PostAsJsonAsync($"{FaceServerUrl}/api/face/enroll", request);
 
             if (response.IsSuccessStatusCode)
             {
@@ -108,7 +108,7 @@ public class FaceApiService
                 ImageData = $"data:image/jpeg;base64,{base64Image}"
             };
 
-            var response = await _httpClient.PostAsJsonAsync($"{FaceServerUrl}/wasm/face/verify", request);
+            var response = await _httpClient.PostAsJsonAsync($"{FaceServerUrl}/api/face/verify", request);
 
             if (response.IsSuccessStatusCode)
             {

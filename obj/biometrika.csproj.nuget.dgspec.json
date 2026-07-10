@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/kukuna/korontana/projet/etude/S5/dev/authentification/biometrika.csproj": {}
+    "/home/kukuna/korontana/projet/etude/S5/dev/front-authentification/biometrika.csproj": {}
   },
   "projects": {
-    "/home/kukuna/korontana/projet/etude/S5/dev/authentification/biometrika.csproj": {
+    "/home/kukuna/korontana/projet/etude/S5/dev/front-authentification/biometrika.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/kukuna/korontana/projet/etude/S5/dev/authentification/biometrika.csproj",
+        "projectUniqueName": "/home/kukuna/korontana/projet/etude/S5/dev/front-authentification/biometrika.csproj",
         "projectName": "biometrika",
-        "projectPath": "/home/kukuna/korontana/projet/etude/S5/dev/authentification/biometrika.csproj",
+        "projectPath": "/home/kukuna/korontana/projet/etude/S5/dev/front-authentification/biometrika.csproj",
         "packagesPath": "/home/kukuna/.nuget/packages/",
-        "outputPath": "/home/kukuna/korontana/projet/etude/S5/dev/authentification/obj/",
+        "outputPath": "/home/kukuna/korontana/projet/etude/S5/dev/front-authentification/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/kukuna/.nuget/NuGet/NuGet.Config"

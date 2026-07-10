@@ -19,4 +19,8 @@ builder.Services.AddScoped<FingerprintApiService>();
 builder.Services.AddScoped<VoiceApiService>();
 builder.Services.AddScoped<FaceApiService>();
 
+
+builder.Services.AddScoped<VoiceRecorderService>();
+builder.Services.AddScoped<VoiceRecorderInterop>();
+
 await builder.Build().RunAsync();

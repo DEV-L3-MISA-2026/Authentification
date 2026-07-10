@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "A4XvxsrunIo=",
+  "dgSpecHash": "ixZ/gkglJqY=",
   "success": true,
-  "projectFilePath": "/home/kukuna/korontana/projet/etude/S5/dev/authentification/biometrika.csproj",
+  "projectFilePath": "/home/kukuna/korontana/projet/etude/S5/dev/front-authentification/biometrika.csproj",
   "expectedPackageFiles": [
     "/home/kukuna/.nuget/packages/microsoft.aspnetcore.app.internal.assets/10.0.9/microsoft.aspnetcore.app.internal.assets.10.0.9.nupkg.sha512",
     "/home/kukuna/.nuget/packages/microsoft.aspnetcore.authorization/10.0.9/microsoft.aspnetcore.authorization.10.0.9.nupkg.sha512",
