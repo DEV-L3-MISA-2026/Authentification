@@ -60,7 +60,7 @@ int main() {
     auto vocService = std::make_shared<VocService>(speechProcessor, authRepository);
     auto authService = std::make_shared<AuthService>("test_secret", "localhost:8000/submit");
     // ---- construction des controllers
-    auto faceController = std::make_shared<FaceController>(faceService);
+    auto faceController = std::make_shared<FaceController>(faceService, authService);
     auto vocController = std::make_shared<VocController>(vocService);
 
     auto authController = std::make_shared<AuthController>(authService);

@@ -21,7 +21,7 @@ struct FaceVerifyResult {
     bool     success;
     int      httpCode;
     std::string error;      // vide si success == true
-    std::string username;
+    int id;
     bool     verified = false;
     double   similarity = 0.0;
 };
@@ -33,10 +33,10 @@ public:
     FaceService(cv::Ptr<fr::FaceDetector> faceDetector,
                 std::shared_ptr<fr::FaceRecognizer> faceRecognizer,
                 std::shared_ptr<AuthRepository> authRepository,
-                double verificationThreshold = 0.5);
+                double verificationThreshold = 0.70);
 
     FaceEnrollResult enroll(const std::string& username, const std::string& imageBase64);
-    FaceVerifyResult verify(const std::string& username, const std::string& imageBase64);
+    FaceVerifyResult verify(int id, const std::string& imageBase64);
 
 private:
     cv::Ptr<fr::FaceDetector>            faceDetector_;

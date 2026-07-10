@@ -87,16 +87,9 @@ FaceEnrollResult FaceService::enroll(const std::string& username, const std::str
     return result;
 }
 
-FaceVerifyResult FaceService::verify(const std::string& username, const std::string& imageBase64) {
+FaceVerifyResult FaceService::verify(int uid, const std::string& imageBase64) {
     FaceVerifyResult result{};
-    result.username = username;
-
-    if (username.empty() || imageBase64.empty()) {
-        result.success = false;
-        result.httpCode = 400;
-        result.error = "username and image are required";
-        return result;
-    }
+    result.id = uid;
 
     std::vector<float> live_embedding;
     std::string error;
@@ -108,7 +101,7 @@ FaceVerifyResult FaceService::verify(const std::string& username, const std::str
         return result;
     }
 
-    int user_id = authRepository_->getIdByUsername(username);
+    int user_id = uid;
     if (user_id == -1) {
         result.success = false;
         result.httpCode = 404;

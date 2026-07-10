@@ -4,16 +4,17 @@
 #include <crow.h>
 
 #include <Services/FaceService.h>
-
+#include <Services/AuthService.h>
 // Couche HTTP : parse la requete, appelle FaceService, ecrit la reponse.
 // A brancher depuis vos fichiers de routes existants.
 class FaceController {
 public:
-    explicit FaceController(std::shared_ptr<FaceService> faceService);
+    explicit FaceController(std::shared_ptr<FaceService> faceService, std::shared_ptr<AuthService> authService);
 
     void enroll(const crow::request& req, crow::response& res);
     void verify(const crow::request& req, crow::response& res);
 
 private:
     std::shared_ptr<FaceService> faceService_;
+    std::shared_ptr<AuthService> authService_;
 };

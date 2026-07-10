@@ -1451,4 +1451,5 @@ CMakeFiles/app.dir/src/Controllers/FaceController.cpp.o: \
  /usr/include/pqxx/transactor.hxx \
  /usr/include/pqxx/internal/header-post.hxx \
  /home/kukuna/korontana/projet/etude/S5/dev/authentification/include/AuthData.h \
+ /home/kukuna/korontana/projet/etude/S5/dev/authentification/include/Services/AuthService.h \
  /home/kukuna/korontana/projet/etude/S5/dev/authentification/include/utility.h

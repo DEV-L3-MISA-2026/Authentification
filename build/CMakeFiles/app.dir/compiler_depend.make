@@ -3337,6 +3337,7 @@ CMakeFiles/app.dir/src/Controllers/FaceController.cpp.o: /home/kukuna/korontana/
   /home/kukuna/korontana/projet/etude/S5/dev/authentification/include/FaceDetector.h \
   /home/kukuna/korontana/projet/etude/S5/dev/authentification/include/FaceRecognizer.h \
   /home/kukuna/korontana/projet/etude/S5/dev/authentification/include/Repository/AuthRepository.h \
+  /home/kukuna/korontana/projet/etude/S5/dev/authentification/include/Services/AuthService.h \
   /home/kukuna/korontana/projet/etude/S5/dev/authentification/include/Services/FaceService.h \
   /home/kukuna/korontana/projet/etude/S5/dev/authentification/include/crow.h \
   /home/kukuna/korontana/projet/etude/S5/dev/authentification/include/crow/TinySHA1.hpp \
